@@ -10,8 +10,6 @@
 
 @interface TaskScheduler_AppDelegate : NSObject 
 {
-    IBOutlet NSWindow *window;
-    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;

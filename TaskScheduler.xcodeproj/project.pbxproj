@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 403F014610C5728B000185A8 /* TodoList.xcdatamodel */; };
+		40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */; };
+		40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BC210CBFA2E00153F26 /* InfoPanelController.m */; };
+		40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */; };
+		40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64C2510CBFFE800153F26 /* TaskWindowController.m */; };
 		770B37ED0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* TaskScheduler_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* TaskScheduler_AppDelegate.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
@@ -25,6 +29,13 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* TaskScheduler_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskScheduler_Prefix.pch; sourceTree = "<group>"; };
 		403F014610C5728B000185A8 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
+		40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D64BC110CBFA2E00153F26 /* InfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanelController.h; sourceTree = "<group>"; };
+		40D64BC210CBFA2E00153F26 /* InfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelController.m; sourceTree = "<group>"; };
+		40D64BD110CBFB4C00153F26 /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
+		40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAttachedWindow.m; sourceTree = "<group>"; };
+		40D64C2410CBFFE800153F26 /* TaskWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskWindowController.h; sourceTree = "<group>"; };
+		40D64C2510CBFFE800153F26 /* TaskWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskWindowController.m; sourceTree = "<group>"; };
 		770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TaskScheduler_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* TaskScheduler_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskScheduler_AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +60,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				40D64C2410CBFFE800153F26 /* TaskWindowController.h */,
+				40D64C2510CBFFE800153F26 /* TaskWindowController.m */,
+				40D64BD110CBFB4C00153F26 /* MAAttachedWindow.h */,
+				40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */,
+				40D64BC110CBFA2E00153F26 /* InfoPanelController.h */,
+				40D64BC210CBFA2E00153F26 /* InfoPanelController.m */,
 				77C8280B06725ACE000B614F /* TaskScheduler_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* TaskScheduler_AppDelegate.m */,
 			);
@@ -57,6 +75,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -189,6 +208,9 @@
 				77C8280E06725ACE000B614F /* TaskScheduler_AppDelegate.m in Sources */,
 				770B37ED0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel in Sources */,
 				403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */,
+				40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */,
+				40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */,
+				40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +276,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Debug;
 		};
