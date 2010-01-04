@@ -24,6 +24,26 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	[self didChangeValueForKey:@"calendars"];
 }
 
+- (BOOL) copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask {
+	CalCalendarStore* store = [CalCalendarStore defaultCalendarStore];
+	calTask.title = task.title;
+	calTask.notes = task.notes;
+	calTask.completedDate = task.completed;
+	NSError* error = nil;
+	bool ok = [store saveTask:calTask error:&error];
+	if (!ok) {
+		[NSApp presentError:error];
+	}
+	return ok;
+}
+
+- (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task {
+	task.title = calTask.title;
+	task.notes = calTask.notes;
+	task.completed = calTask.completedDate;
+	return YES;
+}
+
 - (void)awakeFromNib {
 	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self 
@@ -40,39 +60,29 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	CalCalendarStore* store = [CalCalendarStore defaultCalendarStore];
 	NSDictionary* userInfo = [notification userInfo];
 	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
-	for (Task* object in inserted) {
-		CalTask* task = [CalTask task];
-		task.calendar = [store calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
-		task.title = object.title;
-		task.notes = object.notes;
-		NSError* error;
-		if ([store saveTask:task error:&error]) {
-			object.taskUID = task.uid;
-		} else {
-			[NSApp presentError:error];
+	for (Task* task in inserted) {
+		CalTask* calTask = [CalTask task];
+		calTask.calendar = [store calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+		if ([self copyNativeTask:task toCalTask:calTask]) {
+			task.taskUID = calTask.uid;
 		} 
 	}
 	NSSet* updated = [userInfo objectForKey:NSUpdatedObjectsKey];
-	for (Task* object in updated) {
-		if (object.taskUID) {
-			CalTask* task = [store taskWithUID:object.taskUID];
-			if (task) {
-				task.title = object.title;
-				task.notes = object.notes;
-				NSError* error;
-				if (![store saveTask:task error:&error]) {
-					[NSApp presentError:error];
-				}
+	for (Task* task in updated) {
+		if (task.taskUID) {
+			CalTask* calTask = [store taskWithUID:task.taskUID];
+			if (calTask) {
+				[self copyNativeTask:task toCalTask:calTask];
 			}
 		}
 	}
 	NSSet* deleted = [userInfo objectForKey:NSDeletedObjectsKey];
 	for (Task* object in deleted) {
 		if (object.taskUID) {
-			CalTask* task = [store taskWithUID:object.taskUID];
-			if (task) {
+			CalTask* calTask = [store taskWithUID:object.taskUID];
+			if (calTask) {
 				NSError* error;
-				if (![store removeTask:task error:&error]) {
+				if (![store removeTask:calTask error:&error]) {
 					[NSApp presentError:error];
 				}
 			}
@@ -81,21 +91,22 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (void)tasksChanged:(NSNotification*)notification {
+	NSString* calendarUID = [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey];
 	NSDictionary* userInfo = [notification userInfo];
 	CalCalendarStore* calendarStore = [notification object];
 	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	for (NSString* uid in [userInfo objectForKey:CalInsertedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
-		Task* newTask = [[Task alloc] initWithManagedObjectContext:context];
-		newTask.title = calTask.title;
-		newTask.notes = calTask.notes;
-		newTask.taskUID = uid;
+		if (calTask.calendar.uid == calendarUID) {
+			Task* newTask = [[Task alloc] initWithManagedObjectContext:context];
+			[self copyCalTask:calTask toNativeTask:newTask];
+			newTask.taskUID = uid;
+		}
 	}
 	for (NSString* uid in [userInfo objectForKey:CalUpdatedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
 		Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
-		task.title = calTask.title;
-		task.notes = calTask.notes;
+		[self copyCalTask:calTask toNativeTask:task];
 	}
 	for (NSString* uid in [userInfo objectForKey:CalDeletedRecordsKey]) {
 		Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
