@@ -19,6 +19,8 @@
 
 + (Task*) taskWithUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
 
++ (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context;
+
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 
 @end

@@ -37,6 +37,21 @@
 	return task;
 }
 
++ (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context {
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
+											  inManagedObjectContext:context];
+	[fetchRequest setEntity:entity];
+		
+	NSError *error = nil;
+	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	if (fetchedObjects == nil) {
+		[NSApp presentError:error];
+	}
+	[fetchRequest release];
+	return fetchedObjects;
+}
+
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
 	if (self = [super initWithEntity:[NSEntityDescription entityForName:@"Task" inManagedObjectContext:context] insertIntoManagedObjectContext:context]) {
 		
