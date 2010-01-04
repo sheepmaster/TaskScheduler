@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 403F014610C5728B000185A8 /* TodoList.xcdatamodel */; };
+		408C7AC310EE448F006C7B60 /* ICalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408C7AC210EE448F006C7B60 /* ICalController.m */; };
+		408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408C7AE810EE63C3006C7B60 /* CalendarStore.framework */; };
+		4098FAF310F1174C00150AE3 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FAF210F1174C00150AE3 /* Task.m */; };
+		409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */; };
 		40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */; };
 		40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BC210CBFA2E00153F26 /* InfoPanelController.m */; };
 		40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */; };
@@ -29,6 +33,13 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* TaskScheduler_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskScheduler_Prefix.pch; sourceTree = "<group>"; };
 		403F014610C5728B000185A8 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
+		408C7AC110EE448F006C7B60 /* ICalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICalController.h; sourceTree = "<group>"; };
+		408C7AC210EE448F006C7B60 /* ICalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICalController.m; sourceTree = "<group>"; };
+		408C7AE810EE63C3006C7B60 /* CalendarStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CalendarStore.framework; path = /System/Library/Frameworks/CalendarStore.framework; sourceTree = "<absolute>"; };
+		4098FAF110F1174C00150AE3 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		4098FAF210F1174C00150AE3 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		409D6BDE10DEBC8D00E9E21D /* AwesomeDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeDateFormatter.h; sourceTree = "<group>"; };
+		409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeDateFormatter.m; sourceTree = "<group>"; };
 		40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D64BC110CBFA2E00153F26 /* InfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanelController.h; sourceTree = "<group>"; };
 		40D64BC210CBFA2E00153F26 /* InfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelController.m; sourceTree = "<group>"; };
@@ -51,6 +62,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */,
+				408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +72,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4098FAF110F1174C00150AE3 /* Task.h */,
+				4098FAF210F1174C00150AE3 /* Task.m */,
+				409D6BDE10DEBC8D00E9E21D /* AwesomeDateFormatter.h */,
+				409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */,
 				40D64C2410CBFFE800153F26 /* TaskWindowController.h */,
 				40D64C2510CBFFE800153F26 /* TaskWindowController.m */,
 				40D64BD110CBFB4C00153F26 /* MAAttachedWindow.h */,
@@ -68,6 +84,8 @@
 				40D64BC210CBFA2E00153F26 /* InfoPanelController.m */,
 				77C8280B06725ACE000B614F /* TaskScheduler_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* TaskScheduler_AppDelegate.m */,
+				408C7AC110EE448F006C7B60 /* ICalController.h */,
+				408C7AC210EE448F006C7B60 /* ICalController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -77,6 +95,7 @@
 			children = (
 				40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				408C7AE810EE63C3006C7B60 /* CalendarStore.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -211,6 +230,9 @@
 				40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */,
 				40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */,
 				40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */,
+				409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */,
+				408C7AC310EE448F006C7B60 /* ICalController.m in Sources */,
+				4098FAF310F1174C00150AE3 /* Task.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

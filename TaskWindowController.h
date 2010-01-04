@@ -9,12 +9,18 @@
 #import <Cocoa/Cocoa.h>
 
 #import "TaskScheduler_AppDelegate.h"
-//#import "InfoPanelController.h"
+
+@class InfoPanelController;
 
 @interface TaskWindowController : NSWindowController {
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
 	IBOutlet NSTableView* taskList;
-//	IBOutlet InfoPanelController* infoPanelController;
+	IBOutlet InfoPanelController* infoPanelController;
+	
+	IBOutlet NSTableColumn* completedColumn;
+	IBOutlet NSArrayController* taskController;
 }
+
+- (IBAction)completed:(id)sender;
 
 @end

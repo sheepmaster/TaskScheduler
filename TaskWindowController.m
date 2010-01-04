@@ -8,12 +8,14 @@
 
 #import "TaskWindowController.h"
 
+#import "InfoPanelController.h"
+
 
 @implementation TaskWindowController
 
 - (void)awakeFromNib {
-//	[taskList setTarget:infoPanelController];
-//	[taskList setDoubleAction:@selector(showInfoPanel:)];
+	[taskList setTarget:infoPanelController];
+	[taskList setDoubleAction:@selector(showWindow:)];
 //	[taskList setAction:@selector(showInfoPanel:)];
 }
 
@@ -29,5 +31,22 @@
 //- (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
 //	[infoPanelController hideInfoPanel:nil];
 //}
+
+- (IBAction)completed:(id)sender {
+	
+}
+
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+	if (aTableColumn == completedColumn) {
+		NSManagedObject* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
+		[task setValue:([anObject boolValue] ? [NSDate date] : nil) forKeyPath:@"completed"];
+//		NSLog(@"task: %@", task);
+//		if ([anObject boolValue]) {
+//			tmp.completed = [NSDate date];
+//		} else {
+//			tmp.completed = nil;
+//		}
+	}
+}
 
 @end
