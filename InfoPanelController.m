@@ -12,16 +12,17 @@
 @implementation InfoPanelController
 
 - (void)awakeFromNib {
-	NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%c" allowNaturalLanguage:YES];
-	[formatter setDateStyle:NSDateFormatterMediumStyle];
-	[formatter setTimeStyle:NSDateFormatterShortStyle];
-	[formatter setDoesRelativeDateFormatting:YES];
-	[formatter setLenient:YES];
-	
-	[startDateField setFormatter:formatter];
-	[dueDateField setFormatter:formatter];
-	[scheduledDateField setFormatter:formatter];
+//	NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%x" allowNaturalLanguage:YES];
+//	[formatter setDateStyle:NSDateFormatterMediumStyle];
+//	[formatter setTimeStyle:NSDateFormatterShortStyle];
+//	[formatter setDoesRelativeDateFormatting:YES];
+//	[formatter setLenient:YES];
+//	
+//	[startDateField setFormatter:formatter];
+//	[dueDateField setFormatter:formatter];
+//	[scheduledDateField setFormatter:formatter];
 //	[completedDateField setFormatter:formatter];
+//	[formatter release];
 }
 
 					 

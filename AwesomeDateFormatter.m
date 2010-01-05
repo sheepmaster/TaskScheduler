@@ -16,6 +16,10 @@
 		inputFormatter = [[NSDateFormatter alloc] initWithDateFormat:@"x" allowNaturalLanguage:YES];
 		[inputFormatter setLenient:YES];
 		[inputFormatter setDoesRelativeDateFormatting:YES];
+		
+		outputFormatter = [[NSDateFormatter alloc] init];
+		[outputFormatter setDateStyle:NSDateFormatterMediumStyle];
+		[outputFormatter setTimeStyle:NSDateFormatterShortStyle];
 	}
 	return self;
 }
@@ -23,15 +27,18 @@
 - (void)dealloc {
 	[inputFormatter release];
 	inputFormatter = nil;
+	[outputFormatter release];
+	outputFormatter = nil;
 	[super dealloc];
 }
 
 - (NSString*)stringForObjectValue:(id)obj {
-	return [NSDateFormatter localizedStringFromDate:obj dateStyle: NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
+	return [outputFormatter stringForObjectValue:obj];;
 }
 
 - (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error {
-	return [inputFormatter getObjectValue:anObject forString:string errorDescription:error];
+	return [outputFormatter getObjectValue:anObject forString:string errorDescription:error] || 
+	[inputFormatter getObjectValue:anObject forString:string errorDescription:error];
 }
 
 @end

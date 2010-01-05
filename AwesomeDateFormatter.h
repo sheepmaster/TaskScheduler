@@ -11,6 +11,7 @@
 
 @interface AwesomeDateFormatter : NSFormatter {
 	NSDateFormatter* inputFormatter;
+	NSDateFormatter* outputFormatter;
 }
 
 @end
