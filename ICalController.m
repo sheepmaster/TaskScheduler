@@ -82,45 +82,55 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 - (void)objectsDidChange:(NSNotification*)notification {
 	CalCalendarStore* store = [CalCalendarStore defaultCalendarStore];
 	NSDictionary* userInfo = [notification userInfo];
+	NSEntityDescription* taskEntity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[appDelegate managedObjectContext]];
 	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
-	for (Task* task in inserted) {
-		if (!task.taskUID) {
-			CalTask* calTask = [CalTask task];
-			calTask.calendar = [store calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
-			if ([self copyNativeTask:task toCalTask:calTask]) {
-				task.taskUID = calTask.uid;
-			} 
-		} else {
-			NSLog(@"Inserted task with existing UID %@", task.taskUID);
+	for (id object in inserted) {
+		if ([[object entity] isEqualTo:taskEntity]) {
+			Task* task = object;
+			if (!task.taskUID) {
+				CalTask* calTask = [CalTask task];
+				calTask.calendar = [store calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+				if ([self copyNativeTask:task toCalTask:calTask]) {
+					task.taskUID = calTask.uid;
+				} 
+			} else {
+				NSLog(@"Inserted task with existing UID %@", task.taskUID);
+			}
 		}
 	}
 	NSSet* updated = [userInfo objectForKey:NSUpdatedObjectsKey];
-	for (Task* task in updated) {
-		if (task.taskUID) {
-			CalTask* calTask = [store taskWithUID:task.taskUID];
-			if (calTask) {
-				[self copyNativeTask:task toCalTask:calTask];
+	for (id object in updated) {
+		if ([[object entity] isEqualTo:taskEntity]) {
+			Task* task = object;
+			if (task.taskUID) {
+				CalTask* calTask = [store taskWithUID:task.taskUID];
+				if (calTask) {
+					[self copyNativeTask:task toCalTask:calTask];
+				} else {
+					NSLog(@"Updated task with invalid UID %@", task.taskUID);
+				}
 			} else {
-				NSLog(@"Updated task with invalid UID %@", task.taskUID);
+				NSLog(@"Updated task without a UID");
 			}
-		} else {
-			NSLog(@"Updated task without a UID");
 		}
 	}
 	NSSet* deleted = [userInfo objectForKey:NSDeletedObjectsKey];
-	for (Task* task in deleted) {
-		if (task.taskUID) {
-			CalTask* calTask = [store taskWithUID:task.taskUID];
-			if (calTask) {
-				NSError* error;
-				if (![store removeTask:calTask error:&error]) {
-					[NSApp presentError:error];
+	for (id object in deleted) {
+		if ([[object entity] isEqualTo:taskEntity]) {
+			Task* task = object;
+			if (task.taskUID) {
+				CalTask* calTask = [store taskWithUID:task.taskUID];
+				if (calTask) {
+					NSError* error;
+					if (![store removeTask:calTask error:&error]) {
+						[NSApp presentError:error];
+					}
+				} else {
+					NSLog(@"Deleted task with invalid UID %@", task.taskUID);
 				}
 			} else {
-				NSLog(@"Deleted task with invalid UID %@", task.taskUID);
+				NSLog(@"Deleted task without a UID");
 			}
-		} else {
-			NSLog(@"Deleted task without a UID");
 		}
 	}
 }
