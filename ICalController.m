@@ -114,8 +114,12 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	task.notes = calTask.notes;
 	task.completed = calTask.completedDate;
 //	task.due = calTask.dueDate;
-	NSDateComponents* components = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:task.due];
-	task.due = [calendar dateByAddingComponents:components toDate:calTask.dueDate options:0];
+	if (task.due && calTask.dueDate) {
+		NSDateComponents* components = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:task.due];
+		task.due = [calendar dateByAddingComponents:components toDate:calTask.dueDate options:0];
+	} else {
+		task.due = calTask.dueDate;
+	}
 	return YES;
 }
 
@@ -129,7 +133,23 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	task.eventUID = nil;
 } 
 
+- (void) deleteEventForTask:(Task*)task {
+	if (task.eventUID) {
+		CalEvent* event = [calendarStore eventWithUID:task.eventUID occurrence:nil];
+		if (event) {
+			NSError* error;
+			if (![calendarStore removeEvent:event span:CalSpanAllEvents error:&error]) {
+				[NSApp presentError:error];
+			}
+		} else {
+			NSLog(@"Deleted task with invalid event UID %@", task.eventUID);
+		}
+	}
+}
+
+
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
+	[self deleteEventForTask:task];
 	[context deleteObject:task];
 }
 
@@ -214,11 +234,12 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 						[NSApp presentError:error];
 					}
 				} else {
-					NSLog(@"Deleted task with invalid UID %@", task.taskUID);
+					NSLog(@"Deleted task with invalid task UID %@", task.taskUID);
 				}
 			} else {
 				NSLog(@"Deleted task without a UID");
 			}
+			[self deleteEventForTask:task];
 		}
 	}
 }

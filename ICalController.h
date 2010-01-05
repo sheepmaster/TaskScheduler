@@ -30,5 +30,6 @@
 - (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task;
 - (void) copyCalEvent:(CalEvent*)event toTask:(Task*)task;
 - (void) unscheduleTask:(Task*)task;
+- (void) deleteEventForTask:(Task*)uid;
 
 @end
