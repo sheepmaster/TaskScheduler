@@ -59,4 +59,20 @@
 	return self;
 }
 
+/*
+- (Status)status {
+	if (completed < now) {
+		return StatusCompleted;
+	} else if ((start > now) || (max(dependsOn.completed) > now)) {
+		return StatusPending;
+	} else if (!scheduled) {
+		return StatusPossible;
+	} else if (scheduled > now) {
+		return StatusInactive;
+	} else {
+		return StatusActive;
+	}
+}
+ */
+
 @end
