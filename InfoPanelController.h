@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+@class TaskScheduler_AppDelegate;
 
 @interface InfoPanelController : NSWindowController {
+	IBOutlet TaskScheduler_AppDelegate* appDelegate;
+	
 	IBOutlet NSTextField* startDateField;
 	IBOutlet NSTextField* dueDateField;
 	IBOutlet NSTextField* scheduledDateField;

@@ -7,7 +7,7 @@
 //
 
 #import "InfoPanelController.h"
-
+#import "Task.h"
 
 @implementation InfoPanelController
 
@@ -36,5 +36,24 @@
 	}
 }
 
+
+- (NSArray*)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex {
+	NSManagedObjectContext* context = [appDelegate managedObjectContext];
+	return [[Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"title beginswith[cd] %@", substring] inManagedObjectContext:context] valueForKey:@"title"];
+}
+
+- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString {
+	NSManagedObjectContext* context = [appDelegate managedObjectContext];
+	NSArray* tasks = [Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"title == %@", editingString] inManagedObjectContext:context];
+	return [tasks objectAtIndex:0];
+}
+
+- (NSString*)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject {
+	return ((Task*)representedObject).title;
+}
+
+- (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject {
+	return NO;
+}
 
 @end

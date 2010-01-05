@@ -12,8 +12,8 @@
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<integer value="808"/>
-			<integer value="21"/>
 			<integer value="360"/>
+			<integer value="21"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1098,6 +1098,7 @@
 					<string>priority</string>
 					<string>duration</string>
 					<string>durationScale</string>
+					<string>dependsOn</string>
 				</array>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -4070,6 +4071,38 @@
 					</object>
 					<int key="connectionID">839</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">appDelegate</string>
+						<reference key="source" ref="567998231"/>
+						<reference key="destination" ref="316811008"/>
+					</object>
+					<int key="connectionID">840</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="489488271"/>
+						<reference key="destination" ref="567998231"/>
+					</object>
+					<int key="connectionID">841</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.dependsOn</string>
+						<reference key="source" ref="489488271"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="489488271"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">value: selection.dependsOn</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.dependsOn</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">842</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -6160,7 +6193,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">839</int>
+			<int key="maxID">842</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6192,6 +6225,7 @@
 						<string key="NS.object.0">id</string>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="appDelegate">TaskScheduler_AppDelegate</string>
 						<string key="completedDateField">NSTextField</string>
 						<string key="dueDateField">NSTextField</string>
 						<string key="durationFieldCell">NSDatePickerCell</string>
