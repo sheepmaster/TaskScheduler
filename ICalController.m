@@ -29,7 +29,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	for (Task* task in [Task allTasksInManagedObjectContext:context]) {
 		if (![store taskWithUID:task.taskUID]) {
-			[context deleteObject:task];
+			[self deletedCalTaskCorrespondingToNativeTask:task];
 		}
 	}
 	
@@ -37,11 +37,10 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	for (CalTask* calTask in [store tasksWithPredicate:predicate]) {
 		Task* task = [Task taskWithUID:calTask.uid inManagedObjectContext:context];
 		if (task == nil) {
-			task = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
-			task.taskUID = calTask.uid;
-			[context insertObject:task];
+			[self insertedCalTask:calTask];
+		} else {
+			[self copyCalTask:calTask toNativeTask:task];
 		}
-		[self copyCalTask:calTask toNativeTask:task];
 	}
 }
 
@@ -68,6 +67,19 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	NSDateComponents* components = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:task.due];
 	task.due = [calendar dateByAddingComponents:components toDate:calTask.dueDate options:0];
 	return YES;
+}
+
+- (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
+	NSManagedObjectContext* context = [appDelegate managedObjectContext];
+	[context deleteObject:task];
+}
+
+- (void)insertedCalTask:(CalTask*)calTask {
+	NSManagedObjectContext* context = [appDelegate managedObjectContext];
+	Task* task = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
+	task.taskUID = calTask.uid;
+	[self copyCalTask:calTask toNativeTask:task];
+	[context insertObject:task];
 }
 
 - (void)awakeFromNib {
@@ -148,20 +160,31 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	for (NSString* uid in [userInfo objectForKey:CalInsertedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
 		if ([calTask.calendar.uid isEqualToString:calendarUID]) {
-			Task* newTask = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
-			newTask.taskUID = uid;
-			[self copyCalTask:calTask toNativeTask:newTask];
-			[context insertObject:newTask];
+			[self insertedCalTask:calTask];
 		}
 	}
 	for (NSString* uid in [userInfo objectForKey:CalUpdatedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
-		Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
-		[self copyCalTask:calTask toNativeTask:task];
+		if (calTask) {
+			if ([calTask.calendar.uid isEqualToString:calendarUID]) {
+				Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
+				if (task) {
+					[self copyCalTask:calTask toNativeTask:task];
+				} else {
+					NSLog(@"Updated CalTask with invalid UID %@", uid);
+				}
+			}
+		} else {
+			NSLog(@"Updated non-existing CalTask %@", uid);
+		}
 	}
 	for (NSString* uid in [userInfo objectForKey:CalDeletedRecordsKey]) {
 		Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
-		[context deleteObject:task];
+		if (task) {
+			[self deletedCalTaskCorrespondingToNativeTask:task];
+		} else {
+			NSLog(@"Deleted CalTask with invalid UID %@", uid);
+		}
 	}
 }
 
