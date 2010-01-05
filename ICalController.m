@@ -38,7 +38,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 			if (event) {
 				[self copyCalEvent:event toTask:task];
 			} else {
-				[self unscheduleTask:task];
+				[self eventDeletedForTask:task];
 			}
 		}
 	}
@@ -128,7 +128,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	task.duration = [NSNumber numberWithDouble:[event.endDate timeIntervalSinceDate:event.startDate]];
 }
 
-- (void) unscheduleTask:(Task*)task {
+- (void) eventDeletedForTask:(Task*)task {
 	task.scheduled = nil;
 	task.eventUID = nil;
 } 
@@ -297,7 +297,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	for (NSString* uid in [userInfo objectForKey:CalDeletedRecordsKey]) {
 		Task* task = [Task taskWithEventUID:uid inManagedObjectContext:context];
 		if (task) {
-			[self unscheduleTask:task];
+			[self eventDeletedForTask:task];
 		}
 	}
 }
