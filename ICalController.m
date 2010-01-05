@@ -50,6 +50,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	calTask.title = task.title;
 	calTask.notes = task.notes;
 	calTask.completedDate = task.completed;
+	calTask.dueDate = task.due;
 	NSError* error = nil;
 	bool ok = [store saveTask:calTask error:&error];
 	if (!ok) {
@@ -59,9 +60,13 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task {
+	NSCalendar* calendar = [NSCalendar autoupdatingCurrentCalendar];
 	task.title = calTask.title;
 	task.notes = calTask.notes;
 	task.completed = calTask.completedDate;
+//	task.due = calTask.dueDate;
+	NSDateComponents* components = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:task.due];
+	task.due = [calendar dateByAddingComponents:components toDate:calTask.dueDate options:0];
 	return YES;
 }
 
