@@ -249,7 +249,6 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (void)tasksChanged:(NSNotification*)notification {
-	NSString* calendarUID = [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey];
 	NSDictionary* userInfo = [notification userInfo];
 	for (NSString* uid in [userInfo objectForKey:CalInsertedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
@@ -281,12 +280,13 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (void)eventsChanged:(NSNotification*)notification {
-	NSString* calendarUID = [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey];
 	NSDictionary* userInfo = [notification userInfo];
+	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"eventUID == $UID"];
+
 	for (NSString* uid in [userInfo objectForKey:CalUpdatedRecordsKey]) {
 		CalEvent* event = [calendarStore eventWithUID:uid occurrence:nil];
 		if (event) {
-				Task* task = [Task taskWithEventUID:uid inManagedObjectContext:context];
+			Task* task = [Task taskMatchingPredicate:[predicateTemplate predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:uid forKey:@"UID"]] inManagedObjectContext:context];
 			if (task) {
 				[self copyCalEvent:event toTask:task];
 			}
@@ -295,7 +295,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 		}
 	}
 	for (NSString* uid in [userInfo objectForKey:CalDeletedRecordsKey]) {
-		Task* task = [Task taskWithEventUID:uid inManagedObjectContext:context];
+		Task* task = [Task taskMatchingPredicate:[predicateTemplate predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:uid forKey:@"UID"]] inManagedObjectContext:context];
 		if (task) {
 			[self eventDeletedForTask:task];
 		}

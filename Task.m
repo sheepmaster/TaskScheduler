@@ -12,63 +12,32 @@
 @implementation Task
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
-											  inManagedObjectContext:context];
-	[fetchRequest setEntity:entity];
-	
 	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"taskUID == $UID"];
 	NSPredicate* predicate = [predicateTemplate predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:uid forKey:@"UID"]];
-	[fetchRequest setPredicate:predicate];
-	
-	NSError *error = nil;
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-	id task = nil;
-	if (fetchedObjects == nil) {
-		[NSApp presentError:error];
-	} else if ([fetchedObjects count] != 1) {
-		NSLog(@"Found %d tasks with UID %@", [fetchedObjects count], uid);
-	} else {
-		task = [fetchedObjects objectAtIndex:0];
-	}
-	
-	[fetchRequest release];
-
-	return task;
+	return [self taskMatchingPredicate:predicate inManagedObjectContext:context];
 }
 
-+ (Task*) taskWithEventUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
-											  inManagedObjectContext:context];
-	[fetchRequest setEntity:entity];
-	
-	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"eventUID == $UID"];
-	NSPredicate* predicate = [predicateTemplate predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:uid forKey:@"UID"]];
-	[fetchRequest setPredicate:predicate];
-	
-	NSError *error = nil;
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-	id task = nil;
-	if (fetchedObjects == nil) {
-		[NSApp presentError:error];
-	} else if ([fetchedObjects count] != 1) {
-		NSLog(@"Found %d tasks with event UID %@", [fetchedObjects count], uid);
++ (Task*) taskMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context {
+	NSArray* tasks = [self tasksMatchingPredicate:predicate inManagedObjectContext:context];
+	if ([tasks count] != 1) {
+		NSLog(@"Found %d tasks matching predicate", [tasks count], predicate);
+		return nil;
 	} else {
-		task = [fetchedObjects objectAtIndex:0];
+		return [tasks objectAtIndex:0];
 	}
-	
-	[fetchRequest release];
-	
-	return task;
 }
 
 + (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context {
+	return [self tasksMatchingPredicate:[NSPredicate predicateWithValue:YES] inManagedObjectContext:context];
+}
+
++ (NSArray*)tasksMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
 											  inManagedObjectContext:context];
 	[fetchRequest setEntity:entity];
-		
+	[fetchRequest setPredicate:predicate];
+	
 	NSError *error = nil;
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	if (fetchedObjects == nil) {

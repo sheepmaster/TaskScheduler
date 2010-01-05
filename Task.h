@@ -18,8 +18,8 @@
 //@property NSString* taskUID;
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
-+ (Task*) taskWithEventUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
-
++ (Task*) taskMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
++ (NSArray*)tasksMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
 + (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
