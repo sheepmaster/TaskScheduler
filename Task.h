@@ -17,7 +17,8 @@
 //@property NSString* notes;
 //@property NSString* taskUID;
 
-+ (Task*) taskWithUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
++ (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
++ (Task*) taskWithEventUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
 
 + (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context;
 

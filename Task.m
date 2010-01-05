@@ -11,7 +11,7 @@
 
 @implementation Task
 
-+ (Task*) taskWithUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
++ (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
 											  inManagedObjectContext:context];
@@ -34,6 +34,32 @@
 	
 	[fetchRequest release];
 
+	return task;
+}
+
++ (Task*) taskWithEventUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
+											  inManagedObjectContext:context];
+	[fetchRequest setEntity:entity];
+	
+	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"eventUID == $UID"];
+	NSPredicate* predicate = [predicateTemplate predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:uid forKey:@"UID"]];
+	[fetchRequest setPredicate:predicate];
+	
+	NSError *error = nil;
+	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	id task = nil;
+	if (fetchedObjects == nil) {
+		[NSApp presentError:error];
+	} else if ([fetchedObjects count] != 1) {
+		NSLog(@"Found %d tasks with event UID %@", [fetchedObjects count], uid);
+	} else {
+		task = [fetchedObjects objectAtIndex:0];
+	}
+	
+	[fetchRequest release];
+	
 	return task;
 }
 

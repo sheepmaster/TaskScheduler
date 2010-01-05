@@ -25,17 +25,27 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (void)synchronize {
-	CalCalendarStore* store = [CalCalendarStore defaultCalendarStore];
-	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	for (Task* task in [Task allTasksInManagedObjectContext:context]) {
-		if (![store taskWithUID:task.taskUID]) {
-			[self deletedCalTaskCorrespondingToNativeTask:task];
+		if (task.taskUID) {
+			if (![calendarStore taskWithUID:task.taskUID]) {
+				[self deletedCalTaskCorrespondingToNativeTask:task];
+			}
+		} else {
+			NSLog(@"Task %@ has no task UID", task);
+		}
+		if (task.eventUID) {
+			CalEvent* event = [calendarStore eventWithUID:task.eventUID occurrence:nil];
+			if (event) {
+				[self copyCalEvent:event toTask:task];
+			} else {
+				[self unscheduleTask:task];
+			}
 		}
 	}
 	
-	NSPredicate* predicate = [CalCalendarStore taskPredicateWithCalendars:[NSArray arrayWithObject:[store calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]]]];
-	for (CalTask* calTask in [store tasksWithPredicate:predicate]) {
-		Task* task = [Task taskWithUID:calTask.uid inManagedObjectContext:context];
+	NSPredicate* predicate = [CalCalendarStore taskPredicateWithCalendars:[NSArray arrayWithObject:[calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]]]];
+	for (CalTask* calTask in [calendarStore tasksWithPredicate:predicate]) {
+		Task* task = [Task taskWithTaskUID:calTask.uid inManagedObjectContext:context];
 		if (task == nil) {
 			[self insertedCalTask:calTask];
 		} else {
@@ -45,17 +55,57 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (BOOL) copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask {
-	CalCalendarStore* store = [CalCalendarStore defaultCalendarStore];
 	calTask.title = task.title;
 	calTask.notes = task.notes;
 	calTask.completedDate = task.completed;
 	calTask.dueDate = task.due;
 	NSError* error = nil;
-	bool ok = [store saveTask:calTask error:&error];
-	if (!ok) {
+	if (![calendarStore saveTask:calTask error:&error]) {
 		[NSApp presentError:error];
+		return NO;
 	}
-	return ok;
+	
+	if (task.scheduled) {
+		CalEvent* event;
+		if (task.eventUID) {
+			event = [calendarStore eventWithUID:task.eventUID occurrence:nil];
+		} else {
+			event = [CalEvent event];
+			event.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+			task.eventUID = event.uid;
+		}
+		if (event) {
+			event.startDate = task.scheduled;
+			event.endDate = [task.scheduled dateByAddingTimeInterval:[task.duration doubleValue]];
+			event.title = task.title;
+			event.notes = task.notes;
+			//				scheduledEvent.location = task.location;
+			NSError* error = nil;
+			if (![calendarStore saveEvent:event span:CalSpanAllEvents error:&error]) {
+				[NSApp presentError:error];
+				return NO;
+			}
+		} else {
+			NSLog(@"Event %@ not found");
+			task.eventUID = nil;
+		}
+	} else {
+		if (task.eventUID) {
+			CalEvent* event = [calendarStore eventWithUID:task.eventUID occurrence:nil];
+			if (event) {
+				NSError* error = nil;
+				if (![calendarStore removeEvent:event span:CalSpanAllEvents error:&error]) {
+					[NSApp presentError:error];
+					return NO;
+				}
+			} else {
+				NSLog(@"Scheduled task %@ not found");
+				task.eventUID = nil;
+			}
+		}
+	}
+	
+	return YES;
 }
 
 - (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task {
@@ -69,13 +119,21 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	return YES;
 }
 
+- (void) copyCalEvent:(CalEvent*)event toTask:(Task*)task {
+	task.scheduled = event.startDate;
+	task.duration = [NSNumber numberWithDouble:[event.endDate timeIntervalSinceDate:event.startDate]];
+}
+
+- (void) unscheduleTask:(Task*)task {
+	task.scheduled = nil;
+	task.eventUID = nil;
+} 
+
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
-	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	[context deleteObject:task];
 }
 
 - (void)insertedCalTask:(CalTask*)calTask {
-	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	Task* task = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
 	task.taskUID = calTask.uid;
 	[self copyCalTask:calTask toNativeTask:task];
@@ -83,21 +141,34 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (void)awakeFromNib {
+	calendarStore = [CalCalendarStore defaultCalendarStore];
+	context = [appDelegate managedObjectContext];	
+	
+	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+	NSString* defaultCalendarUID = [defaults stringForKey:DefaultCalendarKey];
+	if (!defaultCalendarUID || ![calendarStore calendarWithUID:defaultCalendarUID]) {
+		[defaults setObject:[[[calendarStore calendars] objectAtIndex:0] uid] forKey:DefaultCalendarKey];
+	}
+	
+	
 	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self 
 			   selector:@selector(objectsDidChange:) 
 				   name:NSManagedObjectContextObjectsDidChangeNotification 
-				 object:[appDelegate managedObjectContext]];
+				 object:context];
 	[center addObserver:self
 			   selector:@selector(tasksChanged:)
 				   name:CalTasksChangedExternallyNotification
-					 object:nil];
-
+				 object:nil];
+	[center addObserver:self
+			   selector:@selector(eventsChanged:)
+				   name:CalEventsChangedExternallyNotification
+				 object:nil];
+	
 	[self synchronize];
 }
 
 - (void)objectsDidChange:(NSNotification*)notification {
-	CalCalendarStore* store = [CalCalendarStore defaultCalendarStore];
 	NSDictionary* userInfo = [notification userInfo];
 	NSEntityDescription* taskEntity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[appDelegate managedObjectContext]];
 	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
@@ -106,7 +177,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 			Task* task = object;
 			if (!task.taskUID) {
 				CalTask* calTask = [CalTask task];
-				calTask.calendar = [store calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+				calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
 				if ([self copyNativeTask:task toCalTask:calTask]) {
 					task.taskUID = calTask.uid;
 				} 
@@ -120,7 +191,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 		if ([[object entity] isEqualTo:taskEntity]) {
 			Task* task = object;
 			if (task.taskUID) {
-				CalTask* calTask = [store taskWithUID:task.taskUID];
+				CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
 				if (calTask) {
 					[self copyNativeTask:task toCalTask:calTask];
 				} else {
@@ -136,10 +207,10 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 		if ([[object entity] isEqualTo:taskEntity]) {
 			Task* task = object;
 			if (task.taskUID) {
-				CalTask* calTask = [store taskWithUID:task.taskUID];
+				CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
 				if (calTask) {
 					NSError* error;
-					if (![store removeTask:calTask error:&error]) {
+					if (![calendarStore removeTask:calTask error:&error]) {
 						[NSApp presentError:error];
 					}
 				} else {
@@ -155,8 +226,6 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 - (void)tasksChanged:(NSNotification*)notification {
 	NSString* calendarUID = [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey];
 	NSDictionary* userInfo = [notification userInfo];
-	CalCalendarStore* calendarStore = [notification object];
-	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	for (NSString* uid in [userInfo objectForKey:CalInsertedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
 		if ([calTask.calendar.uid isEqualToString:calendarUID]) {
@@ -167,7 +236,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 		CalTask* calTask = [calendarStore taskWithUID:uid];
 		if (calTask) {
 			if ([calTask.calendar.uid isEqualToString:calendarUID]) {
-				Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
+				Task* task = [Task taskWithTaskUID:uid inManagedObjectContext:context];
 				if (task) {
 					[self copyCalTask:calTask toNativeTask:task];
 				} else {
@@ -179,11 +248,35 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 		}
 	}
 	for (NSString* uid in [userInfo objectForKey:CalDeletedRecordsKey]) {
-		Task* task = [Task taskWithUID:uid inManagedObjectContext:context];
+		Task* task = [Task taskWithTaskUID:uid inManagedObjectContext:context];
 		if (task) {
 			[self deletedCalTaskCorrespondingToNativeTask:task];
 		} else {
 			NSLog(@"Deleted CalTask with invalid UID %@", uid);
+		}
+	}
+}
+
+- (void)eventsChanged:(NSNotification*)notification {
+	NSString* calendarUID = [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey];
+	NSDictionary* userInfo = [notification userInfo];
+	for (NSString* uid in [userInfo objectForKey:CalUpdatedRecordsKey]) {
+		CalEvent* event = [calendarStore eventWithUID:uid occurrence:nil];
+		if (event) {
+			if ([event.calendar.uid isEqualToString:calendarUID]) {
+				Task* task = [Task taskWithEventUID:uid inManagedObjectContext:context];
+				if (task) {
+					[self copyCalEvent:event toTask:task];
+				}
+			}
+		} else {
+			NSLog(@"Updated non-existing CalEvent %@", uid);
+		}
+	}
+	for (NSString* uid in [userInfo objectForKey:CalDeletedRecordsKey]) {
+		Task* task = [Task taskWithEventUID:uid inManagedObjectContext:context];
+		if (task) {
+			[self unscheduleTask:task];
 		}
 	}
 }
