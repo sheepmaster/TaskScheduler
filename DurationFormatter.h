@@ -1,5 +1,5 @@
 //
-//  DurationToPseudoDateTransformer.h
+//  DurationFormatter.h
 //  TaskScheduler
 //
 //  Created by Bernhard Bauer on 06.01.10.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface DurationToPseudoDateTransformer : NSValueTransformer {
+@interface DurationFormatter : NSFormatter {
 
 }
 

@@ -12,9 +12,8 @@
 		408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408C7AE810EE63C3006C7B60 /* CalendarStore.framework */; };
 		4098FAF310F1174C00150AE3 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FAF210F1174C00150AE3 /* Task.m */; };
 		4098FE3310F4CB1C00150AE3 /* SetToArrayTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */; };
-		4098FECD10F4DED400150AE3 /* DurationToPseudoDateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FECC10F4DED400150AE3 /* DurationToPseudoDateTransformer.m */; };
+		4098FF2310F4E42300150AE3 /* DurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FF2210F4E42300150AE3 /* DurationFormatter.m */; };
 		409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */; };
-		40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */; };
 		40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BC210CBFA2E00153F26 /* InfoPanelController.m */; };
 		40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */; };
 		40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64C2510CBFFE800153F26 /* TaskWindowController.m */; };
@@ -42,11 +41,10 @@
 		4098FAF210F1174C00150AE3 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		4098FE3110F4CB1C00150AE3 /* SetToArrayTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetToArrayTransformer.h; sourceTree = "<group>"; };
 		4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetToArrayTransformer.m; sourceTree = "<group>"; };
-		4098FECB10F4DED400150AE3 /* DurationToPseudoDateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurationToPseudoDateTransformer.h; sourceTree = "<group>"; };
-		4098FECC10F4DED400150AE3 /* DurationToPseudoDateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurationToPseudoDateTransformer.m; sourceTree = "<group>"; };
+		4098FF2110F4E42300150AE3 /* DurationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurationFormatter.h; sourceTree = "<group>"; };
+		4098FF2210F4E42300150AE3 /* DurationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurationFormatter.m; sourceTree = "<group>"; };
 		409D6BDE10DEBC8D00E9E21D /* AwesomeDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeDateFormatter.h; sourceTree = "<group>"; };
 		409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeDateFormatter.m; sourceTree = "<group>"; };
-		40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D64BC110CBFA2E00153F26 /* InfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanelController.h; sourceTree = "<group>"; };
 		40D64BC210CBFA2E00153F26 /* InfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelController.m; sourceTree = "<group>"; };
 		40D64BD110CBFB4C00153F26 /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
@@ -67,7 +65,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */,
 				408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,8 +77,8 @@
 			children = (
 				4098FE3110F4CB1C00150AE3 /* SetToArrayTransformer.h */,
 				4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */,
-				4098FECB10F4DED400150AE3 /* DurationToPseudoDateTransformer.h */,
-				4098FECC10F4DED400150AE3 /* DurationToPseudoDateTransformer.m */,
+				4098FF2110F4E42300150AE3 /* DurationFormatter.h */,
+				4098FF2210F4E42300150AE3 /* DurationFormatter.m */,
 				409D6BDE10DEBC8D00E9E21D /* AwesomeDateFormatter.h */,
 				409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */,
 				4098FAF110F1174C00150AE3 /* Task.h */,
@@ -103,7 +100,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				408C7AE810EE63C3006C7B60 /* CalendarStore.framework */,
 			);
@@ -244,7 +240,7 @@
 				408C7AC310EE448F006C7B60 /* ICalController.m in Sources */,
 				4098FAF310F1174C00150AE3 /* Task.m in Sources */,
 				4098FE3310F4CB1C00150AE3 /* SetToArrayTransformer.m in Sources */,
-				4098FECD10F4DED400150AE3 /* DurationToPseudoDateTransformer.m in Sources */,
+				4098FF2310F4E42300150AE3 /* DurationFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +270,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -293,6 +293,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
