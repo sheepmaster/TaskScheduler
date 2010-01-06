@@ -11,6 +11,7 @@
 		408C7AC310EE448F006C7B60 /* ICalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408C7AC210EE448F006C7B60 /* ICalController.m */; };
 		408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408C7AE810EE63C3006C7B60 /* CalendarStore.framework */; };
 		4098FAF310F1174C00150AE3 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FAF210F1174C00150AE3 /* Task.m */; };
+		4098FE3310F4CB1C00150AE3 /* SetToArrayTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */; };
 		409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */; };
 		40D64B8E10CBF3CA00153F26 /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */; };
 		40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BC210CBFA2E00153F26 /* InfoPanelController.m */; };
@@ -38,6 +39,8 @@
 		408C7AE810EE63C3006C7B60 /* CalendarStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CalendarStore.framework; path = /System/Library/Frameworks/CalendarStore.framework; sourceTree = "<absolute>"; };
 		4098FAF110F1174C00150AE3 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
 		4098FAF210F1174C00150AE3 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		4098FE3110F4CB1C00150AE3 /* SetToArrayTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetToArrayTransformer.h; sourceTree = "<group>"; };
+		4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetToArrayTransformer.m; sourceTree = "<group>"; };
 		409D6BDE10DEBC8D00E9E21D /* AwesomeDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeDateFormatter.h; sourceTree = "<group>"; };
 		409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeDateFormatter.m; sourceTree = "<group>"; };
 		40D64B8D10CBF3CA00153F26 /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +75,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4098FE3110F4CB1C00150AE3 /* SetToArrayTransformer.h */,
+				4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */,
 				4098FAF110F1174C00150AE3 /* Task.h */,
 				4098FAF210F1174C00150AE3 /* Task.m */,
 				409D6BDE10DEBC8D00E9E21D /* AwesomeDateFormatter.h */,
@@ -233,6 +238,7 @@
 				409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */,
 				408C7AC310EE448F006C7B60 /* ICalController.m in Sources */,
 				4098FAF310F1174C00150AE3 /* Task.m in Sources */,
+				4098FE3310F4CB1C00150AE3 /* SetToArrayTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,7 +45,21 @@
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString {
 	NSManagedObjectContext* context = [appDelegate managedObjectContext];
 	NSArray* tasks = [Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"title == %@", editingString] inManagedObjectContext:context];
-	return [tasks objectAtIndex:0];
+	if ([tasks count] > 0) {
+		return [tasks objectAtIndex:0];
+	} else {
+		return nil;
+	}
+}
+
+- (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(NSUInteger)index {
+	NSMutableArray* filteredArray = [NSMutableArray array];
+	for (id token in tokens) {
+		if (![token isKindOfClass:[NSString class]]) {
+			[filteredArray addObject:token];
+		}
+	}
+	return filteredArray;
 }
 
 - (NSString*)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject {

@@ -8,8 +8,14 @@
 
 #import "TaskScheduler_AppDelegate.h"
 
+#import "SetToArrayTransformer.h"
+
 @implementation TaskScheduler_AppDelegate
 
++ (void)initialize {
+	SetToArrayTransformer* transformer = [[SetToArrayTransformer alloc] init];
+	[NSValueTransformer setValueTransformer:transformer forName:@"SetToArrayTransformer"];  
+}
 
 /**
     Returns the support folder for the application, used to store the Core Data
