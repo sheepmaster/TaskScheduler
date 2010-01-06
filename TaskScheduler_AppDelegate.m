@@ -9,12 +9,15 @@
 #import "TaskScheduler_AppDelegate.h"
 
 #import "SetToArrayTransformer.h"
+#import "DurationToPseudoDateTransformer.h"
 
 @implementation TaskScheduler_AppDelegate
 
 + (void)initialize {
-	SetToArrayTransformer* transformer = [[SetToArrayTransformer alloc] init];
-	[NSValueTransformer setValueTransformer:transformer forName:@"SetToArrayTransformer"];  
+	SetToArrayTransformer* transformer1 = [[SetToArrayTransformer alloc] init];
+	[NSValueTransformer setValueTransformer:transformer1 forName:@"SetToArrayTransformer"];  
+	DurationToPseudoDateTransformer* transformer2 = [[DurationToPseudoDateTransformer alloc] init];
+	[NSValueTransformer setValueTransformer:transformer2 forName:@"DurationToPseudoDateTransformer"];  
 }
 
 /**
