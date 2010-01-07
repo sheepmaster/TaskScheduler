@@ -11,6 +11,36 @@
 
 @implementation Task
 
+@dynamic completed;
+@dynamic due;
+@dynamic duration;
+@dynamic eventUID;
+@dynamic flagged;
+@dynamic notes;
+@dynamic priority;
+@dynamic scheduled;
+@dynamic start;
+@dynamic taskUID;
+@dynamic title;
+@dynamic dependsOn;
+@dynamic enables;
+
+- (void)visitWithSet:(NSMutableSet*)set {
+	if ([set member:self]) {
+		return;
+	}
+	[set addObject:self];
+	for (Task* neighbour in self.enables) {
+		[neighbour visitWithSet:set];
+	}
+}
+
+- (NSSet*)transitiveEnables {
+	NSMutableSet* set = [NSMutableSet set];
+	[self visitWithSet:set];
+	return set;
+}
+
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"taskUID == $UID"];
 	NSPredicate* predicate = [predicateTemplate predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:uid forKey:@"UID"]];

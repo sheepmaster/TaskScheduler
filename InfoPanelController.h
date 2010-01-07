@@ -10,6 +10,9 @@
 @class TaskScheduler_AppDelegate;
 
 @interface InfoPanelController : NSWindowController {
+	IBOutlet NSArrayController* tasksController;
+	NSSet* excludedTasks;
+	
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
 	
 	IBOutlet NSTextField* startDateField;

@@ -12,6 +12,8 @@
 @implementation InfoPanelController
 
 - (void)awakeFromNib {
+	[tasksController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+	
 //	NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%x" allowNaturalLanguage:YES];
 //	[formatter setDateStyle:NSDateFormatterMediumStyle];
 //	[formatter setTimeStyle:NSDateFormatterShortStyle];
@@ -23,9 +25,23 @@
 //	[scheduledDateField setFormatter:formatter];
 //	[completedDateField setFormatter:formatter];
 //	[formatter release];
+	excludedTasks = [[NSSet alloc] init];
 }
 
-					 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//	NSLog(@"change: %@", change);
+	NSArray* selectedObjects = [tasksController selectedObjects];
+	if ([selectedObjects count] != 1) {
+		return;
+	}
+	id selectedTask = [selectedObjects objectAtIndex:0];
+//	NSLog(@"selected task: %@", selectedTask);
+	[excludedTasks release];
+	
+	excludedTasks = [[[selectedTask valueForKey:@"dependsOn"] setByAddingObjectsFromSet:[selectedTask valueForKey:@"transitiveEnables"]] retain];
+//	excludedTasks = [[selectedTask valueForKey:@"dependsOn"] retain];
+	NSLog(@"excludedTasks: %@", [excludedTasks valueForKey:@"title"]);
+}
 
 - (IBAction)toggleWindow:(id)sender {
 	NSWindow* window = [self window];
@@ -39,12 +55,12 @@
 
 - (NSArray*)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex {
 	NSManagedObjectContext* context = [appDelegate managedObjectContext];
-	return [[Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"title beginswith[cd] %@", substring] inManagedObjectContext:context] valueForKey:@"title"];
+	return [[Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"(title beginswith[cd] %@) && !(SELF IN %@)", substring, excludedTasks] inManagedObjectContext:context] valueForKey:@"title"];
 }
 
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString {
 	NSManagedObjectContext* context = [appDelegate managedObjectContext];
-	NSArray* tasks = [Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"title == %@", editingString] inManagedObjectContext:context];
+	NSArray* tasks = [Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"(title == %@) && !(SELF IN %@)", editingString, excludedTasks] inManagedObjectContext:context];
 	if ([tasks count] > 0) {
 		return [tasks objectAtIndex:0];
 	} else {

@@ -24,15 +24,9 @@
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 
-@end
-
-// coalesce these into one @interface Task (CoreDataGeneratedAccessors) section
-@interface Task (CoreDataGeneratedAccessors)
-
 @property (nonatomic, retain) NSDate * completed;
 @property (nonatomic, retain) NSDate * due;
 @property (nonatomic, retain) NSNumber * duration;
-@property (nonatomic, retain) NSNumber * durationScale;
 @property (nonatomic, retain) NSString * eventUID;
 @property (nonatomic, retain) NSNumber * flagged;
 @property (nonatomic, retain) NSString * notes;
@@ -41,5 +35,23 @@
 @property (nonatomic, retain) NSDate * start;
 @property (nonatomic, retain) NSString * taskUID;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSSet* dependsOn;
+@property (nonatomic, retain) NSSet* enables;
+@property (readonly) NSSet* transitiveEnables;
+
+@end
+
+// coalesce these into one @interface Task (CoreDataGeneratedAccessors) section
+@interface Task (CoreDataGeneratedAccessors)
+- (void)addDependsOnObject:(NSManagedObject *)value;
+- (void)removeDependsOnObject:(NSManagedObject *)value;
+- (void)addDependsOn:(NSSet *)value;
+- (void)removeDependsOn:(NSSet *)value;
+
+- (void)addEnablesObject:(NSManagedObject *)value;
+- (void)removeEnablesObject:(NSManagedObject *)value;
+- (void)addEnables:(NSSet *)value;
+- (void)removeEnables:(NSSet *)value;
+
 
 @end
