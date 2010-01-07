@@ -11,7 +11,7 @@
 
 @interface InfoPanelController : NSWindowController {
 	IBOutlet NSArrayController* tasksController;
-	NSSet* excludedTasks;
+	NSMutableSet* excludedTasks;
 	
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
 	

@@ -12,7 +12,8 @@
 @implementation InfoPanelController
 
 - (void)awakeFromNib {
-	[tasksController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+//	[tasksController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+	[tasksController addObserver:self forKeyPath:@"selection.dependsOn" options:0 context:nil];
 	
 //	NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%x" allowNaturalLanguage:YES];
 //	[formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -31,15 +32,19 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 //	NSLog(@"change: %@", change);
 	NSArray* selectedObjects = [tasksController selectedObjects];
-	if ([selectedObjects count] != 1) {
-		return;
-	}
-	id selectedTask = [selectedObjects objectAtIndex:0];
+//	if ([selectedObjects count] != 1) {
+//		return;
+//	}
+//	id selectedTask = [selectedObjects objectAtIndex:0];
 //	NSLog(@"selected task: %@", selectedTask);
 	[excludedTasks release];
+	excludedTasks = [[NSMutableSet alloc] init];
+
+	for (Task* task in selectedObjects) {
+		[excludedTasks unionSet:task.dependsOn];
+		[excludedTasks unionSet:task.transitiveEnables];
+	}
 	
-	excludedTasks = [[[selectedTask valueForKey:@"dependsOn"] setByAddingObjectsFromSet:[selectedTask valueForKey:@"transitiveEnables"]] retain];
-//	excludedTasks = [[selectedTask valueForKey:@"dependsOn"] retain];
 	NSLog(@"excludedTasks: %@", [excludedTasks valueForKey:@"title"]);
 }
 
