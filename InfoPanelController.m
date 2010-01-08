@@ -14,6 +14,7 @@
 - (void)awakeFromNib {
 //	[tasksController addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
 	[tasksController addObserver:self forKeyPath:@"selection.dependsOn" options:0 context:nil];
+	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
 	
 //	NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%x" allowNaturalLanguage:YES];
 //	[formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -45,7 +46,7 @@
 		[excludedTasks unionSet:task.transitiveEnables];
 	}
 	
-	NSLog(@"excludedTasks: %@", [excludedTasks valueForKey:@"title"]);
+//	NSLog(@"excludedTasks: %@", [excludedTasks valueForKey:@"title"]);
 }
 
 - (IBAction)toggleWindow:(id)sender {

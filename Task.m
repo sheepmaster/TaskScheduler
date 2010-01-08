@@ -84,20 +84,26 @@
 	return self;
 }
 
-/*
-- (Status)status {
-	if (completed < now) {
-		return StatusCompleted;
-	} else if ((start > now) || (max(dependsOn.completed) > now)) {
-		return StatusPending;
-	} else if (!scheduled) {
-		return StatusPossible;
-	} else if (scheduled > now) {
-		return StatusInactive;
-	} else {
-		return StatusActive;
-	}
++ (NSSet *)keyPathsForValuesAffectingStatus {
+	return [NSSet setWithObjects:@"completed", @"start", @"scheduled", @"dependsOn", nil];
 }
- */
+
+- (NSNumber*)status {
+	TaskStatus s;
+	NSDate* now = [NSDate date];
+	if ([self.completed compare:now] == NSOrderedAscending) {
+		s = TaskStatusCompleted;
+	} else if (([self.start compare:now] == NSOrderedDescending) || ([now compare:[self.dependsOn valueForKeyPath:@"@max.completed"]] == NSOrderedAscending)) {
+		s = TaskStatusPending;
+	} else if (!self.scheduled) {
+		s = TaskStatusPossible;
+	} else if ([self.scheduled compare:now] == NSOrderedDescending) {
+		s = TaskStatusInactive;
+	} else {
+		s = TaskStatusActive;
+	}
+	NSLog(@"Status for %@: %d", self.title, s);
+	return [NSNumber numberWithInt:s];
+}
 
 @end

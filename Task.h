@@ -8,14 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum  {
+	TaskStatusCompleted = 1, 
+	TaskStatusPending, 
+	TaskStatusInactive, 
+	TaskStatusPossible, 
+	TaskStatusActive
+} TaskStatus;
+
 
 @interface Task : NSManagedObject {
 
 }
-
-//@property NSString* title;
-//@property NSString* notes;
-//@property NSString* taskUID;
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
 + (Task*) taskMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
@@ -38,6 +42,7 @@
 @property (nonatomic, retain) NSSet* dependsOn;
 @property (nonatomic, retain) NSSet* enables;
 @property (readonly) NSSet* transitiveEnables;
+@property (readonly) NSNumber* status;
 
 @end
 

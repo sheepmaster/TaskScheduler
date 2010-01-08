@@ -11,7 +11,7 @@
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="2"/>
+			<integer value="350"/>
 			<integer value="360"/>
 			<integer value="809"/>
 		</array>
@@ -853,7 +853,7 @@
 													<reference key="NSTableView" ref="1041524829"/>
 												</object>
 												<object class="NSTableColumn" id="327906144">
-													<double key="NSWidth">458</double>
+													<double key="NSWidth">361</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -935,6 +935,32 @@
 													</object>
 													<reference key="NSTableView" ref="1041524829"/>
 												</object>
+												<object class="NSTableColumn" id="753953785">
+													<double key="NSWidth">64</double>
+													<double key="NSMinWidth">10</double>
+													<double key="NSMaxWidth">3.4028234663852886e+38</double>
+													<object class="NSTableHeaderCell" key="NSHeaderCell">
+														<int key="NSCellFlags">75628096</int>
+														<int key="NSCellFlags2">2048</int>
+														<string key="NSContents"/>
+														<reference key="NSSupport" ref="26"/>
+														<reference key="NSBackgroundColor" ref="945845385"/>
+														<reference key="NSTextColor" ref="939948387"/>
+													</object>
+													<object class="NSTextFieldCell" key="NSDataCell" id="209654141">
+														<int key="NSCellFlags">337772096</int>
+														<int key="NSCellFlags2">2048</int>
+														<string key="NSContents">Text Cell</string>
+														<reference key="NSSupport" ref="828637943"/>
+														<reference key="NSControlView" ref="1041524829"/>
+														<reference key="NSBackgroundColor" ref="457479183"/>
+														<reference key="NSTextColor" ref="1023837937"/>
+													</object>
+													<int key="NSResizingMask">3</int>
+													<bool key="NSIsResizeable">YES</bool>
+													<bool key="NSIsEditable">YES</bool>
+													<reference key="NSTableView" ref="1041524829"/>
+												</object>
 											</array>
 											<double key="NSIntercellSpacingWidth">3</double>
 											<double key="NSIntercellSpacingHeight">2</double>
@@ -949,7 +975,7 @@
 												</object>
 											</object>
 											<double key="NSRowHeight">17</double>
-											<int key="NSTvFlags">1514143744</int>
+											<int key="NSTvFlags">1512046592</int>
 											<reference key="NSDelegate"/>
 											<reference key="NSDataSource"/>
 											<int key="NSColumnAutoresizingStyle">4</int>
@@ -1107,6 +1133,7 @@
 					<string>duration</string>
 					<string>durationScale</string>
 					<string>dependsOn</string>
+					<string>status</string>
 				</array>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -4073,6 +4100,22 @@
 					</object>
 					<int key="connectionID">940</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.status</string>
+						<reference key="source" ref="753953785"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="753953785"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">value: arrangedObjects.status</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.status</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">943</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -4686,6 +4729,7 @@
 							<reference ref="548401112"/>
 							<reference ref="327906144"/>
 							<reference ref="1045449207"/>
+							<reference ref="753953785"/>
 						</array>
 						<reference key="parent" ref="417814865"/>
 					</object>
@@ -5789,6 +5833,19 @@
 						<reference key="object" ref="152633093"/>
 						<reference key="parent" ref="270662517"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">941</int>
+						<reference key="object" ref="753953785"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="209654141"/>
+						</array>
+						<reference key="parent" ref="1041524829"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">942</int>
+						<reference key="object" ref="209654141"/>
+						<reference key="parent" ref="753953785"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -6160,7 +6217,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">940</int>
+			<int key="maxID">943</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
