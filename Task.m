@@ -9,22 +9,118 @@
 #import "Task.h"
 
 
+@interface Task (CoreDataGeneratedPrimitiveAccessors)
+
+- (NSNumber *)primitiveActive;
+- (void)setPrimitiveActive:(NSNumber *)value;
+
+- (NSNumber *)primitiveCompleted;
+- (void)setPrimitiveCompleted:(NSNumber *)value;
+
+- (NSNumber *)primitiveInactive;
+- (void)setPrimitiveInactive:(NSNumber *)value;
+
+- (NSNumber *)primitiveOverdue;
+- (void)setPrimitiveOverdue:(NSNumber *)value;
+
+- (NSNumber *)primitivePending;
+- (void)setPrimitivePending:(NSNumber *)value;
+
+@end
+
 @implementation Task
 
-@dynamic completed;
-@dynamic due;
+@dynamic completedDate;
+@dynamic dueDate;
 @dynamic duration;
 @dynamic eventUID;
 @dynamic flagged;
 @dynamic notes;
 @dynamic priority;
-@dynamic scheduled;
-@dynamic start;
+@dynamic scheduledDate;
+@dynamic startDate;
 @dynamic taskUID;
 @dynamic title;
 @dynamic dependsOn;
 @dynamic enables;
-@dynamic status;
+@dynamic active;
+@dynamic completed;
+@dynamic inactive;
+@dynamic overdue;
+@dynamic pending;
+
+
+- (BOOL)evaluateSelfWithPredicateNamed:(NSString*)predicateName {
+	NSManagedObjectModel* model = [[Task entityInContext:[self managedObjectContext]] managedObjectModel];
+	NSDictionary* dict = [NSDictionary dictionaryWithObject:[NSDate date] forKey:@"NOW"];
+	NSPredicate* predicate = [[model fetchRequestTemplateForName:predicateName] predicate];
+	return [predicate evaluateWithObject:self substitutionVariables:dict];
+}
+
+- (NSNumber *)active {
+    NSNumber * tmpValue;
+    
+    [self willAccessValueForKey:@"active"];
+    tmpValue = [self primitiveActive];
+	if (!tmpValue) {
+		[self setPrimitiveActive:[NSNumber numberWithBool:[self evaluateSelfWithPredicateNamed:@"active"]]];
+	}
+    [self didAccessValueForKey:@"active"];
+    
+    return tmpValue;
+}
+
+- (NSNumber *)completed {
+    NSNumber * tmpValue;
+    
+    [self willAccessValueForKey:@"completed"];
+    tmpValue = [self primitiveCompleted];
+	if (!tmpValue) {
+		[self setPrimitiveCompleted:[NSNumber numberWithBool:[self evaluateSelfWithPredicateNamed:@"completed"]]];
+	}
+    [self didAccessValueForKey:@"completed"];
+    
+    return tmpValue;
+}
+
+- (NSNumber *)inactive {
+    NSNumber * tmpValue;
+    
+    [self willAccessValueForKey:@"inactive"];
+    tmpValue = [self primitiveInactive];
+	if (!tmpValue) {
+		[self setPrimitiveCompleted:[NSNumber numberWithBool:[self evaluateSelfWithPredicateNamed:@"inactive"]]];
+	}
+    [self didAccessValueForKey:@"inactive"];
+    
+    return tmpValue;
+}
+
+- (NSNumber *)overdue {
+    NSNumber * tmpValue;
+    
+    [self willAccessValueForKey:@"overdue"];
+    tmpValue = [self primitiveOverdue];
+	if (!tmpValue) {
+		[self setPrimitiveOverdue:[NSNumber numberWithBool:[self evaluateSelfWithPredicateNamed:@"overdue"]]];
+	}
+    [self didAccessValueForKey:@"overdue"];
+    
+    return tmpValue;
+}
+
+- (NSNumber *)pending {
+    NSNumber * tmpValue;
+    
+    [self willAccessValueForKey:@"pending"];
+    tmpValue = [self primitivePending];
+	if (!tmpValue) {
+		[self setPrimitivePending:[NSNumber numberWithBool:[self evaluateSelfWithPredicateNamed:@"pending"]]];
+	}
+    [self didAccessValueForKey:@"pending"];
+    
+    return tmpValue;
+}
 
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
@@ -67,14 +163,13 @@
 }
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
-	if (self = [super initWithEntity:[self entityInContext:context] insertIntoManagedObjectContext:context]) {
+	if (self = [super initWithEntity:[Task entityInContext:context] insertIntoManagedObjectContext:context]) {
 		
 	}
 	return self;
 }
 
 - (void)awakeFromFetch {
-	[self refreshStatus];
 	[self addObserver:self forKeyPath:@"completed" options:0 context:nil];
 	[self addObserver:self forKeyPath:@"start" options:0 context:nil];
 	[self addObserver:self forKeyPath:@"scheduled" options:0 context:nil];
@@ -99,33 +194,17 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	[self refreshStatus];
-}
-
-+ (NSSet *)keyPathsForValuesAffectingStatus {
-	return [NSSet setWithObjects:@"completed", @"start", @"scheduled", @"dependsOn", nil];
-}
-
-- (void)refreshStatus {
-	NSManagedObjectModel* model = [[Task entityInContext:[self managedObjectContext]] managedObjectModel];
-	NSDictionary* dict = [NSDictionary dictionaryWithObject:[NSDate date] forKey:@"NOW"];
-	NSPredicate* completedPredicate = [[model fetchRequestTemplateForName:@"completed"] predicate];
-	NSPredicate* pendingPredicate = [[model fetchRequestTemplateForName:@"pending"] predicate];
-	NSPredicate* activePredicate = [[model fetchRequestTemplateForName:@"active"] predicate];
-	NSPredicate* inactivePredicate = [[model fetchRequestTemplateForName:@"inactive"] predicate];
-	TaskStatus s;
-	if ([completedPredicate evaluateWithObject:self substitutionVariables:dict]) {
-		s = TaskStatusCompleted;
-	} else if ([pendingPredicate evaluateWithObject:self substitutionVariables:dict]) {
-		s = TaskStatusPending;
-	} else if ([activePredicate evaluateWithObject:self substitutionVariables:dict]) {
-		s = TaskStatusActive;
-	} else if ([inactivePredicate evaluateWithObject:self substitutionVariables:dict]) {
-		s = TaskStatusInactive;
-	} else {
-		s = TaskStatusPossible;
+	if ([keyPath isEqualToString:@"scheduledDate"]) {
+		self.active = nil;
+		self.inactive = nil;
+	} else if ([keyPath isEqualToString:@"startDate"]) {
+		self.pending = nil;
+	} else if ([keyPath isEqualToString:@"completedDate"]) {
+		self.completed = nil;
+	} else if ([keyPath isEqualToString:@"dueDate"]) {
+		self.overdue = nil;
 	}
-	self.status = [NSNumber numberWithInt:s];
 }
+
 
 @end
