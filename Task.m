@@ -24,22 +24,8 @@
 @dynamic title;
 @dynamic dependsOn;
 @dynamic enables;
+@dynamic status;
 
-- (void)visitWithSet:(NSMutableSet*)set {
-	if ([set member:self]) {
-		return;
-	}
-	[set addObject:self];
-	for (Task* neighbour in self.enables) {
-		[neighbour visitWithSet:set];
-	}
-}
-
-- (NSSet*)transitiveEnables {
-	NSMutableSet* set = [NSMutableSet set];
-	[self visitWithSet:set];
-	return set;
-}
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"taskUID == $UID"];
@@ -61,10 +47,13 @@
 	return [self tasksMatchingPredicate:[NSPredicate predicateWithValue:YES] inManagedObjectContext:context];
 }
 
++ (NSEntityDescription*)entityInContext:(NSManagedObjectContext*)context {
+	return [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
+}
+
 + (NSArray*)tasksMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task"
-											  inManagedObjectContext:context];
+	NSEntityDescription *entity = [self entityInContext:context];
 	[fetchRequest setEntity:entity];
 	[fetchRequest setPredicate:predicate];
 	
@@ -78,32 +67,65 @@
 }
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
-	if (self = [super initWithEntity:[NSEntityDescription entityForName:@"Task" inManagedObjectContext:context] insertIntoManagedObjectContext:context]) {
+	if (self = [super initWithEntity:[self entityInContext:context] insertIntoManagedObjectContext:context]) {
 		
 	}
 	return self;
+}
+
+- (void)awakeFromFetch {
+	[self refreshStatus];
+	[self addObserver:self forKeyPath:@"completed" options:0 context:nil];
+	[self addObserver:self forKeyPath:@"start" options:0 context:nil];
+	[self addObserver:self forKeyPath:@"scheduled" options:0 context:nil];
+	[self addObserver:self forKeyPath:@"dependsOn" options:0 context:nil];
+//	[self addObserver:self forKeyPath:@"dependsOn.completed" options:0 context:nil];
+}
+
+- (void)visitWithSet:(NSMutableSet*)set {
+	if ([set member:self]) {
+		return;
+	}
+	[set addObject:self];
+	for (Task* neighbour in self.enables) {
+		[neighbour visitWithSet:set];
+	}
+}
+
+- (NSSet*)transitiveEnables {
+	NSMutableSet* set = [NSMutableSet set];
+	[self visitWithSet:set];
+	return set;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	[self refreshStatus];
 }
 
 + (NSSet *)keyPathsForValuesAffectingStatus {
 	return [NSSet setWithObjects:@"completed", @"start", @"scheduled", @"dependsOn", nil];
 }
 
-- (NSNumber*)status {
+- (void)refreshStatus {
+	NSManagedObjectModel* model = [[Task entityInContext:[self managedObjectContext]] managedObjectModel];
+	NSDictionary* dict = [NSDictionary dictionaryWithObject:[NSDate date] forKey:@"NOW"];
+	NSPredicate* completedPredicate = [[model fetchRequestTemplateForName:@"completed"] predicate];
+	NSPredicate* pendingPredicate = [[model fetchRequestTemplateForName:@"pending"] predicate];
+	NSPredicate* activePredicate = [[model fetchRequestTemplateForName:@"active"] predicate];
+	NSPredicate* inactivePredicate = [[model fetchRequestTemplateForName:@"inactive"] predicate];
 	TaskStatus s;
-	NSDate* now = [NSDate date];
-	if ([self.completed compare:now] == NSOrderedAscending) {
+	if ([completedPredicate evaluateWithObject:self substitutionVariables:dict]) {
 		s = TaskStatusCompleted;
-	} else if (([self.start compare:now] == NSOrderedDescending) || ([now compare:[self.dependsOn valueForKeyPath:@"@max.completed"]] == NSOrderedAscending)) {
+	} else if ([pendingPredicate evaluateWithObject:self substitutionVariables:dict]) {
 		s = TaskStatusPending;
-	} else if (!self.scheduled) {
-		s = TaskStatusPossible;
-	} else if ([self.scheduled compare:now] == NSOrderedDescending) {
+	} else if ([activePredicate evaluateWithObject:self substitutionVariables:dict]) {
+		s = TaskStatusActive;
+	} else if ([inactivePredicate evaluateWithObject:self substitutionVariables:dict]) {
 		s = TaskStatusInactive;
 	} else {
-		s = TaskStatusActive;
+		s = TaskStatusPossible;
 	}
-	NSLog(@"Status for %@: %d", self.title, s);
-	return [NSNumber numberWithInt:s];
+	self.status = [NSNumber numberWithInt:s];
 }
 
 @end

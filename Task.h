@@ -21,12 +21,15 @@ typedef enum  {
 
 }
 
++ (NSEntityDescription*)entityInContext:(NSManagedObjectContext*)context;
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
 + (Task*) taskMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
 + (NSArray*)tasksMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
 + (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
+
+- (void) refreshStatus;
 
 @property (nonatomic, retain) NSDate * completed;
 @property (nonatomic, retain) NSDate * due;
@@ -42,7 +45,7 @@ typedef enum  {
 @property (nonatomic, retain) NSSet* dependsOn;
 @property (nonatomic, retain) NSSet* enables;
 @property (readonly) NSSet* transitiveEnables;
-@property (readonly) NSNumber* status;
+@property (nonatomic, retain) NSNumber* status;
 
 @end
 
