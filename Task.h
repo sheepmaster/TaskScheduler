@@ -49,6 +49,12 @@ typedef enum  {
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 
+- (BOOL)evaluateWithPredicateNamed:(NSString*)predicateName;
+- (void)updateCompleted;
+- (void)updateActive;
+- (void)updatePending;
+- (void)updateOverdue;
+
 @end
 
 // coalesce these into one @interface Task (CoreDataGeneratedAccessors) section
