@@ -159,9 +159,7 @@
 		return;
 	}
 	[set addObject:self];
-	for (Task* neighbour in self.enables) {
-		[neighbour visitWithSet:set];
-	}
+	[self.enables makeObjectsPerformSelector:@selector(visitWithSet:) withObject:set];
 }
 
 - (NSSet*)transitiveEnables {
@@ -177,6 +175,7 @@
 		[self updatePending];
 	} else if ([keyPath isEqualToString:@"completedDate"]) {
 		[self updateCompleted];
+		[self.enables makeObjectsPerformSelector:@selector(updatePending)];
 	} else if ([keyPath isEqualToString:@"dueDate"]) {
 		[self updateOverdue];
 	}
