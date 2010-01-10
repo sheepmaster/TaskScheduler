@@ -170,6 +170,12 @@
 }
 
 - (void)awakeFromFetch {
+	self.completed = nil;
+	self.pending = nil;
+	self.active = nil;
+	self.inactive = nil;
+	self.overdue = nil;
+	
 	[self addObserver:self forKeyPath:@"completed" options:0 context:nil];
 	[self addObserver:self forKeyPath:@"start" options:0 context:nil];
 	[self addObserver:self forKeyPath:@"scheduled" options:0 context:nil];

@@ -9,7 +9,7 @@
 #import "TaskWindowController.h"
 
 #import "InfoPanelController.h"
-
+#import "Task.h"
 
 @implementation TaskWindowController
 
@@ -38,8 +38,9 @@
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 	if (aTableColumn == completedColumn) {
-		NSManagedObject* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
-		[task setValue:([anObject boolValue] ? [NSDate date] : nil) forKeyPath:@"completed"];
+		Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
+		
+		task.completedDate = [anObject boolValue] ? [NSDate date] : nil;
 //		NSLog(@"task: %@", task);
 //		if ([anObject boolValue]) {
 //			tmp.completed = [NSDate date];
