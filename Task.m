@@ -82,8 +82,17 @@
 	return [NSSet setWithObject:@"startDate"];
 }
 
+- (NSDate*)completedDateOrDistantFuture {
+	NSDate* date = self.completedDate;
+	if (!date) {
+		date = [NSDate distantFuture];
+	}
+	return date;
+}
+
 - (void)updatePending {
-	self.pending = [NSNumber numberWithBool:[self evaluateWithPredicateNamed:@"pending"]];
+	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"ANY dependsOn.completedDateOrDistantFuture > %@", [NSDate date]];
+	self.pending = [NSNumber numberWithBool:[predicate evaluateWithObject:self]];
 }
 
 + (NSSet *)keyPathsForValuesAffectingOverdue {

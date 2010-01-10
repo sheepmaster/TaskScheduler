@@ -22,6 +22,7 @@ typedef enum  {
 }
 
 @property (nonatomic, retain) NSDate * completedDate;
+@property (readonly) NSDate* completedDateOrDistantFuture;
 @property (nonatomic, retain) NSNumber * completed;
 @property (nonatomic, retain) NSDate * dueDate;
 @property (nonatomic, retain) NSNumber * overdue;
