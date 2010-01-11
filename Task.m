@@ -57,29 +57,13 @@
 	return [predicate evaluateWithObject:self substitutionVariables:dict];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingCompleted {
-	return [NSSet setWithObject:@"completedDate"];
-}
-
 - (void)updateCompleted {
 	self.completed = [NSNumber numberWithBool:[self evaluateWithPredicateNamed:@"completed"]];
-}
-
-+ (NSSet *)keyPathsForValuesAffectingActive {
-	return [NSSet setWithObject:@"scheduledDate"];
-}
-
-+ (NSSet *)keyPathsForValuesAffectingInactive {
-	return [NSSet setWithObject:@"scheduledDate"];
 }
 
 - (void)updateActive {
 	self.active = [NSNumber numberWithBool:[self evaluateWithPredicateNamed:@"active"]];
 	self.inactive = [NSNumber numberWithBool:[self evaluateWithPredicateNamed:@"inactive"]];	
-}
-
-+ (NSSet *)keyPathsForValuesAffectingPending {
-	return [NSSet setWithObject:@"startDate"];
 }
 
 - (NSDate*)completedDateOrDistantFuture {
@@ -91,12 +75,9 @@
 }
 
 - (void)updatePending {
-	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"ANY dependsOn.completedDateOrDistantFuture > %@", [NSDate date]];
+	NSDate* now = [NSDate date];
+	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"startDate > %@ OR ANY dependsOn.completedDateOrDistantFuture > %@", now, now];
 	self.pending = [NSNumber numberWithBool:[predicate evaluateWithObject:self]];
-}
-
-+ (NSSet *)keyPathsForValuesAffectingOverdue {
-	return [NSSet setWithObject:@"dueDate"];
 }
 
 - (void)updateOverdue {
@@ -155,11 +136,11 @@
 	[self updateActive];
 	[self updateOverdue];
 	
-	[self addObserver:self forKeyPath:@"completedDate" options:0 context:nil];
-	[self addObserver:self forKeyPath:@"startDate" options:0 context:nil];
-	[self addObserver:self forKeyPath:@"scheduledDate" options:0 context:nil];
+	[self addObserver:self forKeyPath:@"completedDate" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+	[self addObserver:self forKeyPath:@"startDate" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+	[self addObserver:self forKeyPath:@"scheduledDate" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+	[self addObserver:self forKeyPath:@"dueDate" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 	[self addObserver:self forKeyPath:@"dependsOn" options:0 context:nil];
-	[self addObserver:self forKeyPath:@"dueDate" options:0 context:nil];
 //	[self addObserver:self forKeyPath:@"dependsOn.completed" options:0 context:nil];
 }
 
@@ -178,6 +159,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	NSLog(@"%@\t%@\tchange kind: %@\told: %@\tnew: %@", ((Task*)object).title, keyPath, [change objectForKey:NSKeyValueChangeKindKey], [change objectForKey:NSKeyValueChangeOldKey], [change objectForKey:NSKeyValueChangeNewKey]);
 	if ([keyPath isEqualToString:@"scheduledDate"]) {
 		[self updateActive];
 	} else if ([keyPath isEqualToString:@"startDate"] || [keyPath isEqualToString:@"dependsOn"]) {

@@ -112,24 +112,44 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	return YES;
 }
 
+static inline BOOL equals(id a, id b) {
+	return (a == b) || [a isEqual:b];
+//	return NO;
+}
+
 - (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task {
 	NSCalendar* calendar = [NSCalendar autoupdatingCurrentCalendar];
-	task.title = calTask.title;
-	task.notes = calTask.notes;
-	task.completedDate = calTask.completedDate;
+	if (!equals(task.title, calTask.title)) {
+		task.title = calTask.title;
+	}
+	if (!equals(task.notes, calTask.notes)) {
+		task.notes = calTask.notes;
+	}
+	if (!equals(task.completedDate, calTask.completedDate)) {
+		task.completedDate = calTask.completedDate;
+	}
 //	task.due = calTask.dueDate;
+	NSDate* newDate;
 	if (task.dueDate && calTask.dueDate) {
 		NSDateComponents* components = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:task.dueDate];
-		task.dueDate = [calendar dateByAddingComponents:components toDate:calTask.dueDate options:0];
+		newDate = [calendar dateByAddingComponents:components toDate:calTask.dueDate options:0];
 	} else {
-		task.dueDate = calTask.dueDate;
+		newDate = calTask.dueDate;
+	}
+	if (!equals(newDate, task.dueDate)) {
+		task.dueDate = newDate;
 	}
 	return YES;
 }
 
 - (void) copyCalEvent:(CalEvent*)event toTask:(Task*)task {
-	task.scheduledDate = event.startDate;
-	task.duration = [NSNumber numberWithDouble:[event.endDate timeIntervalSinceDate:event.startDate]];
+	if (!equals(task.scheduledDate, event.startDate)) {
+		task.scheduledDate = event.startDate;
+	}
+	NSNumber* newDuration = [NSNumber numberWithDouble:[event.endDate timeIntervalSinceDate:event.startDate]];
+	if (!equals(task.duration, newDuration)) {
+		task.duration = newDuration;
+	}
 }
 
 - (void) eventDeletedForTask:(Task*)task {
