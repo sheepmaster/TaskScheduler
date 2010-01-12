@@ -130,6 +130,10 @@
 	return self;
 }
 
+- (void)awakeFromInsert {
+	[self awakeFromFetch];
+}
+
 - (void)awakeFromFetch {
 	[self updateCompleted];
 	[self updatePending];
@@ -156,6 +160,14 @@
 	NSMutableSet* set = [NSMutableSet set];
 	[self visitWithSet:set];
 	return set;
+}
+
+- (void)willTurnIntoFault {
+	[self removeObserver:self forKeyPath:@"completedDate"];
+	[self removeObserver:self forKeyPath:@"startDate"];
+	[self removeObserver:self forKeyPath:@"scheduledDate"];
+	[self removeObserver:self forKeyPath:@"dueDate"];
+	[self removeObserver:self forKeyPath:@"dependsOn"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

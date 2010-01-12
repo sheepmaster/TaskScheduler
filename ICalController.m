@@ -113,12 +113,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 static BOOL equals(id a, id b) {
-	if (a) {
-		NSLog(@"%@", a);
-	}
-	return (a == nil) && (b == nil);
-//	return (a == b) || [a isEqual:b];
-//	return NO;
+	return (a == b) || [a isEqual:b];
 }
 
 - (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task {
@@ -218,7 +213,7 @@ static BOOL equals(id a, id b) {
 
 - (void)objectsDidChange:(NSNotification*)notification {
 	NSDictionary* userInfo = [notification userInfo];
-	NSEntityDescription* taskEntity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[appDelegate managedObjectContext]];
+	NSEntityDescription* taskEntity = [Task entityInContext:context];
 	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
 	for (id object in inserted) {
 		if ([[object entity] isEqualTo:taskEntity]) {
