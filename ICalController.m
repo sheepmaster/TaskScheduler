@@ -112,8 +112,12 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 	return YES;
 }
 
-static inline BOOL equals(id a, id b) {
-	return (a == b) || [a isEqual:b];
+static BOOL equals(id a, id b) {
+	if (a) {
+		NSLog(@"%@", a);
+	}
+	return (a == nil) && (b == nil);
+//	return (a == b) || [a isEqual:b];
 //	return NO;
 }
 
