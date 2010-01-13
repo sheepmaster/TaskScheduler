@@ -7,7 +7,7 @@
 //
 
 #import "Task.h"
-
+#import "StatusChange.h"
 
 @interface Task (CoreDataGeneratedPrimitiveAccessors)
 
@@ -48,6 +48,7 @@
 @dynamic inactive;
 @dynamic overdue;
 @dynamic pending;
+@dynamic statusChanges;
 
 
 - (BOOL)evaluateWithPredicateNamed:(NSString*)predicateName {
@@ -123,6 +124,17 @@
 	return fetchedObjects;
 }
 
+- (StatusChange*)statusChange:(NSString*)status {
+	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"status == $STATUS"];
+	NSDictionary* dict = [NSDictionary dictionaryWithObject:status forKey:@"STATUS"];
+							
+	NSSet* set = [self.statusChanges filteredSetUsingPredicate:[predicate predicateWithSubstitutionVariables:dict]];
+	if ([set count] != 1) {
+		NSLog(@"Found %d status change \"%@\" for object %@", [set count], status, self.title);
+	}
+	return [set anyObject];
+}
+
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
 	if (self = [super initWithEntity:[Task entityInContext:context] insertIntoManagedObjectContext:context]) {
 		
@@ -170,16 +182,50 @@
 	[self removeObserver:self forKeyPath:@"dependsOn"];
 }
 
+- (void)dateForStatus:(NSString*)status changedFrom:(NSDate*)oldDate to:(NSDate*)newDate {
+	NSManagedObjectContext* context = [self managedObjectContext];
+	StatusChange* change = nil;
+	if (![oldDate isKindOfClass:[NSNull class]]) {
+		change = [self statusChange:status];
+	}
+	if (!change) {
+		NSEntityDescription* entity = [NSEntityDescription entityForName:@"StatusChange" inManagedObjectContext:context];
+		change = [[StatusChange alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+		change.status = status;
+		[self addStatusChangesObject:change];
+		[change autorelease];
+	}
+	if ([newDate isKindOfClass:[NSNull class]] || ([newDate compare:[NSDate date]] == NSOrderedAscending)) {
+		[context deleteObject:change];
+	} else {
+		change.date = newDate;
+	}
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	NSLog(@"%@\t%@\tchange kind: %@\told: %@\tnew: %@", ((Task*)object).title, keyPath, [change objectForKey:NSKeyValueChangeKindKey], [change objectForKey:NSKeyValueChangeOldKey], [change objectForKey:NSKeyValueChangeNewKey]);
 	if ([keyPath isEqualToString:@"scheduledDate"]) {
+		[self dateForStatus:@"scheduled" 
+				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
+						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updateActive];
-	} else if ([keyPath isEqualToString:@"startDate"] || [keyPath isEqualToString:@"dependsOn"]) {
+	} else if ([keyPath isEqualToString:@"startDate"]) {
+		[self dateForStatus:@"start" 
+				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
+						 to:[change objectForKey:NSKeyValueChangeNewKey]];
+		[self updatePending];
+	} else if ([keyPath isEqualToString:@"dependsOn"]) {
 		[self updatePending];
 	} else if ([keyPath isEqualToString:@"completedDate"]) {
+		[self dateForStatus:@"completed" 
+				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
+						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updateCompleted];
 		[self.enables makeObjectsPerformSelector:@selector(updatePending)];
 	} else if ([keyPath isEqualToString:@"dueDate"]) {
+		[self dateForStatus:@"due" 
+				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
+						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updateOverdue];
 	}
 }

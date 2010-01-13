@@ -8,14 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-typedef enum  {
-	TaskStatusCompleted = 1, 
-	TaskStatusPending, 
-	TaskStatusInactive, 
-	TaskStatusPossible, 
-	TaskStatusActive
-} TaskStatus;
-
+@class StatusChange;
 
 @interface Task : NSManagedObject {
 
@@ -41,12 +34,16 @@ typedef enum  {
 @property (nonatomic, retain) NSSet* dependsOn;
 @property (nonatomic, retain) NSSet* enables;
 @property (readonly) NSSet* transitiveEnables;
+@property (nonatomic, retain) NSSet* statusChanges;
+
 
 + (NSEntityDescription*)entityInContext:(NSManagedObjectContext*)context;
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context;
 + (Task*) taskMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
 + (NSArray*)tasksMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context;
 + (NSArray*)allTasksInManagedObjectContext:(NSManagedObjectContext*)context;
+
+- (StatusChange*)statusChange:(NSString*)status;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 
@@ -55,6 +52,8 @@ typedef enum  {
 - (void)updateActive;
 - (void)updatePending;
 - (void)updateOverdue;
+
+- (void)dateForStatus:(NSString*)status changedFrom:(NSDate*)oldDate to:(NSDate*)newDate;
 
 @end
 
@@ -70,5 +69,9 @@ typedef enum  {
 - (void)addEnables:(NSSet *)value;
 - (void)removeEnables:(NSSet *)value;
 
+- (void)addStatusChangesObject:(NSManagedObject *)value;
+- (void)removeStatusChangesObject:(NSManagedObject *)value;
+- (void)addStatusChanges:(NSSet *)value;
+- (void)removeStatusChanges:(NSSet *)value;
 
 @end
