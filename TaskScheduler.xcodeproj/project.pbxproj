@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		401C550D10FCDC0100E16C96 /* StatusChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C550C10FCDC0100E16C96 /* StatusChange.m */; };
+		401C556810FDFC0400E16C96 /* StatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C556710FDFC0400E16C96 /* StatusController.m */; };
 		403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 403F014610C5728B000185A8 /* TodoList.xcdatamodel */; };
 		408C7AC310EE448F006C7B60 /* ICalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408C7AC210EE448F006C7B60 /* ICalController.m */; };
 		408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408C7AE810EE63C3006C7B60 /* CalendarStore.framework */; };
@@ -36,6 +37,8 @@
 		32CA4F630368D1EE00C91783 /* TaskScheduler_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskScheduler_Prefix.pch; sourceTree = "<group>"; };
 		401C550B10FCDC0000E16C96 /* StatusChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusChange.h; sourceTree = "<group>"; };
 		401C550C10FCDC0100E16C96 /* StatusChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusChange.m; sourceTree = "<group>"; };
+		401C556610FDFC0400E16C96 /* StatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusController.h; sourceTree = "<group>"; };
+		401C556710FDFC0400E16C96 /* StatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusController.m; sourceTree = "<group>"; };
 		403F014610C5728B000185A8 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
 		408C7AC110EE448F006C7B60 /* ICalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICalController.h; sourceTree = "<group>"; };
 		408C7AC210EE448F006C7B60 /* ICalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICalController.m; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 				401C550C10FCDC0100E16C96 /* StatusChange.m */,
 				4098FAF110F1174C00150AE3 /* Task.h */,
 				4098FAF210F1174C00150AE3 /* Task.m */,
+				401C556610FDFC0400E16C96 /* StatusController.h */,
+				401C556710FDFC0400E16C96 /* StatusController.m */,
 				40D64C2410CBFFE800153F26 /* TaskWindowController.h */,
 				40D64C2510CBFFE800153F26 /* TaskWindowController.m */,
 				40D64BD110CBFB4C00153F26 /* MAAttachedWindow.h */,
@@ -247,6 +252,7 @@
 				4098FE3310F4CB1C00150AE3 /* SetToArrayTransformer.m in Sources */,
 				4098FF2310F4E42300150AE3 /* DurationFormatter.m in Sources */,
 				401C550D10FCDC0100E16C96 /* StatusChange.m in Sources */,
+				401C556810FDFC0400E16C96 /* StatusController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

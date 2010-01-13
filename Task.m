@@ -130,7 +130,7 @@
 							
 	NSSet* set = [self.statusChanges filteredSetUsingPredicate:[predicate predicateWithSubstitutionVariables:dict]];
 	if ([set count] != 1) {
-		NSLog(@"Found %d status change \"%@\" for object %@", [set count], status, self.title);
+		NSLog(@"Found %d status changes \"%@\" for object %@", [set count], status, self.title);
 	}
 	return [set anyObject];
 }
@@ -184,26 +184,29 @@
 
 - (void)dateForStatus:(NSString*)status changedFrom:(NSDate*)oldDate to:(NSDate*)newDate {
 	NSManagedObjectContext* context = [self managedObjectContext];
-	StatusChange* change = nil;
-	if (![oldDate isKindOfClass:[NSNull class]]) {
-		change = [self statusChange:status];
-	}
-	if (!change) {
-		NSEntityDescription* entity = [NSEntityDescription entityForName:@"StatusChange" inManagedObjectContext:context];
-		change = [[StatusChange alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-		change.status = status;
-		[self addStatusChangesObject:change];
-		[change autorelease];
+	StatusChange* change =  [self statusChange:status];
+	if (change && [oldDate isKindOfClass:[NSNull class]]) {
+		NSLog(@"Found superfluous change of %@ for %@", status, self.title);
 	}
 	if ([newDate isKindOfClass:[NSNull class]] || ([newDate compare:[NSDate date]] == NSOrderedAscending)) {
-		[context deleteObject:change];
+		if (change) {
+			[change.task removeDependsOnObject:change];
+			[context deleteObject:change];
+		}
 	} else {
+		if (!change) {
+			NSEntityDescription* entity = [NSEntityDescription entityForName:@"StatusChange" inManagedObjectContext:context];
+			change = [[StatusChange alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+			change.status = status;
+			[self addStatusChangesObject:change];
+			[change autorelease];
+		}
 		change.date = newDate;
 	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	NSLog(@"%@\t%@\tchange kind: %@\told: %@\tnew: %@", ((Task*)object).title, keyPath, [change objectForKey:NSKeyValueChangeKindKey], [change objectForKey:NSKeyValueChangeOldKey], [change objectForKey:NSKeyValueChangeNewKey]);
+//	NSLog(@"%@\t%@\tchange kind: %@\told: %@\tnew: %@", ((Task*)object).title, keyPath, [change objectForKey:NSKeyValueChangeKindKey], [change objectForKey:NSKeyValueChangeOldKey], [change objectForKey:NSKeyValueChangeNewKey]);
 	if ([keyPath isEqualToString:@"scheduledDate"]) {
 		[self dateForStatus:@"scheduled" 
 				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 

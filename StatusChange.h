@@ -18,4 +18,6 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * status;
 
++ (StatusChange*)nextStatusChangeInContext:(NSManagedObjectContext*)context;
+
 @end
