@@ -18,6 +18,9 @@
 	NSManagedObjectContext* context;
 	StatusChange* nextChange;
 	NSTimer* nextChangeTimer;
+	NSDate* nextChangeDate;
 }
+
+- (void)setNextChange:(StatusChange*)change;
 
 @end
