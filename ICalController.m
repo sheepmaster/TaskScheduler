@@ -10,10 +10,10 @@
 #import <CalendarStore/CalendarStore.h>
 #import "TaskScheduler_AppDelegate.h"
 #import "Task.h"
+#import "PreferencesController.h"
 
 static NSString* DefaultCalendarKey = @"DefaultCalendar";
 static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
-static NSString* UseCustomScheduleCalendarKey = @"UseCustomScheduleCalendar";
 
 @implementation ICalController
 
@@ -24,10 +24,6 @@ static NSString* UseCustomScheduleCalendarKey = @"UseCustomScheduleCalendar";
 - (void) calendarsChanged:(NSNotification *)notification {
 	[self willChangeValueForKey:@"calendars"];
 	[self didChangeValueForKey:@"calendars"];
-}
-
-- (NSPredicate*)isInDefaultCalendarPredicate {
-	return [CalCalendarStore taskPredicateWithCalendars:[NSArray arrayWithObject:[calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]]]];
 }
 
 - (void)synchronize {
@@ -50,7 +46,8 @@ static NSString* UseCustomScheduleCalendarKey = @"UseCustomScheduleCalendar";
 		}
 	}
 	
-	for (CalTask* calTask in [calendarStore tasksWithPredicate:[self isInDefaultCalendarPredicate]]) {
+	NSPredicate* predicate = [CalCalendarStore taskPredicateWithCalendars:[NSArray arrayWithObject:[calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]]]];
+	for (CalTask* calTask in [calendarStore tasksWithPredicate:predicate]) {
 		Task* task = [Task taskWithTaskUID:calTask.uid inManagedObjectContext:context];
 		if (task == nil) {
 			[self insertedCalTask:calTask];
@@ -79,7 +76,7 @@ static NSString* UseCustomScheduleCalendarKey = @"UseCustomScheduleCalendar";
 				NSLog(@"Event %@ not found");
 				task.eventUID = nil;
 			}
-		} else {
+		} else if ([defaults boolForKey:CreateEventForScheduledTaskKey]) {
 			event = [CalEvent event];
 			NSString* calendarUID = [defaults boolForKey:UseCustomScheduleCalendarKey] ? [defaults objectForKey:DefaultScheduleCalendarKey] : [defaults objectForKey:DefaultCalendarKey];
 			event.calendar = [calendarStore calendarWithUID:calendarUID];
@@ -157,8 +154,10 @@ static BOOL equals(id a, id b) {
 }
 
 - (void) eventDeletedForTask:(Task*)task {
-	task.scheduledDate = nil;
-	task.eventUID = nil;
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:UnscheduleTaskForDeletedEventKey]) {
+		task.scheduledDate = nil;
+		task.eventUID = nil;
+	}
 } 
 
 - (void) deleteEventForTask:(Task*)task {
@@ -177,38 +176,42 @@ static BOOL equals(id a, id b) {
 
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
-//	NSLog(@"disabling objectsdidchange notifications for deleting task");
-	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:DeleteTaskForDeletedCalTaskKey]) {
+//		NSLog(@"disabling objectsdidchange notifications for deleting task");
+		NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+		[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 
-	[self deleteEventForTask:task];
-	[context deleteObject:task];
-	[context processPendingChanges];
-	
-	[center addObserver:self 
-			   selector:@selector(objectsDidChange:) 
-				   name:NSManagedObjectContextObjectsDidChangeNotification 
-				 object:context];
-//	NSLog(@"re-enabling objectsdidchange notifications for deleting task");
+		[self deleteEventForTask:task];
+		[context deleteObject:task];
+		[context processPendingChanges];
+		
+		[center addObserver:self 
+				   selector:@selector(objectsDidChange:) 
+					   name:NSManagedObjectContextObjectsDidChangeNotification 
+					 object:context];
+//		NSLog(@"re-enabling objectsdidchange notifications for deleting task");
+	}
 }
 
 - (void)insertedCalTask:(CalTask*)calTask {
-//	NSLog(@"disabling objectsdidchange notifications for inserting task");
-	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
-	
-	Task* task = [[Task alloc] initWithManagedObjectContext:context];
-	task.taskUID = calTask.uid;
-	[self copyCalTask:calTask toNativeTask:task];
-	[context insertObject:task];
-	[context processPendingChanges];
-	[task release];
-	
-	[center addObserver:self 
-			   selector:@selector(objectsDidChange:) 
-				   name:NSManagedObjectContextObjectsDidChangeNotification 
-				 object:context];
-//	NSLog(@"re-enabling objectsdidchange notifications for inserting task");
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:CreateTaskForNewCalTaskKey]) {
+//		NSLog(@"disabling objectsdidchange notifications for inserting task");
+		NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+		[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+		
+		Task* task = [[Task alloc] initWithManagedObjectContext:context];
+		task.taskUID = calTask.uid;
+		[self copyCalTask:calTask toNativeTask:task];
+		[context insertObject:task];
+		[context processPendingChanges];
+		[task release];
+		
+		[center addObserver:self 
+				   selector:@selector(objectsDidChange:) 
+					   name:NSManagedObjectContextObjectsDidChangeNotification 
+					 object:context];
+//		NSLog(@"re-enabling objectsdidchange notifications for inserting task");
+	}
 }
 
 - (void)awakeFromNib {
@@ -245,11 +248,13 @@ static BOOL equals(id a, id b) {
 
 - (void)insertedTask:(Task*)task {
 	if (!task.taskUID) {
-		CalTask* calTask = [CalTask task];
-		calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
-		if ([self copyNativeTask:task toCalTask:calTask]) {
-			task.taskUID = calTask.uid;
-		} 
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:CreateCalTaskForNewTaskKey]) {
+			CalTask* calTask = [CalTask task];
+			calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+			if ([self copyNativeTask:task toCalTask:calTask]) {
+				task.taskUID = calTask.uid;
+			} 
+		}
 	} else {
 		NSLog(@"Inserted task with existing UID %@", task.taskUID);
 	}

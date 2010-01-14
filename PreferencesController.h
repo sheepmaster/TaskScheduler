@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern NSString* CreateCalTaskForNewTaskKey;
+extern NSString* CreateTaskForNewCalTaskKey;
+extern NSString* DeleteTaskForDeletedCalTaskKey;
+extern NSString* CreateEventForScheduledTaskKey;
+extern NSString* UnscheduleTaskForDeletedEventKey;
+extern NSString* UseCustomScheduleCalendarKey;
+
 
 @interface PreferencesController : NSWindowController {
 

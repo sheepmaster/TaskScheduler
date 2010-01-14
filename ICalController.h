@@ -21,8 +21,6 @@
 
 @property(readonly) NSArray *calendars;
 
-- (NSPredicate*)isInDefaultCalendarPredicate;
-
 - (void)synchronize;
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task;

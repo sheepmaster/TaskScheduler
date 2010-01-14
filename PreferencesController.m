@@ -8,11 +8,12 @@
 
 #import "PreferencesController.h"
 
-static NSString* CreateCalTaskForNewTaskKey = @"CreateCalTaskForNewTask";
-static NSString* CreateTaskForNewCalTaskKey = @"CreateTaskForNewCalTask";
-static NSString* DeleteTaskForDeletedCalTaskKey = @"DeleteTaskForDeletedCalTask";
-static NSString* CreateEventForScheduledTaskKey = @"CreateEventForScheduledTask";
-static NSString* UnscheduleTaskForDeletedEventKey = @"UnscheduleTaskForDeletedEvent";
+NSString* CreateCalTaskForNewTaskKey = @"CreateCalTaskForNewTask";
+NSString* CreateTaskForNewCalTaskKey = @"CreateTaskForNewCalTask";
+NSString* DeleteTaskForDeletedCalTaskKey = @"DeleteTaskForDeletedCalTask";
+NSString* CreateEventForScheduledTaskKey = @"CreateEventForScheduledTask";
+NSString* UnscheduleTaskForDeletedEventKey = @"UnscheduleTaskForDeletedEvent";
+NSString* UseCustomScheduleCalendarKey = @"UseCustomScheduleCalendar";
 
 
 @implementation PreferencesController
@@ -24,6 +25,7 @@ static NSString* UnscheduleTaskForDeletedEventKey = @"UnscheduleTaskForDeletedEv
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:DeleteTaskForDeletedCalTaskKey];
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:CreateEventForScheduledTaskKey];
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:UnscheduleTaskForDeletedEventKey];
+	[defaultValues setObject:[NSNumber numberWithBool:NO] forKey:UseCustomScheduleCalendarKey];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
