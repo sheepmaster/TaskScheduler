@@ -28,6 +28,11 @@
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task;
 - (void)insertedCalTask:(CalTask*)calTask;
 
+- (void)insertedTask:(Task*)task;
+- (void)updatedTask:(Task*)task;
+- (void)deletedTask:(Task*)task;
+	
+
 - (BOOL) copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask;
 - (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task;
 - (void) copyCalEvent:(CalEvent*)event toTask:(Task*)task;

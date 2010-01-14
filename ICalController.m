@@ -229,50 +229,58 @@ static BOOL equals(id a, id b) {
 	[self synchronize];
 }
 
+- (void)insertedTask:(Task*)task {
+	if (!task.taskUID) {
+		CalTask* calTask = [CalTask task];
+		calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+		if ([self copyNativeTask:task toCalTask:calTask]) {
+			task.taskUID = calTask.uid;
+		} 
+	} else {
+		NSLog(@"Inserted task with existing UID %@", task.taskUID);
+	}
+}
+
+- (void)updatedTask:(Task*)task {
+	if (task.taskUID) {
+		CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
+		if (calTask) {
+			[self copyNativeTask:task toCalTask:calTask];
+		}
+	}
+}
+
+- (void)deletedTask:(Task*)task {
+	if (task.taskUID) {
+		CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
+		if (calTask) {
+			NSError* error;
+			if (![calendarStore removeTask:calTask error:&error]) {
+				[NSApp presentError:error];
+			}
+		}
+	}
+	[self deleteEventForTask:task];
+}
+
 - (void)objectsDidChange:(NSNotification*)notification {
 	NSDictionary* userInfo = [notification userInfo];
-	NSEntityDescription* taskEntity = [Task entityInContext:context];
 	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
 	for (id object in inserted) {
-		if ([[object entity] isEqualTo:taskEntity]) {
-			Task* task = object;
-			if (!task.taskUID) {
-				CalTask* calTask = [CalTask task];
-				calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
-				if ([self copyNativeTask:task toCalTask:calTask]) {
-					task.taskUID = calTask.uid;
-				} 
-			} else {
-				NSLog(@"Inserted task with existing UID %@", task.taskUID);
-			}
+		if ([object isKindOfClass:[Task class]]) {
+			[self insertedTask:object];
 		}
 	}
 	NSSet* updated = [userInfo objectForKey:NSUpdatedObjectsKey];
 	for (id object in updated) {
-		if ([[object entity] isEqualTo:taskEntity]) {
-			Task* task = object;
-			if (task.taskUID) {
-				CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
-				if (calTask) {
-					[self copyNativeTask:task toCalTask:calTask];
-				}
-			}
+		if ([object isKindOfClass:[Task class]]) {
+			[self updatedTask:object];
 		}
 	}
 	NSSet* deleted = [userInfo objectForKey:NSDeletedObjectsKey];
 	for (id object in deleted) {
-		if ([[object entity] isEqualTo:taskEntity]) {
-			Task* task = object;
-			if (task.taskUID) {
-				CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
-				if (calTask) {
-					NSError* error;
-					if (![calendarStore removeTask:calTask error:&error]) {
-						[NSApp presentError:error];
-					}
-				}
-			}
-			[self deleteEventForTask:task];
+		if ([object isKindOfClass:[Task class]]) {
+			[self deletedTask:object];
 		}
 	}
 }
