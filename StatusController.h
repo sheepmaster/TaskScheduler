@@ -12,13 +12,11 @@
 @class TaskScheduler_AppDelegate;
 
 @interface StatusController : NSObject {
-	IBOutlet NSArrayController* statusChanges;
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
 	
 	NSManagedObjectContext* context;
 	StatusChange* nextChange;
 	NSTimer* nextChangeTimer;
-	NSDate* nextChangeDate;
 }
 
 - (void)setNextChange:(StatusChange*)change;

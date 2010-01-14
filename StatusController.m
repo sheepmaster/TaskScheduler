@@ -21,30 +21,29 @@
 											 selector:@selector(objectsDidChange:) 
 												 name:NSManagedObjectContextObjectsDidChangeNotification 
 											   object:context];
-	[self setNextChange:nil];
+	[self setNextChange:[StatusChange nextStatusChangeInContext:context]];
 }
 
 	 
 	 
 - (void)setNextChange:(StatusChange*)change {
-	NSLog(@"next change: %@", nextChange);
-	[nextChange autorelease];
-	[nextChangeDate autorelease];
+	if (change == nextChange) {
+		return;
+	}
+	[nextChange release];
 	[nextChangeTimer invalidate];
 	[nextChangeTimer release];
+	nextChange = [change retain];
+	nextChangeTimer = nil;
 	if (change) {
-		nextChange = [change retain];
+		NSLog(@"next change: %@ %@ %@", change.task.title, change.status, change.date);
 		nextChangeTimer = [[NSTimer alloc] initWithFireDate:change.date 
 												   interval:0 
 													 target:self 
 												   selector:@selector(executeStatusChange:) 
 												   userInfo:nil 
 													repeats:NO];
-		nextChangeDate = [change.date retain];
-	} else {
-		nextChange = nil;
-		nextChangeTimer = nil;
-		nextChangeDate = [[NSDate distantFuture] retain];
+		[[NSRunLoop mainRunLoop] addTimer:nextChangeTimer forMode:NSDefaultRunLoopMode];
 	}
 }
 
@@ -67,6 +66,9 @@
 				candidate = change;
 			}
 		}
+	}
+	if (!candidate) {
+		candidate = [StatusChange nextStatusChangeInContext:context];
 	}
 	[self setNextChange:candidate];
 	
