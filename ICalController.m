@@ -37,8 +37,6 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 			} else {
 				[self deletedCalTaskCorrespondingToNativeTask:task];
 			}
-		} else {
-			NSLog(@"Task %@ has no task UID", task);
 		}
 		if (task.eventUID) {
 			CalEvent* event = [calendarStore eventWithUID:task.eventUID occurrence:nil];
@@ -172,33 +170,35 @@ static BOOL equals(id a, id b) {
 
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
-//	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-//	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+	NSLog(@"disabling objectsdidchange notifications for deleting task");
+	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 
 	[self deleteEventForTask:task];
 	[context deleteObject:task];
 
-//	[center addObserver:self 
-//			   selector:@selector(objectsDidChange:) 
-//				   name:NSManagedObjectContextObjectsDidChangeNotification 
-//				 object:context];
+	[center addObserver:self 
+			   selector:@selector(objectsDidChange:) 
+				   name:NSManagedObjectContextObjectsDidChangeNotification 
+				 object:context];
+	NSLog(@"re-enabling objectsdidchange notifications for deleting task");
 }
 
 - (void)insertedCalTask:(CalTask*)calTask {
-//	NSLog(@"disabling objectsdidchange notifications for inserting task");
-//	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-//	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+	NSLog(@"disabling objectsdidchange notifications for inserting task");
+	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 	
 	Task* task = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
 	task.taskUID = calTask.uid;
 	[self copyCalTask:calTask toNativeTask:task];
 	[context insertObject:task];
 	
-//	[center addObserver:self 
-//			   selector:@selector(objectsDidChange:) 
-//				   name:NSManagedObjectContextObjectsDidChangeNotification 
-//				 object:context];
-//	NSLog(@"re-enabling objectsdidchange notifications for inserting task");
+	[center addObserver:self 
+			   selector:@selector(objectsDidChange:) 
+				   name:NSManagedObjectContextObjectsDidChangeNotification 
+				 object:context];
+	NSLog(@"re-enabling objectsdidchange notifications for inserting task");
 }
 
 - (void)awakeFromNib {
@@ -255,11 +255,7 @@ static BOOL equals(id a, id b) {
 				CalTask* calTask = [calendarStore taskWithUID:task.taskUID];
 				if (calTask) {
 					[self copyNativeTask:task toCalTask:calTask];
-				} else {
-					NSLog(@"Updated task with invalid UID %@", task.taskUID);
 				}
-			} else {
-				NSLog(@"Updated task without a UID");
 			}
 		}
 	}
@@ -274,11 +270,7 @@ static BOOL equals(id a, id b) {
 					if (![calendarStore removeTask:calTask error:&error]) {
 						[NSApp presentError:error];
 					}
-				} else {
-					NSLog(@"Deleted task with invalid task UID %@", task.taskUID);
 				}
-			} else {
-				NSLog(@"Deleted task without a UID");
 			}
 			[self deleteEventForTask:task];
 		}
@@ -299,8 +291,6 @@ static BOOL equals(id a, id b) {
 			Task* task = [Task taskWithTaskUID:uid inManagedObjectContext:context];
 			if (task) {
 				[self copyCalTask:calTask toNativeTask:task];
-			} else {
-				NSLog(@"Updated CalTask with invalid UID %@", uid);
 			}
 		} else {
 			NSLog(@"Updated non-existing CalTask %@", uid);
@@ -310,8 +300,6 @@ static BOOL equals(id a, id b) {
 		Task* task = [Task taskWithTaskUID:uid inManagedObjectContext:context];
 		if (task) {
 			[self deletedCalTaskCorrespondingToNativeTask:task];
-		} else {
-			NSLog(@"Deleted CalTask with invalid UID %@", uid);
 		}
 	}
 }
