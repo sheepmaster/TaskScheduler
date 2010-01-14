@@ -36,7 +36,7 @@
 	nextChange = [change retain];
 	nextChangeTimer = nil;
 	if (change) {
-		NSLog(@"next change: %@ %@ %@", change.task.title, change.status, change.date);
+//		NSLog(@"next change: %@ %@ %@", change.task.title, change.status, change.date);
 		nextChangeTimer = [[NSTimer alloc] initWithFireDate:change.date 
 												   interval:0 
 													 target:self 

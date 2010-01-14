@@ -94,7 +94,7 @@
 + (Task*) taskMatchingPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSArray* tasks = [self tasksMatchingPredicate:predicate inManagedObjectContext:context];
 	if ([tasks count] != 1) {
-		NSLog(@"Found %d tasks matching predicate", [tasks count], predicate);
+		NSLog(@"Found %d tasks matching predicate %@", [tasks count], predicate);
 		return nil;
 	} else {
 		return [tasks objectAtIndex:0];
@@ -130,7 +130,7 @@
 							
 	NSSet* set = [self.statusChanges filteredSetUsingPredicate:[predicate predicateWithSubstitutionVariables:dict]];
 	if ([set count] != 1) {
-		NSLog(@"Found %d status changes \"%@\" for object %@", [set count], status, self.title);
+//		NSLog(@"Found %d status changes \"%@\" for object %@", [set count], status, self.title);
 	}
 	return [set anyObject];
 }
