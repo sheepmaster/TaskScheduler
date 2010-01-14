@@ -100,6 +100,7 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 					[NSApp presentError:error];
 					return NO;
 				}
+				task.eventUID = nil;
 			} else {
 				NSLog(@"Scheduled task %@ not found");
 				task.eventUID = nil;
