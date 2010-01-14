@@ -172,31 +172,33 @@ static BOOL equals(id a, id b) {
 
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
-	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+//	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+//	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 
 	[self deleteEventForTask:task];
 	[context deleteObject:task];
 
-	[center addObserver:self 
-			   selector:@selector(objectsDidChange:) 
-				   name:NSManagedObjectContextObjectsDidChangeNotification 
-				 object:context];
+//	[center addObserver:self 
+//			   selector:@selector(objectsDidChange:) 
+//				   name:NSManagedObjectContextObjectsDidChangeNotification 
+//				 object:context];
 }
 
 - (void)insertedCalTask:(CalTask*)calTask {
-	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+//	NSLog(@"disabling objectsdidchange notifications for inserting task");
+//	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+//	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 	
 	Task* task = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
 	task.taskUID = calTask.uid;
 	[self copyCalTask:calTask toNativeTask:task];
 	[context insertObject:task];
 	
-	[center addObserver:self 
-			   selector:@selector(objectsDidChange:) 
-				   name:NSManagedObjectContextObjectsDidChangeNotification 
-				 object:context];
+//	[center addObserver:self 
+//			   selector:@selector(objectsDidChange:) 
+//				   name:NSManagedObjectContextObjectsDidChangeNotification 
+//				 object:context];
+//	NSLog(@"re-enabling objectsdidchange notifications for inserting task");
 }
 
 - (void)awakeFromNib {
@@ -287,7 +289,6 @@ static BOOL equals(id a, id b) {
 	NSDictionary* userInfo = [notification userInfo];
 	for (NSString* uid in [userInfo objectForKey:CalInsertedRecordsKey]) {
 		CalTask* calTask = [calendarStore taskWithUID:uid];
-		NSPredicate* predicate = [self isInDefaultCalendarPredicate];
 		if ([calTask.calendar.uid isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]]) {
 			[self insertedCalTask:calTask];
 		}
