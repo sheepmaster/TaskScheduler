@@ -25,6 +25,7 @@
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task;
 - (void)insertedCalTask:(CalTask*)calTask;
+- (void)eventDeletedForTask:(Task*)task;
 
 - (void)insertedTask:(Task*)task;
 - (void)updatedTask:(Task*)task;
@@ -35,10 +36,12 @@
 - (BOOL)copyNativeTask:(Task*)task toEvent:(CalEvent*)event;
 - (void)copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task;
 - (void)copyCalEvent:(CalEvent*)event toTask:(Task*)task;
+
+- (BOOL)synchronizeScheduleForTask:(Task*)task;
+
 - (void)createCalTaskForTask:(Task*)task;
 - (void)createEventForTask:(Task*)task;
-
-- (void)eventDeletedForTask:(Task*)task;
 - (void)deleteEventForTask:(Task*)uid;
+
 
 @end

@@ -101,19 +101,7 @@ static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
 	return YES;
 }
 
-- (BOOL)copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask {
-	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-
-	calTask.title = task.title;
-	calTask.notes = task.notes;
-	calTask.completedDate = task.completedDate;
-	calTask.dueDate = task.dueDate;
-	NSError* error = nil;
-	if (![calendarStore saveTask:calTask error:&error]) {
-		[NSApp presentError:error];
-		return NO;
-	}
-	
+- (BOOL)synchronizeScheduleForTask:(Task*)task {
 	if (task.scheduledDate) {
 		CalEvent* event;
 		if (task.eventUID) {
@@ -143,6 +131,21 @@ static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
 			}
 			task.eventUID = nil;
 		}
+	}
+	return YES;
+}
+
+- (BOOL)copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask {
+	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+
+	calTask.title = task.title;
+	calTask.notes = task.notes;
+	calTask.completedDate = task.completedDate;
+	calTask.dueDate = task.dueDate;
+	NSError* error = nil;
+	if (![calendarStore saveTask:calTask error:&error]) {
+		[NSApp presentError:error];
+		return NO;
 	}
 	
 	return YES;
@@ -191,7 +194,7 @@ static inline BOOL equals(id a, id b) {
 	calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
 	if ([self copyNativeTask:task toCalTask:calTask]) {
 		task.taskUID = calTask.uid;
-	} 
+	}
 }
 
 - (void)createEventForTask:(Task*)task {
@@ -284,6 +287,7 @@ static inline BOOL equals(id a, id b) {
 	} else {
 		NSLog(@"Inserted task with existing UID %@", task.taskUID);
 	}
+	[self synchronizeScheduleForTask:task];
 }
 
 - (void)updatedTask:(Task*)task {
@@ -293,6 +297,7 @@ static inline BOOL equals(id a, id b) {
 			[self copyNativeTask:task toCalTask:calTask];
 		}
 	}
+	[self synchronizeScheduleForTask:task];
 }
 
 - (void)deletedTask:(Task*)task {
