@@ -50,24 +50,26 @@
 
 - (void)objectsDidChange:(NSNotification*)notification {
 	NSDictionary* userInfo = [notification userInfo];
-	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
-//	StatusChange* candidate = nextChange;
-	for (id object in inserted) {
-		if ([object isKindOfClass:[StatusChange class]]) {
-			StatusChange* change = object;
-		}
-	}
-	NSSet* updated = [userInfo objectForKey:NSUpdatedObjectsKey];
-	for (id object in updated) {
-		if ([object isKindOfClass:[StatusChange class]]) {
-			StatusChange* change = object;
-//			if ([nextChangeDate
-		}
-	}
 	NSSet* deleted = [userInfo objectForKey:NSDeletedObjectsKey];
-	if ([deleted member:nextChange]) {
-		
+	NSSet* updated = [userInfo objectForKey:NSUpdatedObjectsKey];
+	StatusChange* candidate;
+	if ([deleted member:nextChange] || [updated member:nextChange]) {
+		candidate = nil;
+	} else {
+		candidate = nextChange;
 	}
+	
+	NSSet* inserted = [userInfo objectForKey:NSInsertedObjectsKey];
+	for (id object in [inserted setByAddingObjectsFromSet:updated]) {
+		if ([object isKindOfClass:[StatusChange class]]) {
+			StatusChange* change = object;
+			if (!candidate || ([change.date compare:candidate.date] == NSOrderedAscending)) {
+				candidate = change;
+			}
+		}
+	}
+	[self setNextChange:candidate];
+	
 }
 
 - (void)executeStatusChange:(NSTimer*)timer {
