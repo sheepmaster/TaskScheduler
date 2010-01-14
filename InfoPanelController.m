@@ -7,6 +7,8 @@
 //
 
 #import "InfoPanelController.h"
+
+#import "ICalController.h";
 #import "Task.h"
 
 @implementation InfoPanelController
@@ -56,6 +58,34 @@
 	} else {
 		[self showWindow:sender]; 
 	}
+}
+
+- (IBAction)createTaskInICal:(id)sender {
+	for (Task* task in [tasksController selectedObjects]) {
+		if (!task.taskUID) {
+			[iCalController createCalTaskForTask:task];
+		} else {
+			NSLog(@"Task %@ already has a CalTask (%@)", task.title, task.taskUID);
+		}
+	} 
+}
+
+- (IBAction)revealTaskInICal:(id)sender {
+	
+}
+
+- (IBAction)scheduleTaskInICal:(id)sender {
+	for (Task* task in [tasksController selectedObjects]) {
+		if (!task.eventUID) {
+			[iCalController createEventForTask:task];
+		} else {
+			NSLog(@"Task %@ already has an event (%@)", task.title, task.eventUID);
+		}
+	} 
+}
+
+- (IBAction)revealScheduledTaskInICal:(id)sender {
+	
 }
 
 

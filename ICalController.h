@@ -31,10 +31,14 @@
 - (void)deletedTask:(Task*)task;
 	
 
-- (BOOL) copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask;
-- (BOOL) copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task;
-- (void) copyCalEvent:(CalEvent*)event toTask:(Task*)task;
-- (void) eventDeletedForTask:(Task*)task;
-- (void) deleteEventForTask:(Task*)uid;
+- (BOOL)copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask;
+- (BOOL)copyNativeTask:(Task*)task toEvent:(CalEvent*)event;
+- (void)copyCalTask:(CalTask*)calTask toNativeTask:(Task*)task;
+- (void)copyCalEvent:(CalEvent*)event toTask:(Task*)task;
+- (void)createCalTaskForTask:(Task*)task;
+- (void)createEventForTask:(Task*)task;
+
+- (void)eventDeletedForTask:(Task*)task;
+- (void)deleteEventForTask:(Task*)uid;
 
 @end

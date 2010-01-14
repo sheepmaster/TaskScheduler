@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 @class TaskScheduler_AppDelegate;
+@class ICalController;
 
 @interface InfoPanelController : NSWindowController {
 	IBOutlet NSArrayController* tasksController;
+	IBOutlet ICalController* iCalController;
 	NSMutableSet* excludedTasks;
 	
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
@@ -23,5 +25,10 @@
 }
 
 - (IBAction)toggleWindow:(id)sender;
+
+- (IBAction)createTaskInICal:(id)sender;
+- (IBAction)revealTaskInICal:(id)sender;
+- (IBAction)scheduleTaskInICal:(id)sender;
+- (IBAction)revealScheduledTaskInICal:(id)sender;
 
 @end
