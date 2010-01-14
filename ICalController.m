@@ -199,8 +199,9 @@ static inline BOOL equals(id a, id b) {
 	CalEvent* event = [CalEvent event];
 	NSString* calendarUID = [defaults boolForKey:UseCustomScheduleCalendarKey] ? [defaults objectForKey:DefaultScheduleCalendarKey] : [defaults objectForKey:DefaultCalendarKey];
 	event.calendar = [calendarStore calendarWithUID:calendarUID];
-	task.eventUID = event.uid;
-	[self copyNativeTask:task toEvent:event];
+	if ([self copyNativeTask:task toEvent:event]) {
+		task.eventUID = event.uid;
+	}
 }
 
 - (void) eventDeletedForTask:(Task*)task {
