@@ -170,35 +170,38 @@ static BOOL equals(id a, id b) {
 
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
-	NSLog(@"disabling objectsdidchange notifications for deleting task");
+//	NSLog(@"disabling objectsdidchange notifications for deleting task");
 	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
 	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 
 	[self deleteEventForTask:task];
 	[context deleteObject:task];
-
+	[context processPendingChanges];
+	
 	[center addObserver:self 
 			   selector:@selector(objectsDidChange:) 
 				   name:NSManagedObjectContextObjectsDidChangeNotification 
 				 object:context];
-	NSLog(@"re-enabling objectsdidchange notifications for deleting task");
+//	NSLog(@"re-enabling objectsdidchange notifications for deleting task");
 }
 
 - (void)insertedCalTask:(CalTask*)calTask {
-	NSLog(@"disabling objectsdidchange notifications for inserting task");
+//	NSLog(@"disabling objectsdidchange notifications for inserting task");
 	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
 	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 	
-	Task* task = [[[Task alloc] initWithManagedObjectContext:context] autorelease];
+	Task* task = [[Task alloc] initWithManagedObjectContext:context];
 	task.taskUID = calTask.uid;
 	[self copyCalTask:calTask toNativeTask:task];
 	[context insertObject:task];
+	[context processPendingChanges];
+	[task release];
 	
 	[center addObserver:self 
 			   selector:@selector(objectsDidChange:) 
 				   name:NSManagedObjectContextObjectsDidChangeNotification 
 				 object:context];
-	NSLog(@"re-enabling objectsdidchange notifications for inserting task");
+//	NSLog(@"re-enabling objectsdidchange notifications for inserting task");
 }
 
 - (void)awakeFromNib {
