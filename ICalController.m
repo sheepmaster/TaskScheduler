@@ -12,6 +12,8 @@
 #import "Task.h"
 
 static NSString* DefaultCalendarKey = @"DefaultCalendar";
+static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
+static NSString* UseCustomScheduleCalendarKey = @"UseCustomScheduleCalendar";
 
 @implementation ICalController
 
@@ -57,6 +59,8 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 }
 
 - (BOOL) copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask {
+	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+
 	calTask.title = task.title;
 	calTask.notes = task.notes;
 	calTask.completedDate = task.completedDate;
@@ -71,9 +75,14 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 		CalEvent* event;
 		if (task.eventUID) {
 			event = [calendarStore eventWithUID:task.eventUID occurrence:nil];
+			if (!event) {
+				NSLog(@"Event %@ not found");
+				task.eventUID = nil;
+			}
 		} else {
 			event = [CalEvent event];
-			event.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
+			NSString* calendarUID = [defaults boolForKey:UseCustomScheduleCalendarKey] ? [defaults objectForKey:DefaultScheduleCalendarKey] : [defaults objectForKey:DefaultCalendarKey];
+			event.calendar = [calendarStore calendarWithUID:calendarUID];
 			task.eventUID = event.uid;
 		}
 		if (event) {
@@ -87,9 +96,6 @@ static NSString* DefaultCalendarKey = @"DefaultCalendar";
 				[NSApp presentError:error];
 				return NO;
 			}
-		} else {
-			NSLog(@"Event %@ not found");
-			task.eventUID = nil;
 		}
 	} else {
 		if (task.eventUID) {
@@ -213,6 +219,10 @@ static BOOL equals(id a, id b) {
 	NSString* defaultCalendarUID = [defaults stringForKey:DefaultCalendarKey];
 	if (!defaultCalendarUID || ![calendarStore calendarWithUID:defaultCalendarUID]) {
 		[defaults setObject:[[[calendarStore calendars] objectAtIndex:0] uid] forKey:DefaultCalendarKey];
+	}
+	NSString* defaultScheduleUID = [defaults stringForKey:DefaultScheduleCalendarKey];
+	if (!defaultScheduleUID || ![calendarStore calendarWithUID:defaultScheduleUID]) {
+		[defaults setObject:[[[calendarStore calendars] objectAtIndex:0] uid] forKey:DefaultScheduleCalendarKey];
 	}
 	
 	
