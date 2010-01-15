@@ -11,9 +11,9 @@
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
+			<integer value="809"/>
 			<integer value="360"/>
 			<integer value="2"/>
-			<integer value="809"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1778,10 +1778,10 @@
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Create in iCal</string>
-								<object class="NSFont" key="NSSupport">
+								<object class="NSFont" key="NSSupport" id="370711171">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">12</double>
-									<int key="NSfFlags">4883</int>
+									<int key="NSfFlags">16</int>
 								</object>
 								<reference key="NSControlView" ref="991655633"/>
 								<int key="NSButtonFlags">-2038152961</int>
@@ -1802,11 +1802,7 @@
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Reveal in iCal</string>
-								<object class="NSFont" key="NSSupport" id="370711171">
-									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">12</double>
-									<int key="NSfFlags">16</int>
-								</object>
+								<reference key="NSSupport" ref="370711171"/>
 								<reference key="NSControlView" ref="334627468"/>
 								<int key="NSButtonFlags">-2038152961</int>
 								<int key="NSButtonFlags2">164</int>
@@ -2185,15 +2181,6 @@
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
 			<object class="NSUserDefaultsController" id="10293073">
-				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>DefaultScheduleCalendar</string>
-					<string>CreateCalTaskForNewTask</string>
-					<string>DeleteTaskForDeletedCalTask</string>
-					<string>CreateEventForScheduledTask</string>
-					<string>UnscheduleTaskForDeletedEvent</string>
-					<string>UseCustomScheduleCalendar</string>
-					<string>CreateTaskForNewCalTask</string>
-				</array>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSCustomObject" id="815822776">
@@ -2224,8 +2211,9 @@
 				<string key="NSWindowTitle">Agenda</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
+				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="549906009">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSScrollView" id="24830077">
@@ -2241,14 +2229,12 @@
 											<int key="NSvFlags">256</int>
 											<string key="NSFrameSize">{480, 254}</string>
 											<reference key="NSSuperview" ref="212530870"/>
-											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="773386089">
 												<reference key="NSNextResponder" ref="960706174"/>
 												<int key="NSvFlags">256</int>
 												<string key="NSFrameSize">{480, 17}</string>
 												<reference key="NSSuperview" ref="960706174"/>
-												<reference key="NSWindow"/>
 												<reference key="NSTableView" ref="245448434"/>
 											</object>
 											<object class="_NSCornerView" key="NSCornerView" id="831713207">
@@ -2256,7 +2242,6 @@
 												<int key="NSvFlags">-2147483392</int>
 												<string key="NSFrame">{{466, 0}, {16, 17}}</string>
 												<reference key="NSSuperview" ref="24830077"/>
-												<reference key="NSWindow"/>
 											</object>
 											<array class="NSMutableArray" key="NSTableColumns">
 												<object class="NSTableColumn" id="738831640">
@@ -2364,7 +2349,6 @@
 									</array>
 									<string key="NSFrame">{{1, 17}, {480, 254}}</string>
 									<reference key="NSSuperview" ref="24830077"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="245448434"/>
 									<reference key="NSDocView" ref="245448434"/>
 									<reference key="NSBGColor" ref="457479183"/>
@@ -2375,7 +2359,6 @@
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{466, 17}, {15, 239}}</string>
 									<reference key="NSSuperview" ref="24830077"/>
-									<reference key="NSWindow"/>
 									<reference key="NSTarget" ref="24830077"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSPercent">0.94094488188976377</double>
@@ -2385,7 +2368,6 @@
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{1, 256}, {465, 15}}</string>
 									<reference key="NSSuperview" ref="24830077"/>
-									<reference key="NSWindow"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="24830077"/>
 									<string key="NSAction">_doScroller:</string>
@@ -2400,7 +2382,6 @@
 									</array>
 									<string key="NSFrame">{{1, 0}, {480, 17}}</string>
 									<reference key="NSSuperview" ref="24830077"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="773386089"/>
 									<reference key="NSDocView" ref="773386089"/>
 									<reference key="NSBGColor" ref="457479183"/>
@@ -2410,7 +2391,6 @@
 							</array>
 							<string key="NSFrame">{{-1, -1}, {482, 272}}</string>
 							<reference key="NSSuperview" ref="549906009"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="212530870"/>
 							<int key="NSsFlags">562</int>
 							<reference key="NSVScroller" ref="37627225"/>
@@ -2422,8 +2402,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{480, 270}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -3728,51 +3706,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled2: selection.scheduledDate</string>
-						<reference key="source" ref="783293604"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="700141759">
-							<reference key="NSSource" ref="783293604"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">enabled2: selection.scheduledDate</string>
-							<string key="NSBinding">enabled2</string>
-							<string key="NSKeyPath">selection.scheduledDate</string>
-							<dictionary key="NSOptions">
-								<integer value="0" key="NSMultipleValuesPlaceholder"/>
-								<integer value="-1" key="NSNoSelectionPlaceholder"/>
-								<integer value="-1" key="NSNotApplicablePlaceholder"/>
-								<integer value="-1" key="NSNullPlaceholder"/>
-								<string key="NSValueTransformerName">NSIsNotNil</string>
-							</dictionary>
-							<reference key="NSPreviousConnector" ref="261815151"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1396</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden: selection.eventUID</string>
-						<reference key="source" ref="783293604"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="783293604"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">hidden: selection.eventUID</string>
-							<string key="NSBinding">hidden</string>
-							<string key="NSKeyPath">selection.eventUID</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSIsNotNil</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="700141759"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1397</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">hidden: selection.eventUID</string>
 						<reference key="source" ref="629118394"/>
 						<reference key="destination" ref="116824562"/>
@@ -3798,6 +3731,51 @@
 						<reference key="destination" ref="1001032125"/>
 					</object>
 					<int key="connectionID">1399</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled2: selection.scheduledDate</string>
+						<reference key="source" ref="783293604"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector" id="346257965">
+							<reference key="NSSource" ref="783293604"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">enabled2: selection.scheduledDate</string>
+							<string key="NSBinding">enabled2</string>
+							<string key="NSKeyPath">selection.scheduledDate</string>
+							<dictionary key="NSOptions">
+								<integer value="-1" key="NSMultipleValuesPlaceholder"/>
+								<integer value="-1" key="NSNoSelectionPlaceholder"/>
+								<integer value="-1" key="NSNotApplicablePlaceholder"/>
+								<integer value="-1" key="NSNullPlaceholder"/>
+								<string key="NSValueTransformerName">NSIsNotNil</string>
+							</dictionary>
+							<reference key="NSPreviousConnector" ref="261815151"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1400</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden: selection.eventUID</string>
+						<reference key="source" ref="783293604"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="783293604"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">hidden: selection.eventUID</string>
+							<string key="NSBinding">hidden</string>
+							<string key="NSKeyPath">selection.eventUID</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSIsNotNil</string>
+							</object>
+							<reference key="NSPreviousConnector" ref="346257965"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1401</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5348,9 +5326,10 @@
 				<string key="1276.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1277.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1278.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1279.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1280.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<integer value="1" key="1284.IBDateFormatterBehaviorMetadataKey"/>
 				<string key="1284.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1289.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="129.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="129.ImportedFromIB2"/>
 				<string key="1296.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5386,7 +5365,6 @@
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="134.ImportedFromIB2"/>
 				<string key="1340.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1346.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="136.ImportedFromIB2"/>
 				<string key="143.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5450,9 +5428,9 @@
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="2.ImportedFromIB2"/>
 				<boolean value="YES" key="205.ImportedFromIB2"/>
-				<string key="21.IBEditorWindowLastContentRect">{{448, 340}, {582, 509}}</string>
+				<string key="21.IBEditorWindowLastContentRect">{{312, 340}, {582, 509}}</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="21.IBWindowTemplateEditedContentRect">{{448, 340}, {582, 509}}</string>
+				<string key="21.IBWindowTemplateEditedContentRect">{{312, 340}, {582, 509}}</string>
 				<boolean value="YES" key="21.ImportedFromIB2"/>
 				<boolean value="YES" key="21.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="21.windowTemplate.hasMinSize"/>
@@ -5637,7 +5615,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1399</int>
+			<int key="maxID">1401</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
