@@ -3737,7 +3737,7 @@
 						<string key="label">enabled2: selection.scheduledDate</string>
 						<reference key="source" ref="783293604"/>
 						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="346257965">
+						<object class="NSNibBindingConnector" key="connector" id="655284182">
 							<reference key="NSSource" ref="783293604"/>
 							<reference key="NSDestination" ref="116824562"/>
 							<string key="NSLabel">enabled2: selection.scheduledDate</string>
@@ -3771,11 +3771,27 @@
 								<string key="NS.key.0">NSValueTransformerName</string>
 								<string key="NS.object.0">NSIsNotNil</string>
 							</object>
-							<reference key="NSPreviousConnector" ref="346257965"/>
+							<reference key="NSPreviousConnector" ref="655284182"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
 					<int key="connectionID">1401</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">revealScheduledTaskInICal:</string>
+						<reference key="source" ref="567998231"/>
+						<reference key="destination" ref="629118394"/>
+					</object>
+					<int key="connectionID">1402</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">revealTaskInICal:</string>
+						<reference key="source" ref="567998231"/>
+						<reference key="destination" ref="334627468"/>
+					</object>
+					<int key="connectionID">1403</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5615,7 +5631,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1401</int>
+			<int key="maxID">1403</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

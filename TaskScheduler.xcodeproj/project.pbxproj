@@ -10,6 +10,8 @@
 		401C550D10FCDC0100E16C96 /* StatusChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C550C10FCDC0100E16C96 /* StatusChange.m */; };
 		401C556810FDFC0400E16C96 /* StatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C556710FDFC0400E16C96 /* StatusController.m */; };
 		401C575B10FFB9A800E16C96 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C575A10FFB9A800E16C96 /* PreferencesController.m */; };
+		401C58811100854200E16C96 /* RevealInICal.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 401C58451100809C00E16C96 /* RevealInICal.scpt */; };
+		401C58A611008EAB00E16C96 /* NSAppleScript+TaskScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C58A511008EAB00E16C96 /* NSAppleScript+TaskScheduler.m */; };
 		403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 403F014610C5728B000185A8 /* TodoList.xcdatamodel */; };
 		408C7AC310EE448F006C7B60 /* ICalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408C7AC210EE448F006C7B60 /* ICalController.m */; };
 		408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408C7AE810EE63C3006C7B60 /* CalendarStore.framework */; };
@@ -42,6 +44,9 @@
 		401C556710FDFC0400E16C96 /* StatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusController.m; sourceTree = "<group>"; };
 		401C575910FFB9A800E16C96 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
 		401C575A10FFB9A800E16C96 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+		401C58451100809C00E16C96 /* RevealInICal.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = RevealInICal.scpt; sourceTree = "<group>"; };
+		401C58A411008EAB00E16C96 /* NSAppleScript+TaskScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAppleScript+TaskScheduler.h"; sourceTree = "<group>"; };
+		401C58A511008EAB00E16C96 /* NSAppleScript+TaskScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleScript+TaskScheduler.m"; sourceTree = "<group>"; };
 		403F014610C5728B000185A8 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
 		408C7AC110EE448F006C7B60 /* ICalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICalController.h; sourceTree = "<group>"; };
 		408C7AC210EE448F006C7B60 /* ICalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICalController.m; sourceTree = "<group>"; };
@@ -84,6 +89,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				401C58A411008EAB00E16C96 /* NSAppleScript+TaskScheduler.h */,
+				401C58A511008EAB00E16C96 /* NSAppleScript+TaskScheduler.m */,
 				4098FE3110F4CB1C00150AE3 /* SetToArrayTransformer.h */,
 				4098FE3210F4CB1C00150AE3 /* SetToArrayTransformer.m */,
 				4098FF2110F4E42300150AE3 /* DurationFormatter.h */,
@@ -164,6 +171,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				401C58451100809C00E16C96 /* RevealInICal.scpt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -232,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				401C58811100854200E16C96 /* RevealInICal.scpt in Resources */,
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 			);
@@ -259,6 +268,7 @@
 				401C550D10FCDC0100E16C96 /* StatusChange.m in Sources */,
 				401C556810FDFC0400E16C96 /* StatusController.m in Sources */,
 				401C575B10FFB9A800E16C96 /* PreferencesController.m in Sources */,
+				401C58A611008EAB00E16C96 /* NSAppleScript+TaskScheduler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

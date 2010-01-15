@@ -8,8 +8,9 @@
 
 #import "InfoPanelController.h"
 
-#import "ICalController.h";
+#import "ICalController.h"
 #import "Task.h"
+#import "NSAppleScript+TaskScheduler.h"
 
 @implementation InfoPanelController
 
@@ -60,6 +61,28 @@
 	}
 }
 
+- (NSAppleScript*)revealInICalAppleScript {
+	if (!revealInICalAppleScript) {
+		// load the script from a resource by fetching its URL from within our bundle
+		NSString* path = [[NSBundle mainBundle] pathForResource:@"RevealInICal" ofType:@"scpt"];
+		if (path) {
+			NSURL* url = [NSURL fileURLWithPath:path];
+			if (url) {
+				NSDictionary* errors = [NSDictionary dictionary];
+				revealInICalAppleScript = [[NSAppleScript alloc] initWithContentsOfURL:url error:&errors];
+				if (!revealInICalAppleScript) {
+					NSLog(@"Couldn't load applescript: %@", errors);
+				}
+			} else {
+				NSLog(@"Couldn't create URL from path %@", path);
+			}
+		} else {
+			NSLog(@"Couldn't find RevealInICal.scpt in Resources");
+		}
+	}
+	return revealInICalAppleScript;
+}
+
 - (IBAction)createTaskInICal:(id)sender {
 	for (Task* task in [tasksController selectedObjects]) {
 		if (!task.taskUID) {
@@ -71,7 +94,27 @@
 }
 
 - (IBAction)revealTaskInICal:(id)sender {
+	NSArray* selectedObjects = [tasksController selectedObjects];
+	if ([selectedObjects count] != 1) {
+		NSLog(@"Can't reveal multiple tasks");
+		return;
+	}
+	Task* task = [selectedObjects objectAtIndex:0];
+	if (!task.eventUID) {
+		NSLog(@"Task %@ doesn't exist in iCal", task.title);
+		return;
+	}
+	CalTask* calTask = [[CalCalendarStore defaultCalendarStore] taskWithUID:task.taskUID];
+	if (!calTask) {
+		NSLog(@"Invalid taskUID %@ for task %@", task.taskUID, task.title);
+	}
 	
+	NSAppleScript* appleScript = [self revealInICalAppleScript];
+	
+	NSDictionary* error = nil;
+	if (![appleScript callSubroutineNamed:@"reveal_task" withParameters:[NSArray arrayWithObjects:calTask.uid, calTask.calendar.uid, nil] error:&error]) {
+		NSLog(@"Couldn't execute applescript: %@", error);
+	}			
 }
 
 - (IBAction)scheduleTaskInICal:(id)sender {
@@ -85,7 +128,27 @@
 }
 
 - (IBAction)revealScheduledTaskInICal:(id)sender {
+	NSArray* selectedObjects = [tasksController selectedObjects];
+	if ([selectedObjects count] != 1) {
+		NSLog(@"Can't reveal multiple scheduled tasks");
+		return;
+	}
+	Task* task = [selectedObjects objectAtIndex:0];
+	if (!task.eventUID) {
+		NSLog(@"Task %@ has no event in iCal", task.title);
+		return;
+	}
+	CalEvent* event = [[CalCalendarStore defaultCalendarStore] eventWithUID:task.eventUID occurrence:nil];
+	if (!event) {
+		NSLog(@"Invalid eventUID %@ for task %@", task.eventUID, task.title);
+	}
 	
+	NSAppleScript* appleScript = [self revealInICalAppleScript];
+
+	NSDictionary* error = nil;
+	if (![appleScript callSubroutineNamed:@"reveal_event" withParameters:[NSArray arrayWithObjects:event.uid, event.calendar.uid, nil] error:&error]) {
+		NSLog(@"Couldn't execute applescript: %@", error);
+	}			
 }
 
 

@@ -22,7 +22,11 @@
 	IBOutlet NSTextField* scheduledDateField;
 	IBOutlet NSTextField* completedDateField;	
 	IBOutlet NSDatePickerCell* durationFieldCell;
+	
+	NSAppleScript* revealInICalAppleScript;
 }
+
+- (NSAppleScript*)revealInICalAppleScript;
 
 - (IBAction)toggleWindow:(id)sender;
 
