@@ -16,8 +16,12 @@
 + (void)initialize {
 	SetToArrayTransformer* transformer1 = [[SetToArrayTransformer alloc] init];
 	[NSValueTransformer setValueTransformer:transformer1 forName:@"SetToArrayTransformer"];  
+	[transformer1 release];
 //	DurationToPseudoDateTransformer* transformer2 = [[DurationToPseudoDateTransformer alloc] init];
 //	[NSValueTransformer setValueTransformer:transformer2 forName:@"DurationToPseudoDateTransformer"];  
+}
+
+- (void)awakeFromNib {
 }
 
 /**
@@ -47,6 +51,7 @@
     }
 	
     managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+
     return managedObjectModel;
 }
 
@@ -101,12 +106,18 @@
         managedObjectContext = [[NSManagedObjectContext alloc] init];
         [managedObjectContext setPersistentStoreCoordinator: coordinator];
     }
-    
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(objectsDidChange:) 
+												 name:NSManagedObjectContextObjectsDidChangeNotification 
+											   object:managedObjectContext];
+	 
     return managedObjectContext;
 }
 
 
-
+- (void)objectsDidChange:(NSNotification*)notification {
+	[NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(saveAction:) userInfo:nil repeats:NO];
+}
 
 /**
     Performs the save action for the application, which is to send the save:
