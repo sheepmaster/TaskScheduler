@@ -114,7 +114,7 @@ static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
 				NSLog(@"Event %@ not found", task.eventUID);
 				task.eventUID = nil;
 			}
-		} else if ([defaults boolForKey:CreateEventForScheduledTaskKey]) {
+		} else if ([[NSUserDefaults standardUserDefaults] boolForKey:CreateEventForScheduledTaskKey]) {
 			[self createEventForTask:task];
 		}
 	} else {
@@ -129,15 +129,22 @@ static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
 			} else {
 				NSLog(@"Scheduled task %@ not found", task.eventUID);
 			}
+			NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+			[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+			
 			task.eventUID = nil;
+			[context processPendingChanges];
+
+			[center addObserver:self 
+					   selector:@selector(objectsDidChange:) 
+						   name:NSManagedObjectContextObjectsDidChangeNotification 
+						 object:context];
 		}
 	}
 	return YES;
 }
 
 - (BOOL)copyNativeTask:(Task*)task toCalTask:(CalTask*)calTask {
-	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-
 	calTask.title = task.title;
 	calTask.notes = task.notes;
 	calTask.completedDate = task.completedDate;
@@ -193,7 +200,16 @@ static inline BOOL equals(id a, id b) {
 	CalTask* calTask = [CalTask task];
 	calTask.calendar = [calendarStore calendarWithUID:[[NSUserDefaults standardUserDefaults] stringForKey:DefaultCalendarKey]];
 	if ([self copyNativeTask:task toCalTask:calTask]) {
+		NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+		[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+
 		task.taskUID = calTask.uid;
+		
+		[context processPendingChanges];
+		[center addObserver:self 
+				   selector:@selector(objectsDidChange:) 
+					   name:NSManagedObjectContextObjectsDidChangeNotification 
+					 object:context];
 	}
 }
 
@@ -203,7 +219,16 @@ static inline BOOL equals(id a, id b) {
 	NSString* calendarUID = [defaults boolForKey:UseCustomScheduleCalendarKey] ? [defaults objectForKey:DefaultScheduleCalendarKey] : [defaults objectForKey:DefaultCalendarKey];
 	event.calendar = [calendarStore calendarWithUID:calendarUID];
 	if ([self copyNativeTask:task toEvent:event]) {
+		NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+		[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
+
 		task.eventUID = event.uid;
+
+		[context processPendingChanges];
+		[center addObserver:self 
+				   selector:@selector(objectsDidChange:) 
+					   name:NSManagedObjectContextObjectsDidChangeNotification 
+					 object:context];
 	}
 }
 
@@ -239,23 +264,23 @@ static inline BOOL equals(id a, id b) {
 
 
 - (void)deletedCalTaskCorrespondingToNativeTask:(Task*)task {
+//	NSLog(@"disabling objectsdidchange notifications for deleting task");
+	NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+	[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:DeleteTaskForDeletedCalTaskKey]) {
-//		NSLog(@"disabling objectsdidchange notifications for deleting task");
-		NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-		[center removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:context];
 
 		[self deleteEventForTask:task];
 		[context deleteObject:task];
-		[context processPendingChanges];
-		
-		[center addObserver:self 
-				   selector:@selector(objectsDidChange:) 
-					   name:NSManagedObjectContextObjectsDidChangeNotification 
-					 object:context];
-//		NSLog(@"re-enabling objectsdidchange notifications for deleting task");
 	} else {
 		task.taskUID = nil;
 	}
+
+	[context processPendingChanges];
+	[center addObserver:self 
+			   selector:@selector(objectsDidChange:) 
+				   name:NSManagedObjectContextObjectsDidChangeNotification 
+				 object:context];
+//	NSLog(@"re-enabling objectsdidchange notifications for deleting task");
 }
 
 - (void)insertedCalTask:(CalTask*)calTask {
