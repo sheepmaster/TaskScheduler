@@ -13,6 +13,8 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+	
+	NSTimer* saveTimer;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;

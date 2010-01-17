@@ -116,7 +116,10 @@
 
 
 - (void)objectsDidChange:(NSNotification*)notification {
-	[NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(saveAction:) userInfo:nil repeats:NO];
+	NSTimeInterval idleTime = 5.0;
+	[saveTimer invalidate];
+	[saveTimer release];
+	saveTimer = [[NSTimer scheduledTimerWithTimeInterval:idleTime target:self selector:@selector(saveAction:) userInfo:nil repeats:NO] retain];
 }
 
 /**
