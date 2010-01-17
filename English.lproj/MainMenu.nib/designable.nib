@@ -799,6 +799,7 @@
 											</object>
 											<array class="NSMutableArray" key="NSTableColumns">
 												<object class="NSTableColumn" id="548401112">
+													<string key="NSIdentifier">completed</string>
 													<double key="NSWidth">17</double>
 													<double key="NSMinWidth">8</double>
 													<double key="NSMaxWidth">1000</double>
@@ -853,6 +854,7 @@
 													<reference key="NSTableView" ref="1041524829"/>
 												</object>
 												<object class="NSTableColumn" id="327906144">
+													<string key="NSIdentifier">task</string>
 													<double key="NSWidth">482</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
@@ -888,6 +890,7 @@
 													</object>
 													<int key="NSResizingMask">3</int>
 													<bool key="NSIsResizeable">YES</bool>
+													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="1041524829"/>
 												</object>
 												<object class="NSTableColumn" id="753953785">
@@ -1269,6 +1272,7 @@
 					<string>active</string>
 					<string>taskUID</string>
 					<string>eventUID</string>
+					<string>titke</string>
 				</array>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -2742,47 +2746,6 @@
 					<int key="connectionID">404</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue1: arrangedObjects.title</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="271337609">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue1: arrangedObjects.title</string>
-							<string key="NSBinding">displayPatternValue1</string>
-							<string key="NSKeyPath">arrangedObjects.title</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@ %{value2}@</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">422</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue2: arrangedObjects.notes</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue2: arrangedObjects.notes</string>
-							<string key="NSBinding">displayPatternValue2</string>
-							<string key="NSKeyPath">arrangedObjects.notes</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@ %{value2}@</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="271337609"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">423</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">window</string>
 						<reference key="source" ref="985083513"/>
@@ -3737,7 +3700,7 @@
 						<string key="label">enabled2: selection.scheduledDate</string>
 						<reference key="source" ref="783293604"/>
 						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="655284182">
+						<object class="NSNibBindingConnector" key="connector" id="600607154">
 							<reference key="NSSource" ref="783293604"/>
 							<reference key="NSDestination" ref="116824562"/>
 							<string key="NSLabel">enabled2: selection.scheduledDate</string>
@@ -3771,7 +3734,7 @@
 								<string key="NS.key.0">NSValueTransformerName</string>
 								<string key="NS.object.0">NSIsNotNil</string>
 							</object>
-							<reference key="NSPreviousConnector" ref="655284182"/>
+							<reference key="NSPreviousConnector" ref="600607154"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -4552,11 +4515,6 @@
 						<reference key="parent" ref="141760324"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">435</int>
-						<reference key="object" ref="718631047"/>
-						<reference key="parent" ref="327906144"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">676</int>
 						<reference key="object" ref="712981804"/>
 						<array class="NSMutableArray" key="children">
@@ -5306,6 +5264,11 @@
 						<reference key="object" ref="505983842"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1415</int>
+						<reference key="object" ref="718631047"/>
+						<reference key="parent" ref="327906144"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -5383,6 +5346,7 @@
 				<string key="1340.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="136.ImportedFromIB2"/>
+				<string key="1415.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="143.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="143.ImportedFromIB2"/>
 				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5444,9 +5408,9 @@
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="2.ImportedFromIB2"/>
 				<boolean value="YES" key="205.ImportedFromIB2"/>
-				<string key="21.IBEditorWindowLastContentRect">{{312, 340}, {582, 509}}</string>
+				<string key="21.IBEditorWindowLastContentRect">{{335, 292}, {582, 509}}</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="21.IBWindowTemplateEditedContentRect">{{312, 340}, {582, 509}}</string>
+				<string key="21.IBWindowTemplateEditedContentRect">{{335, 292}, {582, 509}}</string>
 				<boolean value="YES" key="21.ImportedFromIB2"/>
 				<boolean value="YES" key="21.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="21.windowTemplate.hasMinSize"/>
@@ -5528,7 +5492,6 @@
 				<string key="386.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="424.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="425.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="435.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="56.ImportedFromIB2"/>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5631,7 +5594,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1403</int>
+			<int key="maxID">1419</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5721,7 +5684,6 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="appDelegate">TaskScheduler_AppDelegate</string>
-						<string key="completedColumn">NSTableColumn</string>
 						<string key="infoPanelController">InfoPanelController</string>
 						<string key="taskController">NSArrayController</string>
 						<string key="taskList">NSTableView</string>

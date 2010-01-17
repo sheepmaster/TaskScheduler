@@ -16,8 +16,7 @@
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
 	IBOutlet NSTableView* taskList;
 	IBOutlet InfoPanelController* infoPanelController;
-	
-	IBOutlet NSTableColumn* completedColumn;
+
 	IBOutlet NSArrayController* taskController;
 }
 
