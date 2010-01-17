@@ -41,14 +41,15 @@
 //	}
 //	id selectedTask = [selectedObjects objectAtIndex:0];
 //	NSLog(@"selected task: %@", selectedTask);
-	[excludedTasks release];
-	excludedTasks = [[NSMutableSet alloc] init];
+	NSMutableSet* newExcludedTasks = [[NSMutableSet alloc] init];
 
 	for (Task* task in selectedObjects) {
-		[excludedTasks unionSet:task.dependsOn];
-		[excludedTasks unionSet:task.transitiveEnables];
+		[newExcludedTasks unionSet:task.dependsOn];
+		[newExcludedTasks unionSet:task.transitiveEnables];
 	}
 	
+	[excludedTasks release];
+	excludedTasks = newExcludedTasks;
 //	NSLog(@"excludedTasks: %@", [excludedTasks valueForKey:@"title"]);
 }
 
