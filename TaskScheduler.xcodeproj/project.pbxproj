@@ -21,7 +21,6 @@
 		4098FF2310F4E42300150AE3 /* DurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4098FF2210F4E42300150AE3 /* DurationFormatter.m */; };
 		409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */; };
 		40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BC210CBFA2E00153F26 /* InfoPanelController.m */; };
-		40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */; };
 		40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64C2510CBFFE800153F26 /* TaskWindowController.m */; };
 		770B37ED0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* TaskScheduler_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* TaskScheduler_AppDelegate.m */; };
@@ -64,8 +63,6 @@
 		409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeDateFormatter.m; sourceTree = "<group>"; };
 		40D64BC110CBFA2E00153F26 /* InfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanelController.h; sourceTree = "<group>"; };
 		40D64BC210CBFA2E00153F26 /* InfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelController.m; sourceTree = "<group>"; };
-		40D64BD110CBFB4C00153F26 /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
-		40D64BD210CBFB4C00153F26 /* MAAttachedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAttachedWindow.m; sourceTree = "<group>"; };
 		40D64C2410CBFFE800153F26 /* TaskWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskWindowController.h; sourceTree = "<group>"; };
 		40D64C2510CBFFE800153F26 /* TaskWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskWindowController.m; sourceTree = "<group>"; };
 		770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TaskScheduler_DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -293,7 +290,6 @@
 				770B37ED0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel in Sources */,
 				403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */,
 				40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */,
-				40D64BD310CBFB4C00153F26 /* MAAttachedWindow.m in Sources */,
 				40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */,
 				409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */,
 				408C7AC310EE448F006C7B60 /* ICalController.m in Sources */,
