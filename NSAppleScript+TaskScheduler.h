@@ -11,6 +11,6 @@
 
 @interface NSAppleScript(TaskScheduler)
 
-- (BOOL)callSubroutineNamed:(NSString*)subroutine withParameters:(NSArray*)parameters error:(NSDictionary**)error;
+- (NSAppleEventDescriptor*)callSubroutineNamed:(NSString*)subroutine withParameters:(NSArray*)parameters error:(NSDictionary**)error;
 
 @end

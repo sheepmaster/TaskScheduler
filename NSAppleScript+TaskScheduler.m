@@ -13,7 +13,7 @@
 
 @implementation NSAppleScript(TaskScheduler)
 
-- (BOOL)callSubroutineNamed:(NSString*)subroutine withParameters:(NSArray*)parameterArray error:(NSDictionary**)error {
+- (NSAppleEventDescriptor*)callSubroutineNamed:(NSString*)subroutine withParameters:(NSArray*)parameterArray error:(NSDictionary**)error {
 	NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
 	int i = 1;
 	for (id parameter in parameterArray) {
