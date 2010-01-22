@@ -19,9 +19,12 @@
 	[taskList setDoubleAction:@selector(showWindow:)];
 //	[taskList setAction:@selector(showInfoPanel:)];
 	
-	TaskCell* taskCell = [[TaskCell alloc] init];
-	[taskCell bind:@"task" toObject:taskController withKeyPath:@"arrangedObjects" options:nil];
 	NSTableColumn* taskColumn = [taskList tableColumnWithIdentifier:@"task"];
+	NSCell* taskCell = [[TaskCell alloc] init];
+//	NSTextFieldCell* cell = [taskColumn dataCell];
+//	[cell 
+//	[taskCell bind:@"value" toObject:taskController withKeyPath:@"arrangedObjects.title" options:nil];
+//	[taskColumn bind:@"value" toObject:taskController withKeyPath:@"arrangedObjects.title" options:nil];
 	[taskColumn setDataCell:taskCell];
 	[taskCell release];
 }
@@ -43,11 +46,21 @@
 	
 }
 
+/*
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 	if ([[tableColumn identifier] isEqualToString:@"task"]) {
 		return [[taskController arrangedObjects] objectAtIndex:row];
 	}
 	return nil;
+}
+*/
+
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	if ([cell isKindOfClass:[TaskCell class]]) {
+		TaskCell* taskCell = cell;
+		Task* task = [[taskController arrangedObjects] objectAtIndex:row];
+		taskCell.task = task;
+	}
 }
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {

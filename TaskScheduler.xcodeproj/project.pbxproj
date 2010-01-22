@@ -13,6 +13,7 @@
 		401C58811100854200E16C96 /* RevealInICal.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 401C58451100809C00E16C96 /* RevealInICal.scpt */; };
 		401C58A611008EAB00E16C96 /* NSAppleScript+TaskScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C58A511008EAB00E16C96 /* NSAppleScript+TaskScheduler.m */; };
 		401C596E1103737F00E16C96 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C596D1103737F00E16C96 /* TaskCell.m */; };
+		401C5ACD1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 401C5ACC1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.m */; };
 		403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 403F014610C5728B000185A8 /* TodoList.xcdatamodel */; };
 		408C7AC310EE448F006C7B60 /* ICalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 408C7AC210EE448F006C7B60 /* ICalController.m */; };
 		408C7AE910EE63C3006C7B60 /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408C7AE810EE63C3006C7B60 /* CalendarStore.framework */; };
@@ -49,6 +50,8 @@
 		401C58A511008EAB00E16C96 /* NSAppleScript+TaskScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleScript+TaskScheduler.m"; sourceTree = "<group>"; };
 		401C596C1103737F00E16C96 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
 		401C596D1103737F00E16C96 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
+		401C5ACB1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+TaskScheduler.h"; sourceTree = "<group>"; };
+		401C5ACC1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+TaskScheduler.m"; sourceTree = "<group>"; };
 		403F014610C5728B000185A8 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
 		408C7AC110EE448F006C7B60 /* ICalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICalController.h; sourceTree = "<group>"; };
 		408C7AC210EE448F006C7B60 /* ICalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICalController.m; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 		401C59631103728F00E16C96 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				401C5ACB1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.h */,
+				401C5ACC1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.m */,
 				401C58A411008EAB00E16C96 /* NSAppleScript+TaskScheduler.h */,
 				401C58A511008EAB00E16C96 /* NSAppleScript+TaskScheduler.m */,
 				4098FE3110F4CB1C00150AE3 /* SetToArrayTransformer.h */,
@@ -301,6 +306,7 @@
 				401C575B10FFB9A800E16C96 /* PreferencesController.m in Sources */,
 				401C58A611008EAB00E16C96 /* NSAppleScript+TaskScheduler.m in Sources */,
 				401C596E1103737F00E16C96 /* TaskCell.m in Sources */,
+				401C5ACD1109FA8500E16C96 /* NSMutableAttributedString+TaskScheduler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

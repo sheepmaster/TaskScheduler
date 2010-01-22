@@ -12,8 +12,8 @@
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<integer value="809"/>
-			<integer value="360"/>
 			<integer value="2"/>
+			<integer value="360"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3799,8 +3799,8 @@
 							<reference ref="960333572"/>
 							<reference ref="1071335464"/>
 							<reference ref="286939503"/>
-							<reference ref="417814865"/>
 							<reference ref="287123778"/>
+							<reference ref="417814865"/>
 						</array>
 						<reference key="parent" ref="644663340"/>
 					</object>

@@ -9,15 +9,25 @@
 #import "TaskCell.h"
 
 #import "Task.h"
+#import "NSMutableAttributedString+TaskScheduler.h"
 
 @implementation TaskCell
 
 @synthesize task;
 
 - (void)drawInteriorWithFrame:(NSRect)theCellFrame inView:(NSView *)theControlView {
-	NSString* title = task.title;
-	
-	[title drawInRect:theCellFrame withAttributes:nil];
+	if (task.title) {
+		NSFont* font = [self font];
+		NSDictionary* dict = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+		NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:task.title attributes:dict];
+		if (task.notes) {
+			[string appendString:@" "];
+			dict = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, [NSColor disabledControlTextColor], NSForegroundColorAttributeName, [NSColor whiteColor], NSBackgroundColorAttributeName, nil];
+			[string appendString:task.notes withAttributes:dict];
+		}
+		
+		[string drawInRect:theCellFrame];
+	}
 }
 
 @end

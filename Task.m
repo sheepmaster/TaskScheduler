@@ -50,6 +50,9 @@
 @dynamic pending;
 @dynamic statusChanges;
 
+- (id)copyWithZone:(NSZone*)zone {
+	return [self retain];
+}
 
 - (BOOL)evaluateWithPredicateNamed:(NSString*)predicateName {
 	NSManagedObjectModel* model = [[Task entityInContext:[self managedObjectContext]] managedObjectModel];
@@ -233,5 +236,6 @@
 	}
 }
 
+// !completed && (overdue || pending && active)
 
 @end
