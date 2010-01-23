@@ -3259,47 +3259,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">predicate: filterPredicate</string>
-						<reference key="source" ref="287123778"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="587164946">
-							<reference key="NSSource" ref="287123778"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">predicate: filterPredicate</string>
-							<string key="NSBinding">predicate</string>
-							<string key="NSKeyPath">filterPredicate</string>
-							<dictionary key="NSOptions">
-								<string key="NSDisplayName">All</string>
-								<string key="NSPredicateFormat">title contains[cd] $value OR notes contains[cd] value</string>
-							</dictionary>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1264</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">predicate2: filterPredicate</string>
-						<reference key="source" ref="287123778"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="287123778"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">predicate2: filterPredicate</string>
-							<string key="NSBinding">predicate2</string>
-							<string key="NSKeyPath">filterPredicate</string>
-							<dictionary key="NSOptions">
-								<string key="NSDisplayName">Notes</string>
-								<string key="NSPredicateFormat">notes contains $value</string>
-							</dictionary>
-							<reference key="NSPreviousConnector" ref="587164946"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1265</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
 						<reference key="source" ref="1029279861"/>
 						<reference key="destination" ref="316811008"/>
@@ -3788,6 +3747,68 @@
 						</object>
 					</object>
 					<int key="connectionID">1421</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">predicate: filterPredicate</string>
+						<reference key="source" ref="287123778"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector" id="1006106306">
+							<reference key="NSSource" ref="287123778"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">predicate: filterPredicate</string>
+							<string key="NSBinding">predicate</string>
+							<string key="NSKeyPath">filterPredicate</string>
+							<dictionary key="NSOptions">
+								<string key="NSDisplayName">All</string>
+								<string key="NSPredicateFormat">title contains[cd] $value OR notes contains[cd] $value</string>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1430</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">predicate2: filterPredicate</string>
+						<reference key="source" ref="287123778"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector" id="198609155">
+							<reference key="NSSource" ref="287123778"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">predicate2: filterPredicate</string>
+							<string key="NSBinding">predicate2</string>
+							<string key="NSKeyPath">filterPredicate</string>
+							<dictionary key="NSOptions">
+								<string key="NSDisplayName">Title</string>
+								<string key="NSPredicateFormat">title contains[cd] $value</string>
+							</dictionary>
+							<reference key="NSPreviousConnector" ref="1006106306"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1431</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">predicate3: filterPredicate</string>
+						<reference key="source" ref="287123778"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="287123778"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">predicate3: filterPredicate</string>
+							<string key="NSBinding">predicate3</string>
+							<string key="NSKeyPath">filterPredicate</string>
+							<dictionary key="NSOptions">
+								<string key="NSDisplayName">Notes</string>
+								<string key="NSPredicateFormat">notes contains[cd] $value</string>
+							</dictionary>
+							<reference key="NSPreviousConnector" ref="198609155"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1432</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5627,7 +5648,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1421</int>
+			<int key="maxID">1432</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
