@@ -21,6 +21,7 @@
 	
 	NSTableColumn* taskColumn = [taskList tableColumnWithIdentifier:@"task"];
 	NSCell* taskCell = [[TaskCell alloc] init];
+	[taskCell setEditable:YES];
 //	NSTextFieldCell* cell = [taskColumn dataCell];
 //	[cell 
 //	[taskCell bind:@"value" toObject:taskController withKeyPath:@"arrangedObjects.title" options:nil];
@@ -64,7 +65,8 @@
 }
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-	if ([[aTableColumn identifier] isEqualToString:@"completed"]) {
+	NSString* identifier = [aTableColumn identifier];
+	if ([identifier isEqualToString:@"completed"]) {
 		Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
 		
 		task.completedDate = [anObject boolValue] ? [NSDate date] : nil;
@@ -74,11 +76,10 @@
 //		} else {
 //			tmp.completed = nil;
 //		}
+	} else if ([identifier isEqualToString:@"task"]) {
+		Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
+		task.title = anObject;
 	}
-}
-
-- (BOOL)tableView:(NSTableView *)aTableView shouldEditTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-	return YES;
 }
 
 @end

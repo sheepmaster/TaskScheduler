@@ -11,9 +11,9 @@
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="809"/>
-			<integer value="350"/>
 			<integer value="360"/>
+			<integer value="2"/>
+			<integer value="809"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -794,7 +794,7 @@
 											<object class="_NSCornerView" key="NSCornerView" id="727847725">
 												<reference key="NSNextResponder" ref="417814865"/>
 												<int key="NSvFlags">-2147483392</int>
-												<string key="NSFrame">{{587, 0}, {16, 17}}</string>
+												<string key="NSFrame">{{568, 0}, {16, 17}}</string>
 												<reference key="NSSuperview" ref="417814865"/>
 											</object>
 											<array class="NSMutableArray" key="NSTableColumns">
@@ -855,7 +855,7 @@
 												</object>
 												<object class="NSTableColumn" id="327906144">
 													<string key="NSIdentifier">task</string>
-													<double key="NSWidth">558</double>
+													<double key="NSWidth">559</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -888,7 +888,7 @@
 															<reference key="NSColor" ref="461353613"/>
 														</object>
 													</object>
-													<int key="NSResizingMask">1</int>
+													<int key="NSResizingMask">2</int>
 													<bool key="NSIsResizeable">YES</bool>
 													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="1041524829"/>
@@ -910,7 +910,7 @@
 												</object>
 											</object>
 											<double key="NSRowHeight">17</double>
-											<int key="NSTvFlags">1512046592</int>
+											<int key="NSTvFlags">1514143744</int>
 											<reference key="NSDelegate"/>
 											<reference key="NSDataSource"/>
 											<int key="NSColumnAutoresizingStyle">4</int>
@@ -935,21 +935,21 @@
 								<object class="NSScroller" id="866164126">
 									<reference key="NSNextResponder" ref="417814865"/>
 									<int key="NSvFlags">-2147483392</int>
-									<string key="NSFrame">{{587, 17}, {15, 452}}</string>
+									<string key="NSFrame">{{568, 17}, {15, 446}}</string>
 									<reference key="NSSuperview" ref="417814865"/>
 									<reference key="NSTarget" ref="417814865"/>
 									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.9678800856531049</double>
+									<double key="NSPercent">0.96746203904555317</double>
 								</object>
 								<object class="NSScroller" id="721227916">
 									<reference key="NSNextResponder" ref="417814865"/>
 									<int key="NSvFlags">-2147483392</int>
-									<string key="NSFrame">{{1, 469}, {601, 15}}</string>
+									<string key="NSFrame">{{1, 463}, {582, 15}}</string>
 									<reference key="NSSuperview" ref="417814865"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="417814865"/>
 									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.95245641838351824</double>
+									<double key="NSPercent">0.99828473413379071</double>
 								</object>
 								<object class="NSClipView" id="323908927">
 									<reference key="NSNextResponder" ref="417814865"/>
@@ -3545,7 +3545,7 @@
 						<string key="label">predicate: filterPredicate</string>
 						<reference key="source" ref="287123778"/>
 						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="1009426602">
+						<object class="NSNibBindingConnector" key="connector" id="610266731">
 							<reference key="NSSource" ref="287123778"/>
 							<reference key="NSDestination" ref="116824562"/>
 							<string key="NSLabel">predicate: filterPredicate</string>
@@ -3565,7 +3565,7 @@
 						<string key="label">predicate2: filterPredicate</string>
 						<reference key="source" ref="287123778"/>
 						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="1044844551">
+						<object class="NSNibBindingConnector" key="connector" id="62340657">
 							<reference key="NSSource" ref="287123778"/>
 							<reference key="NSDestination" ref="116824562"/>
 							<string key="NSLabel">predicate2: filterPredicate</string>
@@ -3575,7 +3575,7 @@
 								<string key="NSDisplayName">Title</string>
 								<string key="NSPredicateFormat">title contains[cd] $value</string>
 							</dictionary>
-							<reference key="NSPreviousConnector" ref="1009426602"/>
+							<reference key="NSPreviousConnector" ref="610266731"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -3596,7 +3596,7 @@
 								<string key="NSDisplayName">Notes</string>
 								<string key="NSPredicateFormat">notes contains[cd] $value</string>
 							</dictionary>
-							<reference key="NSPreviousConnector" ref="1044844551"/>
+							<reference key="NSPreviousConnector" ref="62340657"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -3604,149 +3604,23 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue1: arrangedObjects.title</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="854105654">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue1: arrangedObjects.title</string>
-							<string key="NSBinding">displayPatternValue1</string>
-							<string key="NSKeyPath">arrangedObjects.title</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1435</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue2: arrangedObjects.notes</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="169914228">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue2: arrangedObjects.notes</string>
-							<string key="NSBinding">displayPatternValue2</string>
-							<string key="NSKeyPath">arrangedObjects.notes</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="854105654"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1436</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue3: arrangedObjects.completed</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="568424383">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue3: arrangedObjects.completed</string>
-							<string key="NSBinding">displayPatternValue3</string>
-							<string key="NSKeyPath">arrangedObjects.completed</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="169914228"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1439</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue4: arrangedObjects.pending</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="364799353">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue4: arrangedObjects.pending</string>
-							<string key="NSBinding">displayPatternValue4</string>
-							<string key="NSKeyPath">arrangedObjects.pending</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="568424383"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1440</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue5: arrangedObjects.inactive</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="891978863">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue5: arrangedObjects.inactive</string>
-							<string key="NSBinding">displayPatternValue5</string>
-							<string key="NSKeyPath">arrangedObjects.inactive</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="364799353"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1441</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue6: arrangedObjects.active</string>
-						<reference key="source" ref="327906144"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector" id="131959891">
-							<reference key="NSSource" ref="327906144"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue6: arrangedObjects.active</string>
-							<string key="NSBinding">displayPatternValue6</string>
-							<string key="NSKeyPath">arrangedObjects.active</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="891978863"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1442</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">displayPatternValue7: arrangedObjects.overdue</string>
+						<string key="label">value: arrangedObjects.title</string>
 						<reference key="source" ref="327906144"/>
 						<reference key="destination" ref="116824562"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="327906144"/>
 							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">displayPatternValue7: arrangedObjects.overdue</string>
-							<string key="NSBinding">displayPatternValue7</string>
-							<string key="NSKeyPath">arrangedObjects.overdue</string>
+							<string key="NSLabel">value: arrangedObjects.title</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.title</string>
 							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
+								<string key="NS.key.0">NSConditionallySetsEditable</string>
+								<boolean value="NO" key="NS.object.0"/>
 							</object>
-							<reference key="NSPreviousConnector" ref="131959891"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">1443</int>
+					<int key="connectionID">1465</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5522,7 +5396,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1443</int>
+			<int key="maxID">1468</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
