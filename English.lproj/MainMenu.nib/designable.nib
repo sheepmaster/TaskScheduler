@@ -866,8 +866,8 @@
 														<reference key="NSBackgroundColor" ref="109584022"/>
 														<reference key="NSTextColor" ref="939948387"/>
 													</object>
-													<object class="NSTextFieldCell" key="NSDataCell" id="718631047">
-														<int key="NSCellFlags">67239488</int>
+													<object class="NSTextFieldCell" key="NSDataCell" id="990999898">
+														<int key="NSCellFlags">337772096</int>
 														<int key="NSCellFlags2">272630784</int>
 														<string key="NSContents">Text</string>
 														<reference key="NSSupport" ref="828637943"/>
@@ -4255,7 +4255,7 @@
 						<int key="objectID">353</int>
 						<reference key="object" ref="327906144"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="718631047"/>
+							<reference ref="990999898"/>
 						</array>
 						<reference key="parent" ref="1041524829"/>
 					</object>
@@ -5075,8 +5075,8 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">1415</int>
-						<reference key="object" ref="718631047"/>
+						<int key="objectID">1469</int>
+						<reference key="object" ref="990999898"/>
 						<reference key="parent" ref="327906144"/>
 					</object>
 				</array>
@@ -5156,13 +5156,14 @@
 				<string key="1340.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="136.ImportedFromIB2"/>
-				<string key="1415.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="143.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="143.ImportedFromIB2"/>
 				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="144.ImportedFromIB2"/>
 				<string key="145.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="145.ImportedFromIB2"/>
+				<string key="1469.CustomClassName">TaskCell</string>
+				<string key="1469.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="149.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="149.ImportedFromIB2"/>
 				<string key="150.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5396,7 +5397,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1468</int>
+			<int key="maxID">1469</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5463,6 +5464,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">StatusController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TaskCell</string>
+					<string key="superclassName">NSTextFieldCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">TaskCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

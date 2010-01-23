@@ -18,16 +18,6 @@
 	[taskList setTarget:infoPanelController];
 	[taskList setDoubleAction:@selector(showWindow:)];
 //	[taskList setAction:@selector(showInfoPanel:)];
-	
-	NSTableColumn* taskColumn = [taskList tableColumnWithIdentifier:@"task"];
-	NSCell* taskCell = [[TaskCell alloc] init];
-	[taskCell setEditable:YES];
-//	NSTextFieldCell* cell = [taskColumn dataCell];
-//	[cell 
-//	[taskCell bind:@"value" toObject:taskController withKeyPath:@"arrangedObjects.title" options:nil];
-//	[taskColumn bind:@"value" toObject:taskController withKeyPath:@"arrangedObjects.title" options:nil];
-	[taskColumn setDataCell:taskCell];
-	[taskCell release];
 }
 
 /**
