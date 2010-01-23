@@ -20,6 +20,6 @@
 	IBOutlet NSArrayController* taskController;
 }
 
-- (IBAction)completed:(id)sender;
+- (IBAction)addTask:(id)sender;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "TaskWindowController.h"
 
+#import "NSArrayController+TaskScheduler.h"
 #import "InfoPanelController.h"
 #import "Task.h"
 #import "TaskCell.h"
@@ -33,8 +34,9 @@
 //	[infoPanelController hideInfoPanel:nil];
 //}
 
-- (IBAction)completed:(id)sender {
-	
+- (IBAction)addTask:(id)sender {
+	NSUInteger row = [taskController addNewObject];
+	[taskList editColumn:[taskList columnWithIdentifier:@"task"] row:row withEvent:nil select:YES];
 }
 
 /*
@@ -55,19 +57,11 @@
 }
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+	Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
 	NSString* identifier = [aTableColumn identifier];
 	if ([identifier isEqualToString:@"completed"]) {
-		Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
-		
 		task.completedDate = [anObject boolValue] ? [NSDate date] : nil;
-//		NSLog(@"task: %@", task);
-//		if ([anObject boolValue]) {
-//			tmp.completed = [NSDate date];
-//		} else {
-//			tmp.completed = nil;
-//		}
 	} else if ([identifier isEqualToString:@"task"]) {
-		Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
 		task.title = anObject;
 	}
 }
