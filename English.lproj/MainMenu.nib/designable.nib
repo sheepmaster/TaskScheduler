@@ -866,7 +866,7 @@
 														<reference key="NSBackgroundColor" ref="109584022"/>
 														<reference key="NSTextColor" ref="939948387"/>
 													</object>
-													<object class="NSTextFieldCell" key="NSDataCell" id="542825044">
+													<object class="NSTextFieldCell" key="NSDataCell" id="401382329">
 														<int key="NSCellFlags">337772096</int>
 														<int key="NSCellFlags2">272630784</int>
 														<string key="NSContents">Text</string>
@@ -939,7 +939,7 @@
 									<reference key="NSSuperview" ref="417814865"/>
 									<reference key="NSTarget" ref="417814865"/>
 									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.96746203904555317</double>
+									<double key="NSPercent">0.99761336515513122</double>
 								</object>
 								<object class="NSScroller" id="721227916">
 									<reference key="NSNextResponder" ref="417814865"/>
@@ -1020,7 +1020,7 @@
 									<string key="NSResourceName">NSRemoveOnTexture</string>
 								</object>
 								<string key="NSAlternateContents"/>
-								<string key="NSKeyEquivalent"/>
+								<string key="NSKeyEquivalent"></string>
 								<int key="NSPeriodicDelay">400</int>
 								<int key="NSPeriodicInterval">75</int>
 							</object>
@@ -4255,7 +4255,7 @@
 						<int key="objectID">353</int>
 						<reference key="object" ref="327906144"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="542825044"/>
+							<reference ref="401382329"/>
 						</array>
 						<reference key="parent" ref="1041524829"/>
 					</object>
@@ -5076,7 +5076,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1469</int>
-						<reference key="object" ref="542825044"/>
+						<reference key="object" ref="401382329"/>
 						<reference key="parent" ref="327906144"/>
 					</object>
 				</array>
