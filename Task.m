@@ -11,22 +11,14 @@
 
 @interface Task (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSNumber *)primitiveActive;
-- (void)setPrimitiveActive:(NSNumber *)value;
+- (NSDate *)primitiveEffectiveDueDate;
+- (void)setPrimitiveEffectiveDueDate:(NSDate *)value;
 
-- (NSNumber *)primitiveCompleted;
-- (void)setPrimitiveCompleted:(NSNumber *)value;
-
-- (NSNumber *)primitiveInactive;
-- (void)setPrimitiveInactive:(NSNumber *)value;
-
-- (NSNumber *)primitiveOverdue;
-- (void)setPrimitiveOverdue:(NSNumber *)value;
-
-- (NSNumber *)primitivePending;
-- (void)setPrimitivePending:(NSNumber *)value;
+- (NSDate *)primitiveEffectiveStartDate;
+- (void)setPrimitiveEffectiveStartDate:(NSDate *)value;
 
 @end
+
 
 @implementation Task
 
@@ -49,6 +41,8 @@
 @dynamic overdue;
 @dynamic pending;
 @dynamic statusChanges;
+@dynamic effectiveStartDate;
+@dynamic effectiveDueDate;
 
 - (id)copyWithZone:(NSZone*)zone {
 	return [self retain];
@@ -87,6 +81,63 @@
 - (void)updateOverdue {
 	self.overdue = [NSNumber numberWithBool:[self evaluateWithPredicateNamed:@"overdue"]];
 }
+
+- (NSDate*)calculateEffectiveDueDate {
+	NSDate* minDate = self.dueDate ? self.dueDate : [NSDate distantFuture];
+	for (Task* task in self.enables) {
+		NSDate* date = [task.effectiveDueDate dateByAddingTimeInterval:-[task.duration doubleValue]];
+		if ([minDate compare:date] == NSOrderedDescending) {
+			minDate = date;
+		}
+		if (task.scheduledDate) {
+			if ([minDate compare:task.scheduledDate] == NSOrderedDescending) {
+				minDate = task.scheduledDate;
+			}
+		}
+	}
+	return minDate;
+}
+
+- (void)updateEffectiveDueDate {
+	NSDate* newValue = [self calculateEffectiveDueDate];
+	if (![newValue isEqualToDate:[self primitiveEffectiveDueDate]]) {
+		[self willChangeValueForKey:@"effectiveDueDate"];
+		[self setPrimitiveEffectiveDueDate:newValue];
+		[self didChangeValueForKey:@"effectiveDueDate"];
+	}
+}
+
+- (NSDate*)calculateEffectiveStartDate {
+	NSDate* maxDate = self.startDate ? self.startDate : [NSDate distantPast];
+	for (Task* task in self.dependsOn) {
+		if (task.completedDate) {
+			if ([maxDate compare:task.completedDate] == NSOrderedAscending) {
+				maxDate = task.completedDate;
+			}
+		} else if (task.scheduledDate) {
+			NSDate* date = [task.scheduledDate dateByAddingTimeInterval:[task.duration doubleValue]];
+			if ([maxDate compare:date] == NSOrderedAscending) {
+				maxDate = date;
+			}
+		} else {
+			NSDate* date = [task.effectiveStartDate dateByAddingTimeInterval:[task.duration doubleValue]];
+			if ([maxDate compare:date] == NSOrderedAscending) {
+				maxDate = date;
+			}
+		}
+	}
+	return maxDate;
+}
+
+- (void)updateEffectiveStartDate {
+	NSDate* newValue = [self calculateEffectiveStartDate];
+	if (![newValue isEqualToDate:[self primitiveEffectiveStartDate]]) {
+		[self willChangeValueForKey:@"effectiveStartDate"];
+		[self setPrimitiveEffectiveStartDate:newValue];
+		[self didChangeValueForKey:@"effectiveStartDate"];
+	}
+}
+
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"taskUID == $UID"];
@@ -154,6 +205,8 @@
 	[self updatePending];
 	[self updateActive];
 	[self updateOverdue];
+	[self updateEffectiveDueDate];
+	[self updateEffectiveStartDate];
 	
 	[self addObserver:self forKeyPath:@"completedDate" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 	[self addObserver:self forKeyPath:@"startDate" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
@@ -215,24 +268,36 @@
 				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
 						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updateActive];
+		[self.dependsOn makeObjectsPerformSelector:@selector(updateEffectiveDueDate)];
+		[self.enables makeObjectsPerformSelector:@selector(updateEffectiveStartDate)];
 	} else if ([keyPath isEqualToString:@"startDate"]) {
 		[self dateForStatus:@"start" 
 				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
 						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updatePending];
+		[self updateEffectiveStartDate];
+	} else if ([keyPath isEqualToString:@"effectiveStartDate"]) {
+		[self.enables makeObjectsPerformSelector:@selector(updateEffectiveStartDate)];
 	} else if ([keyPath isEqualToString:@"dependsOn"]) {
 		[self updatePending];
+		[self updateEffectiveDueDate];
+	} else if ([keyPath isEqualToString:@"enables"]) {
+		[self updateEffectiveStartDate];
 	} else if ([keyPath isEqualToString:@"completedDate"]) {
 		[self dateForStatus:@"completed" 
 				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
 						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updateCompleted];
 		[self.enables makeObjectsPerformSelector:@selector(updatePending)];
+		[self.enables makeObjectsPerformSelector:@selector(updateEffectiveStartDate)];
 	} else if ([keyPath isEqualToString:@"dueDate"]) {
 		[self dateForStatus:@"due" 
 				changedFrom:[change objectForKey:NSKeyValueChangeOldKey] 
 						 to:[change objectForKey:NSKeyValueChangeNewKey]];
 		[self updateOverdue];
+		[self updateEffectiveDueDate];
+	} else if ([keyPath isEqualToString:@"effectiveDueDate"]) {
+		[self.dependsOn makeObjectsPerformSelector:@selector(updateEffectiveDueDate)];
 	}
 }
 

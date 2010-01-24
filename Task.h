@@ -35,6 +35,8 @@
 @property (nonatomic, retain) NSSet* enables;
 @property (readonly) NSSet* transitiveEnables;
 @property (nonatomic, retain) NSSet* statusChanges;
+@property (readonly, nonatomic, retain) NSDate* effectiveStartDate;
+@property (readonly, nonatomic, retain) NSDate* effectiveDueDate;
 
 
 + (NSEntityDescription*)entityInContext:(NSManagedObjectContext*)context;
@@ -52,6 +54,8 @@
 - (void)updateActive;
 - (void)updatePending;
 - (void)updateOverdue;
+- (void)updateEffectiveDueDate;
+- (void)updateEffectiveStartDate;
 
 - (void)dateForStatus:(NSString*)status changedFrom:(NSDate*)oldDate to:(NSDate*)newDate;
 
