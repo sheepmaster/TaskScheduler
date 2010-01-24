@@ -85,17 +85,12 @@
 - (NSDate*)calculateEffectiveDueDate {
 	NSDate* minDate = self.dueDate ? self.dueDate : [NSDate distantFuture];
 	for (Task* task in self.enables) {
-		NSDate* date = [task.effectiveDueDate dateByAddingTimeInterval:-[task.duration doubleValue]];
-		if ([minDate compare:date] == NSOrderedDescending) {
-			minDate = date;
-		}
+		minDate = [minDate earlierDate:[task.effectiveDueDate dateByAddingTimeInterval:-[task.duration doubleValue]]];
 		if (task.scheduledDate) {
-			if ([minDate compare:task.scheduledDate] == NSOrderedDescending) {
-				minDate = task.scheduledDate;
-			}
+			minDate = [minDate earlierDate:task.scheduledDate];
 		}
 	}
-	return minDate;
+	return ([minDate compare:[NSDate distantFuture]] == NSOrderedAscending) ? minDate : nil;
 }
 
 - (void)updateEffectiveDueDate {
@@ -111,22 +106,14 @@
 	NSDate* maxDate = self.startDate ? self.startDate : [NSDate distantPast];
 	for (Task* task in self.dependsOn) {
 		if (task.completedDate) {
-			if ([maxDate compare:task.completedDate] == NSOrderedAscending) {
-				maxDate = task.completedDate;
-			}
+			maxDate = [maxDate laterDate:task.completedDate];
 		} else if (task.scheduledDate) {
-			NSDate* date = [task.scheduledDate dateByAddingTimeInterval:[task.duration doubleValue]];
-			if ([maxDate compare:date] == NSOrderedAscending) {
-				maxDate = date;
-			}
+			maxDate = [maxDate laterDate:[task.scheduledDate dateByAddingTimeInterval:[task.duration doubleValue]]];
 		} else {
-			NSDate* date = [task.effectiveStartDate dateByAddingTimeInterval:[task.duration doubleValue]];
-			if ([maxDate compare:date] == NSOrderedAscending) {
-				maxDate = date;
-			}
+			maxDate = [maxDate laterDate:[task.effectiveStartDate dateByAddingTimeInterval:[task.duration doubleValue]]];
 		}
 	}
-	return maxDate;
+	return ([maxDate compare:[NSDate distantPast]] == NSOrderedDescending) ? maxDate : nil;
 }
 
 - (void)updateEffectiveStartDate {
