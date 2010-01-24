@@ -36,7 +36,9 @@
 
 - (IBAction)addTask:(id)sender {
 	NSUInteger row = [taskController addNewObject];
-	[taskList editColumn:[taskList columnWithIdentifier:@"task"] row:row withEvent:nil select:YES];
+	if (row != -1) {
+		[taskList editColumn:[taskList columnWithIdentifier:@"task"] row:row withEvent:nil select:YES];
+	}
 }
 
 /*

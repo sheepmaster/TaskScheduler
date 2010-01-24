@@ -171,7 +171,7 @@
 - (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(NSUInteger)index {
 	NSMutableArray* filteredArray = [NSMutableArray array];
 	for (id token in tokens) {
-		if (![token isKindOfClass:[NSString class]]) {
+		if ([token isKindOfClass:[Task class]]) {
 			[filteredArray addObject:token];
 		}
 	}
@@ -179,7 +179,14 @@
 }
 
 - (NSString*)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject {
-	return ((Task*)representedObject).title;
+	if ([representedObject isKindOfClass:[Task class]]) {
+		Task* task = representedObject;
+		return task.title;
+	} else if ([representedObject isKindOfClass:[NSString class]]) {
+		return representedObject;
+	} else {
+		return [representedObject description];
+	}
 }
 
 - (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject {
