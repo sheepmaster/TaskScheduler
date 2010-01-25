@@ -11,9 +11,9 @@
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
+			<integer value="809"/>
 			<integer value="360"/>
 			<integer value="347"/>
-			<integer value="809"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1467,7 +1467,7 @@
 							<reference key="NSSuperview" ref="159269143"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTokenFieldCell" key="NSCell" id="560975640">
-								<int key="NSCellFlags">341966336</int>
+								<int key="NSCellFlags">342490624</int>
 								<int key="NSCellFlags2">0</int>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="761561369"/>
@@ -3009,26 +3009,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.dependsOn</string>
-						<reference key="source" ref="761561369"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="761561369"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">value: selection.dependsOn</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.dependsOn</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">SetToArrayTransformer</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">940</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.startDate</string>
 						<reference key="source" ref="421350396"/>
 						<reference key="destination" ref="116824562"/>
@@ -3731,6 +3711,26 @@
 						</object>
 					</object>
 					<int key="connectionID">1492</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.dependsOn</string>
+						<reference key="source" ref="761561369"/>
+						<reference key="destination" ref="116824562"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="761561369"/>
+							<reference key="NSDestination" ref="116824562"/>
+							<string key="NSLabel">value: selection.dependsOn</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.dependsOn</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
+								<string key="NSValueTransformerName">SetToArrayTransformer</string>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1493</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5595,7 +5595,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1492</int>
+			<int key="maxID">1493</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -155,7 +155,8 @@
 
 - (NSArray*)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex {
 	NSManagedObjectContext* context = [appDelegate managedObjectContext];
-	return [[Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"(title beginswith[cd] %@) && !(SELF IN %@)", substring, excludedTasks] inManagedObjectContext:context] valueForKey:@"title"];
+	NSArray* tasks = [Task tasksMatchingPredicate:[NSPredicate predicateWithFormat:@"(title beginswith[cd] %@) && !(SELF IN %@)", substring, excludedTasks] inManagedObjectContext:context];
+	return [tasks valueForKey:@"title"];
 }
 
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString {
@@ -175,6 +176,8 @@
 			[filteredArray addObject:token];
 		}
 	}
+	
+	[tokenField performSelector:@selector(validateEditing) withObject:nil afterDelay:0];
 	return filteredArray;
 }
 

@@ -8,6 +8,7 @@
 
 #import "SetToArrayTransformer.h"
 
+@class Task;
 
 @implementation SetToArrayTransformer
 
@@ -36,8 +37,6 @@
 	for (id element in array) {
 		if ([element isKindOfClass:[Task class]]) {
 			[set addObject:element];
-		} else {
-			NSLog(@"invalid task: %@", element);
 		}
 	}
 	return set;
