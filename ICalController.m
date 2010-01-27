@@ -149,6 +149,7 @@ static NSString* DefaultScheduleCalendarKey = @"DefaultScheduleCalendar";
 	calTask.notes = task.notes;
 	calTask.completedDate = task.completedDate;
 	calTask.dueDate = task.dueDate;
+	calTask.priority = [task.priority intValue];
 	NSError* error = nil;
 	if (![calendarStore saveTask:calTask error:&error]) {
 		[NSApp presentError:error];
@@ -172,6 +173,9 @@ static inline BOOL equals(id a, id b) {
 	}
 	if (!equals(task.completedDate, calTask.completedDate)) {
 		task.completedDate = calTask.completedDate;
+	}
+	if ([task.priority intValue] != calTask.priority) {
+		task.priority = [NSNumber numberWithInt:calTask.priority];
 	}
 //	task.due = calTask.dueDate;
 	NSDate* newDate;
