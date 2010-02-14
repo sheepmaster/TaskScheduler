@@ -1491,7 +1491,7 @@
 							<reference key="NSSuperview" ref="159269143"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTokenFieldCell" key="NSCell" id="696688263">
-								<int key="NSCellFlags">341966336</int>
+								<int key="NSCellFlags">71433728</int>
 								<int key="NSCellFlags2">0</int>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="733221463"/>
@@ -1806,16 +1806,16 @@
 								<reference key="NSTextColor" ref="1023837937"/>
 							</object>
 						</object>
-						<object class="NSStepper" id="935735722">
+						<object class="NSStepper" id="891235413">
 							<reference key="NSNextResponder" ref="159269143"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{179, 326}, {19, 27}}</string>
 							<reference key="NSSuperview" ref="159269143"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSStepperCell" key="NSCell" id="325332330">
+							<object class="NSStepperCell" key="NSCell" id="70122046">
 								<int key="NSCellFlags">917024</int>
 								<int key="NSCellFlags2">0</int>
-								<reference key="NSControlView" ref="935735722"/>
+								<reference key="NSControlView" ref="891235413"/>
 								<double key="NSMaxValue">86399</double>
 								<double key="NSIncrement">300</double>
 								<bool key="NSAutorepeat">YES</bool>
@@ -2382,7 +2382,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
-			<object class="NSCustomObject" id="863436833">
+			<object class="NSCustomObject" id="631266681">
 				<string key="NSClassName">DurationFormatter</string>
 			</object>
 		</array>
@@ -3768,17 +3768,17 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">formatter</string>
 						<reference key="source" ref="758978298"/>
-						<reference key="destination" ref="863436833"/>
+						<reference key="destination" ref="631266681"/>
 					</object>
 					<int key="connectionID">1499</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.duration</string>
-						<reference key="source" ref="935735722"/>
+						<reference key="source" ref="891235413"/>
 						<reference key="destination" ref="116824562"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="935735722"/>
+							<reference key="NSSource" ref="891235413"/>
 							<reference key="NSDestination" ref="116824562"/>
 							<string key="NSLabel">value: selection.duration</string>
 							<string key="NSBinding">value</string>
@@ -4472,7 +4472,7 @@
 							<reference ref="104400975"/>
 							<reference ref="234238266"/>
 							<reference ref="577650233"/>
-							<reference ref="935735722"/>
+							<reference ref="891235413"/>
 						</array>
 						<reference key="parent" ref="1010401178"/>
 					</object>
@@ -5314,21 +5314,21 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1498</int>
-						<reference key="object" ref="863436833"/>
+						<reference key="object" ref="631266681"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1500</int>
-						<reference key="object" ref="935735722"/>
+						<reference key="object" ref="891235413"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="325332330"/>
+							<reference ref="70122046"/>
 						</array>
 						<reference key="parent" ref="159269143"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1501</int>
-						<reference key="object" ref="325332330"/>
-						<reference key="parent" ref="935735722"/>
+						<reference key="object" ref="70122046"/>
+						<reference key="parent" ref="891235413"/>
 					</object>
 				</array>
 			</object>
