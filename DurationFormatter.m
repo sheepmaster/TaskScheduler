@@ -17,7 +17,7 @@
 	}
 	int duration = [anObject intValue];
 	int hours = (duration / 3600);
-	int minutes = (duration / 60) % 3600;
+	int minutes = (duration % 3600) / 60;
 	return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
 }
 

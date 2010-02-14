@@ -101,7 +101,7 @@
 		return;
 	}
 	Task* task = [selectedObjects objectAtIndex:0];
-	if (!task.eventUID) {
+	if (!task.taskUID) {
 		NSLog(@"Task %@ doesn't exist in iCal", task.title);
 		return;
 	}

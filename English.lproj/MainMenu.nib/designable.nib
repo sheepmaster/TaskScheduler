@@ -11,10 +11,11 @@
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="1268"/>
-			<integer value="21"/>
-			<integer value="360"/>
+			<integer value="2"/>
+			<integer value="57"/>
 			<integer value="809"/>
+			<integer value="1268"/>
+			<integer value="360"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1035,7 +1036,7 @@
 								<string key="NSContents">Info</string>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="1071335464"/>
-								<int key="NSButtonFlags">-1232846593</int>
+								<int key="NSButtonFlags">-2038152961</int>
 								<int key="NSButtonFlags2">163</int>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -1051,7 +1052,7 @@
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSearchFieldCell" key="NSCell" id="764146120">
 								<int key="NSCellFlags">341966400</int>
-								<int key="NSCellFlags2">1088</int>
+								<int key="NSCellFlags2">1024</int>
 								<reference key="NSSupport" ref="828637943"/>
 								<string key="NSPlaceholderString">All</string>
 								<reference key="NSControlView" ref="287123778"/>
@@ -1806,16 +1807,16 @@
 								<reference key="NSTextColor" ref="1023837937"/>
 							</object>
 						</object>
-						<object class="NSStepper" id="891235413">
+						<object class="NSStepper" id="210913032">
 							<reference key="NSNextResponder" ref="159269143"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{179, 326}, {19, 27}}</string>
 							<reference key="NSSuperview" ref="159269143"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSStepperCell" key="NSCell" id="70122046">
+							<object class="NSStepperCell" key="NSCell" id="899940488">
 								<int key="NSCellFlags">917024</int>
 								<int key="NSCellFlags2">0</int>
-								<reference key="NSControlView" ref="891235413"/>
+								<reference key="NSControlView" ref="210913032"/>
 								<double key="NSMaxValue">86399</double>
 								<double key="NSIncrement">300</double>
 								<bool key="NSAutorepeat">YES</bool>
@@ -1828,6 +1829,9 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{241, 601}</string>
 				<string key="NSMaxSize">{1280, 601}</string>
+			</object>
+			<object class="NSCustomObject" id="189075796">
+				<string key="NSClassName">DurationFormatter</string>
 			</object>
 			<object class="NSCustomObject" id="815291721">
 				<string key="NSClassName">AwesomeDateFormatter</string>
@@ -2382,9 +2386,6 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
-			<object class="NSCustomObject" id="631266681">
-				<string key="NSClassName">DurationFormatter</string>
-			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -2777,40 +2778,12 @@
 					<int key="connectionID">768</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleWindow:</string>
-						<reference key="source" ref="567998231"/>
-						<reference key="destination" ref="1071335464"/>
-					</object>
-					<int key="connectionID">769</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">infoPanelController</string>
 						<reference key="source" ref="985083513"/>
 						<reference key="destination" ref="567998231"/>
 					</object>
 					<int key="connectionID">770</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: self.window.isVisible</string>
-						<reference key="source" ref="1071335464"/>
-						<reference key="destination" ref="567998231"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="1071335464"/>
-							<reference key="NSDestination" ref="567998231"/>
-							<string key="NSLabel">value: self.window.isVisible</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">self.window.isVisible</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSNegateBoolean</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">778</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -3768,17 +3741,17 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">formatter</string>
 						<reference key="source" ref="758978298"/>
-						<reference key="destination" ref="631266681"/>
+						<reference key="destination" ref="189075796"/>
 					</object>
 					<int key="connectionID">1499</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.duration</string>
-						<reference key="source" ref="891235413"/>
+						<reference key="source" ref="210913032"/>
 						<reference key="destination" ref="116824562"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="891235413"/>
+							<reference key="NSSource" ref="210913032"/>
 							<reference key="NSDestination" ref="116824562"/>
 							<string key="NSLabel">value: selection.duration</string>
 							<string key="NSBinding">value</string>
@@ -3787,6 +3760,22 @@
 						</object>
 					</object>
 					<int key="connectionID">1502</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showWindow:</string>
+						<reference key="source" ref="505983842"/>
+						<reference key="destination" ref="401865317"/>
+					</object>
+					<int key="connectionID">1503</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showWindow:</string>
+						<reference key="source" ref="567998231"/>
+						<reference key="destination" ref="1071335464"/>
+					</object>
+					<int key="connectionID">1504</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4472,7 +4461,7 @@
 							<reference ref="104400975"/>
 							<reference ref="234238266"/>
 							<reference ref="577650233"/>
-							<reference ref="891235413"/>
+							<reference ref="210913032"/>
 						</array>
 						<reference key="parent" ref="1010401178"/>
 					</object>
@@ -5314,21 +5303,21 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1498</int>
-						<reference key="object" ref="631266681"/>
+						<reference key="object" ref="189075796"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1500</int>
-						<reference key="object" ref="891235413"/>
+						<reference key="object" ref="210913032"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="70122046"/>
+							<reference ref="899940488"/>
 						</array>
 						<reference key="parent" ref="159269143"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1501</int>
-						<reference key="object" ref="70122046"/>
-						<reference key="parent" ref="891235413"/>
+						<reference key="object" ref="899940488"/>
+						<reference key="parent" ref="210913032"/>
 					</object>
 				</array>
 			</object>
@@ -5460,6 +5449,7 @@
 				<boolean value="YES" key="167.ImportedFromIB2"/>
 				<string key="168.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="168.ImportedFromIB2"/>
+				<string key="169.IBEditorWindowLastContentRect">{{471, 593}, {240, 243}}</string>
 				<string key="169.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="169.ImportedFromIB2"/>
 				<string key="171.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5574,6 +5564,7 @@
 				<string key="425.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="56.ImportedFromIB2"/>
+				<string key="57.IBEditorWindowLastContentRect">{{305, 653}, {234, 183}}</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="57.ImportedFromIB2"/>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5615,6 +5606,7 @@
 				<string key="808.IBWindowTemplateEditedContentRect">{{275, 532}, {407, 182}}</string>
 				<boolean value="YES" key="808.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="809.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="81.IBEditorWindowLastContentRect">{{429, 633}, {196, 203}}</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="81.ImportedFromIB2"/>
 				<string key="810.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5665,7 +5657,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1502</int>
+			<int key="maxID">1504</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
