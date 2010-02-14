@@ -13,7 +13,7 @@
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<integer value="809"/>
 			<integer value="360"/>
-			<integer value="347"/>
+			<integer value="21"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -896,9 +896,11 @@
 											</array>
 											<double key="NSIntercellSpacingWidth">3</double>
 											<double key="NSIntercellSpacingHeight">2</double>
-											<object class="NSColor" key="NSBackgroundColor" id="562487322">
-												<int key="NSColorSpace">3</int>
-												<bytes key="NSWhite">MQA</bytes>
+											<object class="NSColor" key="NSBackgroundColor" id="457479183">
+												<int key="NSColorSpace">6</int>
+												<string key="NSCatalogName">System</string>
+												<string key="NSColorName">controlBackgroundColor</string>
+												<reference key="NSColor" ref="815841913"/>
 											</object>
 											<object class="NSColor" key="NSGridColor" id="624719295">
 												<int key="NSColorSpace">6</int>
@@ -924,12 +926,7 @@
 									<reference key="NSSuperview" ref="417814865"/>
 									<reference key="NSNextKeyView" ref="1041524829"/>
 									<reference key="NSDocView" ref="1041524829"/>
-									<object class="NSColor" key="NSBGColor" id="457479183">
-										<int key="NSColorSpace">6</int>
-										<string key="NSCatalogName">System</string>
-										<string key="NSColorName">controlBackgroundColor</string>
-										<reference key="NSColor" ref="815841913"/>
-									</object>
+									<reference key="NSBGColor" ref="457479183"/>
 									<int key="NScvFlags">4</int>
 								</object>
 								<object class="NSScroller" id="866164126">
@@ -1063,7 +1060,10 @@
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
 									<string key="NSColorName">textBackgroundColor</string>
-									<reference key="NSColor" ref="562487322"/>
+									<object class="NSColor" key="NSColor" id="562487322">
+										<int key="NSColorSpace">3</int>
+										<bytes key="NSWhite">MQA</bytes>
+									</object>
 								</object>
 								<reference key="NSTextColor" ref="1023837937"/>
 								<object class="NSButtonCell" key="NSSearchButtonCell">
@@ -5434,9 +5434,9 @@
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="2.ImportedFromIB2"/>
 				<boolean value="YES" key="205.ImportedFromIB2"/>
-				<string key="21.IBEditorWindowLastContentRect">{{450, 344}, {582, 509}}</string>
+				<string key="21.IBEditorWindowLastContentRect">{{312, 344}, {582, 509}}</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="21.IBWindowTemplateEditedContentRect">{{450, 344}, {582, 509}}</string>
+				<string key="21.IBWindowTemplateEditedContentRect">{{312, 344}, {582, 509}}</string>
 				<boolean value="YES" key="21.ImportedFromIB2"/>
 				<boolean value="YES" key="21.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="21.windowTemplate.hasMinSize"/>
