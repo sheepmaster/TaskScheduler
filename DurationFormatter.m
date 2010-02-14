@@ -12,11 +12,30 @@
 @implementation DurationFormatter
 
 - (NSString *)stringForObjectValue:(id)anObject {
-	
+	if (![anObject isKindOfClass:[NSNumber class]]) {
+		return nil;
+	}
+	int duration = [anObject intValue];
+	int hours = (duration / 3600);
+	int minutes = (duration / 60) % 3600;
+	return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
 }
 
 - (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error {
-	
+	NSArray* components = [string componentsSeparatedByString:@":"];
+	if ([components count] == 0) {
+		return NO;
+	} else {
+		int duration = [[components objectAtIndex:0] intValue];
+		if ([components count] == 2) {
+			duration = duration * 60 + [[components objectAtIndex:1] intValue];
+		} else if ([components count] > 2) {
+			return NO;
+		}
+		*anObject = [NSNumber numberWithInt:(duration*60)];
+		NSLog(@"value: %@", *anObject);
+		return YES;
+	}
 }
 
 
