@@ -24,7 +24,6 @@
 		409D6BE010DEBC8D00E9E21D /* AwesomeDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 409D6BDF10DEBC8D00E9E21D /* AwesomeDateFormatter.m */; };
 		40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64BC210CBFA2E00153F26 /* InfoPanelController.m */; };
 		40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D64C2510CBFFE800153F26 /* TaskWindowController.m */; };
-		770B37ED0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* TaskScheduler_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* TaskScheduler_AppDelegate.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -71,7 +70,6 @@
 		40D64BC210CBFA2E00153F26 /* InfoPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelController.m; sourceTree = "<group>"; };
 		40D64C2410CBFFE800153F26 /* TaskWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskWindowController.h; sourceTree = "<group>"; };
 		40D64C2510CBFFE800153F26 /* TaskWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskWindowController.m; sourceTree = "<group>"; };
-		770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = TaskScheduler_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* TaskScheduler_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskScheduler_AppDelegate.h; sourceTree = "<group>"; };
 		77C8280C06725ACE000B614F /* TaskScheduler_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskScheduler_AppDelegate.m; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				770B37EC0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel */,
 				403F014610C5728B000185A8 /* TodoList.xcdatamodel */,
 			);
 			name = Models;
@@ -297,7 +294,6 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				77C8280E06725ACE000B614F /* TaskScheduler_AppDelegate.m in Sources */,
-				770B37ED0679A11B001EADE2 /* TaskScheduler_DataModel.xcdatamodel in Sources */,
 				403F014710C5728B000185A8 /* TodoList.xcdatamodel in Sources */,
 				40D64BC310CBFA2E00153F26 /* InfoPanelController.m in Sources */,
 				40D64C2610CBFFE800153F26 /* TaskWindowController.m in Sources */,
