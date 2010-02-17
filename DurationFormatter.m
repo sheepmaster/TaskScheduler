@@ -33,7 +33,6 @@
 			return NO;
 		}
 		*anObject = [NSNumber numberWithInt:(duration*60)];
-		NSLog(@"value: %@", *anObject);
 		return YES;
 	}
 }

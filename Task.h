@@ -35,8 +35,10 @@
 @property (nonatomic, retain) NSSet* enables;
 @property (readonly) NSSet* transitiveEnables;
 @property (nonatomic, retain) NSSet* statusChanges;
-@property (readonly, nonatomic, retain) NSDate* effectiveStartDate;
-@property (readonly, nonatomic, retain) NSDate* effectiveDueDate;
+@property (readonly) NSDate* effectiveStartDate;
+@property (readonly) NSDate* effectiveDueDate;
+@property (readonly) NSString* effectiveStartDateWarning;
+@property (readonly) NSString* effectiveDueDateWarning;
 
 
 + (NSEntityDescription*)entityInContext:(NSManagedObjectContext*)context;

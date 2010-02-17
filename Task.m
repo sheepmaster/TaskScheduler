@@ -125,6 +125,48 @@
 	}
 }
 
+- (NSDate*)lastStartDateBeforeEffectiveDueDate {
+	return [self.effectiveDueDate dateByAddingTimeInterval:(-[self.duration doubleValue])];
+}
+
+- (NSString*)effectiveStartDateAfterEffectiveDueDateWarning {
+	if ([self.effectiveStartDate compare:[self lastStartDateBeforeEffectiveDueDate]] == NSOrderedDescending) {
+		return NSLocalizedString(@"Work on this task may not start in time for its effective due date.", 
+								 @"Work on this task may not start in time for its effective due date.");
+	} else {
+		return nil;
+	}
+}
+
++ (NSArray*)keyPathsForValuesAffectingEffectiveDueDateWarning {
+	return [NSArray arrayWithObjects: @"completed", @"scheduledDate", @"dueDate", @"effectiveStartDate", nil];
+}
+
+- (NSString*)effectiveDueDateWarning {
+	if ([self.completed boolValue]) {
+		return nil;
+	} else if ([self.scheduledDate compare:[self lastStartDateBeforeEffectiveDueDate]] == NSOrderedDescending) {
+		return NSLocalizedString(@"This task may not be completed before its effective due date.", 
+								 @"This task may not be completed before its effective due date.");
+	} else {
+		return [self effectiveStartDateAfterEffectiveDueDateWarning];
+	}
+}
+
++ (NSArray*)keyPathsForValuesAffectingEffectiveStartDateWarning {
+	return [NSArray arrayWithObjects: @"completed", @"scheduledDate", @"dueDate", @"effectiveStartDate", nil];
+}
+
+- (NSString*)effectiveStartDateWarning {
+	if ([self.completed boolValue]) {
+		return nil;
+	} else if ([self.scheduledDate compare:self.effectiveStartDate] == NSOrderedAscending) {
+		return NSLocalizedString(@"This task is scheduled before its effective start date.", 
+								 @"This task is scheduled before its effective start date.");
+	} else {
+		return [self effectiveStartDateAfterEffectiveDueDateWarning];
+	}
+}
 
 + (Task*) taskWithTaskUID:(NSString*)uid inManagedObjectContext:(NSManagedObjectContext*)context {
 	NSPredicate* predicateTemplate = [NSPredicate predicateWithFormat:@"taskUID == $UID"];
