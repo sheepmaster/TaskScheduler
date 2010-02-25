@@ -8,9 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class URL;
 
 @interface URLProvider : NSObject {
 
 }
+
+- (NSArray*)completionsForString:(NSString*)string;
+- (URL*)urlForString:(NSString*)string;
+
 
 @end

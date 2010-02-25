@@ -9,8 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface URL : NSObject {
+@interface URL : NSManagedObject {
 
 }
+
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * url;
+
+@property (nonatomic, retain) Task * task;
 
 @end

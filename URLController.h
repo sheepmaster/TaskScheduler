@@ -8,9 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface URLController : NSObject {
-
+	NSArray* urlProviders;
 }
 
 @end

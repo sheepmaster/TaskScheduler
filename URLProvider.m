@@ -11,4 +11,14 @@
 
 @implementation URLProvider
 
+- (NSArray*)completionsForString:(NSString*)string {
+	NSLog(@"completionsForString: not implemented");
+	return [NSArray array];
+}
+
+- (URL*)urlForString:(NSString*)string {
+	NSLog(@"urlForString: not implemented");
+	return nil;
+}
+
 @end

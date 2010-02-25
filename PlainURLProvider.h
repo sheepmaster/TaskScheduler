@@ -8,8 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "URLProvider.h"
 
-@interface PlainURLProvider : NSObject {
+@interface PlainURLProvider : URLProvider {
 
 }
 

@@ -11,4 +11,8 @@
 
 @implementation URL
 
+@dynamic title;
+@dynamic url;
+@dynamic task;
+
 @end
