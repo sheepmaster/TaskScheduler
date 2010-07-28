@@ -2,19 +2,19 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.25</string>
-		<string key="IBDocument.HIToolboxVersion">458.00</string>
+		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.InterfaceBuilderVersion">762</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="com.apple.InterfaceBuilder.CocoaPlugin">740</string>
+			<string key="com.apple.InterfaceBuilder.CocoaPlugin">762</string>
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="21"/>
-			<integer value="1268"/>
 			<integer value="360"/>
 			<integer value="809"/>
+			<integer value="21"/>
+			<integer value="1268"/>
 			<integer value="57"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -1915,7 +1915,7 @@
 			<object class="NSWindowTemplate" id="377696707">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{157, 279}, {407, 182}}</string>
+				<string key="NSWindowRect">{{157, 252}, {357, 209}}</string>
 				<int key="NSWTFlags">611844096</int>
 				<string key="NSWindowTitle">Preferences</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -1928,7 +1928,7 @@
 						<object class="NSPopUpButton" id="303238118">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{240, 138}, {100, 26}}</string>
+							<string key="NSFrame">{{240, 165}, {100, 26}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPopUpButtonCell" key="NSCell" id="257103081">
@@ -1993,7 +1993,7 @@
 						<object class="NSTextField" id="1013907444">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{63, 144}, {175, 17}}</string>
+							<string key="NSFrame">{{63, 171}, {175, 17}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="647118390">
@@ -2009,7 +2009,7 @@
 						<object class="NSPopUpButton" id="726767858">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{240, 113}, {100, 26}}</string>
+							<string key="NSFrame">{{240, 140}, {100, 26}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPopUpButtonCell" key="NSCell" id="773795384">
@@ -2074,13 +2074,13 @@
 						<object class="NSButton" id="194160915">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 38}, {249, 18}}</string>
+							<string key="NSFrame">{{30, 38}, {241, 18}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="458124612">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Automatically schedule tasks in iCal</string>
+								<string key="NSContents">Add iCal event for scheduled tasks</string>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="194160915"/>
 								<int key="NSButtonFlags">1211912703</int>
@@ -2096,13 +2096,13 @@
 						<object class="NSButton" id="204265008">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 18}, {316, 18}}</string>
+							<string key="NSFrame">{{30, 18}, {132, 18}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="149204189">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Automatically unschedule tasks</string>
+								<string key="NSContents">Unschedule tasks</string>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="204265008"/>
 								<int key="NSButtonFlags">1211912703</int>
@@ -2118,13 +2118,13 @@
 						<object class="NSButton" id="656716704">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 98}, {261, 18}}</string>
+							<string key="NSFrame">{{30, 98}, {173, 18}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="361734059">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Automatically create new tasks in iCal</string>
+								<string key="NSContents">Create new tasks in iCal</string>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="656716704"/>
 								<int key="NSButtonFlags">1211912703</int>
@@ -2140,13 +2140,13 @@
 						<object class="NSButton" id="1063104249">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 78}, {371, 18}}</string>
+							<string key="NSFrame">{{30, 78}, {159, 18}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="10569502">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Automatically create new tasks for tasks created in iCal</string>
+								<string key="NSContents">Import new iCal tasks</string>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="1063104249"/>
 								<int key="NSButtonFlags">1211912703</int>
@@ -2162,7 +2162,7 @@
 						<object class="NSButton" id="722158337">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 118}, {219, 18}}</string>
+							<string key="NSFrame">{{18, 145}, {219, 18}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="728401124">
@@ -2184,13 +2184,13 @@
 						<object class="NSButton" id="294284190">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 58}, {283, 18}}</string>
+							<string key="NSFrame">{{30, 58}, {194, 18}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="575938583">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Automatically delete tasks deleted in iCal</string>
+								<string key="NSContents">Delete tasks deleted in iCal</string>
 								<reference key="NSSupport" ref="828637943"/>
 								<reference key="NSControlView" ref="294284190"/>
 								<int key="NSButtonFlags">1211912703</int>
@@ -2203,8 +2203,24 @@
 								<int key="NSPeriodicInterval">25</int>
 							</object>
 						</object>
+						<object class="NSTextField" id="1031408305">
+							<reference key="NSNextResponder" ref="403127263"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{17, 122}, {103, 17}}</string>
+							<reference key="NSSuperview" ref="403127263"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSTextFieldCell" key="NSCell" id="433825741">
+								<int key="NSCellFlags">68288064</int>
+								<int key="NSCellFlags2">272630784</int>
+								<string key="NSContents">Automatically…</string>
+								<reference key="NSSupport" ref="828637943"/>
+								<reference key="NSControlView" ref="1031408305"/>
+								<reference key="NSBackgroundColor" ref="199577273"/>
+								<reference key="NSTextColor" ref="1023837937"/>
+							</object>
+						</object>
 					</array>
-					<string key="NSFrameSize">{407, 182}</string>
+					<string key="NSFrameSize">{357, 209}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -4809,6 +4825,7 @@
 							<reference ref="722158337"/>
 							<reference ref="303238118"/>
 							<reference ref="1013907444"/>
+							<reference ref="1031408305"/>
 							<reference ref="194160915"/>
 							<reference ref="204265008"/>
 							<reference ref="656716704"/>
@@ -5477,6 +5494,19 @@
 						<reference key="object" ref="919622899"/>
 						<reference key="parent" ref="443532022"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1526</int>
+						<reference key="object" ref="1031408305"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="433825741"/>
+						</array>
+						<reference key="parent" ref="403127263"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1527</int>
+						<reference key="object" ref="433825741"/>
+						<reference key="parent" ref="1031408305"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -5580,6 +5610,12 @@
 				<boolean value="YES" key="150.ImportedFromIB2"/>
 				<string key="1500.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1501.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1505.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1506.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1507.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1508.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1526.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1527.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="154.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="154.ImportedFromIB2"/>
 				<string key="155.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5758,9 +5794,9 @@
 				<boolean value="YES" key="79.ImportedFromIB2"/>
 				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="80.ImportedFromIB2"/>
-				<string key="808.IBEditorWindowLastContentRect">{{275, 532}, {407, 182}}</string>
+				<string key="808.IBEditorWindowLastContentRect">{{275, 505}, {357, 209}}</string>
 				<string key="808.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="808.IBWindowTemplateEditedContentRect">{{275, 532}, {407, 182}}</string>
+				<string key="808.IBWindowTemplateEditedContentRect">{{275, 505}, {357, 209}}</string>
 				<boolean value="YES" key="808.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="809.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="81.IBEditorWindowLastContentRect">{{429, 633}, {196, 203}}</string>
@@ -5814,7 +5850,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1525</int>
+			<int key="maxID">1527</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6638,6 +6674,7 @@
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
+		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1050" key="NS.object.0"/>
@@ -6645,5 +6682,13 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">../TaskScheduler.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NSAddOnTexture">{11, 11}</string>
+			<string key="NSMenuCheckmark">{9, 8}</string>
+			<string key="NSMenuMixedState">{7, 2}</string>
+			<string key="NSRemoveOnTexture">{11, 11}</string>
+			<string key="NSSwitch">{15, 15}</string>
+			<string key="warningIcon">{10, 10}</string>
+		</dictionary>
 	</data>
 </archive>
