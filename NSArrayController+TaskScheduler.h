@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface NSArrayController(TaskScheduler)
+@interface NSTreeController(TaskScheduler)
 
 - (NSUInteger)addNewObject;
 

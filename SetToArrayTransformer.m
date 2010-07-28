@@ -8,7 +8,7 @@
 
 #import "SetToArrayTransformer.h"
 
-@class Task;
+#import "Task.h"
 
 @implementation SetToArrayTransformer
 

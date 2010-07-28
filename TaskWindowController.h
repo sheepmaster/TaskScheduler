@@ -14,10 +14,11 @@
 
 @interface TaskWindowController : NSWindowController {
 	IBOutlet TaskScheduler_AppDelegate* appDelegate;
-	IBOutlet NSTableView* taskList;
+	IBOutlet NSOutlineView* taskList;
 	IBOutlet InfoPanelController* infoPanelController;
 
-	IBOutlet NSArrayController* taskController;
+	IBOutlet NSArrayController* storedTasks;
+	IBOutlet NSTreeController* taskController;
 }
 
 - (IBAction)addTask:(id)sender;

@@ -31,6 +31,7 @@
 @property (nonatomic, retain) NSNumber * pending;
 @property (nonatomic, retain) NSString * taskUID;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) Task * parent;
 @property (nonatomic, retain) NSSet* dependsOn;
 @property (nonatomic, retain) NSSet* enables;
 @property (readonly) NSSet* transitiveEnables;

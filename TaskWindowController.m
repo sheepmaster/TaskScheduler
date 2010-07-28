@@ -35,7 +35,20 @@
 //}
 
 - (IBAction)addTask:(id)sender {
-	NSUInteger row = [taskController addNewObject];
+	if (![taskController commitEditing]) {
+		return;
+	}
+	
+	id newObject = [storedTasks newObject];
+	
+	[taskController addObject:newObject];
+	[newObject release];
+	
+	[taskController rearrangeObjects];
+	
+	NSTreeNode* node = [NSTreeNode treeNodeWithRepresentedObject:newObject];
+	NSInteger row = [taskList rowForItem:node];
+	
 	if (row != -1) {
 		[taskList editColumn:[taskList columnWithIdentifier:@"task"] row:row withEvent:nil select:YES];
 	}
@@ -50,16 +63,16 @@
 }
 */
 
-- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 	if ([cell isKindOfClass:[TaskCell class]]) {
 		TaskCell* taskCell = cell;
-		Task* task = [[taskController arrangedObjects] objectAtIndex:row];
+		Task* task = [item representedObject];
 		taskCell.task = task;
 	}
 }
 
-- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-	Task* task = [[taskController arrangedObjects] objectAtIndex:rowIndex];
+- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn item:(id)item {
+	Task* task = [item representedObject];
 	NSString* identifier = [aTableColumn identifier];
 	if ([identifier isEqualToString:@"completed"]) {
 		task.completedDate = [anObject boolValue] ? [NSDate date] : nil;

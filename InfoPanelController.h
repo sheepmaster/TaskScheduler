@@ -11,7 +11,7 @@
 @class ICalController;
 
 @interface InfoPanelController : NSWindowController {
-	IBOutlet NSArrayController* tasksController;
+	IBOutlet NSTreeController* tasksController;
 	IBOutlet ICalController* iCalController;
 	NSMutableSet* excludedTasks;
 	

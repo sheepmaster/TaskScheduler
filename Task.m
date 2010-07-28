@@ -33,6 +33,7 @@
 @dynamic startDate;
 @dynamic taskUID;
 @dynamic title;
+@dynamic parent;
 @dynamic dependsOn;
 @dynamic enables;
 @dynamic active;

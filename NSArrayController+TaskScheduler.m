@@ -9,7 +9,7 @@
 #import "NSArrayController+TaskScheduler.h"
 
 
-@implementation NSArrayController(TaskScheduler)
+@implementation NSTreeController(TaskScheduler)
 
 - (NSUInteger)addNewObject {
 	if (![self commitEditing]) {
