@@ -2203,18 +2203,18 @@
 								<int key="NSPeriodicInterval">25</int>
 							</object>
 						</object>
-						<object class="NSTextField" id="1031408305">
+						<object class="NSTextField" id="118495475">
 							<reference key="NSNextResponder" ref="403127263"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 122}, {103, 17}}</string>
 							<reference key="NSSuperview" ref="403127263"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="433825741">
+							<object class="NSTextFieldCell" key="NSCell" id="958185377">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents">Automatically…</string>
 								<reference key="NSSupport" ref="828637943"/>
-								<reference key="NSControlView" ref="1031408305"/>
+								<reference key="NSControlView" ref="118495475"/>
 								<reference key="NSBackgroundColor" ref="199577273"/>
 								<reference key="NSTextColor" ref="1023837937"/>
 							</object>
@@ -4825,7 +4825,7 @@
 							<reference ref="722158337"/>
 							<reference ref="303238118"/>
 							<reference ref="1013907444"/>
-							<reference ref="1031408305"/>
+							<reference ref="118495475"/>
 							<reference ref="194160915"/>
 							<reference ref="204265008"/>
 							<reference ref="656716704"/>
@@ -5496,16 +5496,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1526</int>
-						<reference key="object" ref="1031408305"/>
+						<reference key="object" ref="118495475"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="433825741"/>
+							<reference ref="958185377"/>
 						</array>
 						<reference key="parent" ref="403127263"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1527</int>
-						<reference key="object" ref="433825741"/>
-						<reference key="parent" ref="1031408305"/>
+						<reference key="object" ref="958185377"/>
+						<reference key="parent" ref="118495475"/>
 					</object>
 				</array>
 			</object>
