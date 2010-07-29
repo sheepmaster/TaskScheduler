@@ -11,11 +11,11 @@
 			<string key="com.binarymethod.BGHUDAppKitPlugin">1</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="1268"/>
-			<integer value="57"/>
-			<integer value="360"/>
 			<integer value="809"/>
+			<integer value="360"/>
 			<integer value="1528"/>
+			<integer value="57"/>
+			<integer value="1270"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -959,7 +959,7 @@
 									<array class="NSMutableArray" key="NSSubviews">
 										<reference ref="918418067"/>
 									</array>
-									<string key="NSFrameSize">{0, 0}</string>
+									<string key="NSFrame">{{1, 0}, {581, 17}}</string>
 									<reference key="NSSuperview" ref="501981544"/>
 									<reference key="NSNextKeyView" ref="918418067"/>
 									<reference key="NSDocView" ref="918418067"/>
@@ -1174,6 +1174,19 @@
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy">
 					<string key="NSEntityName">Task</string>
+				</object>
+				<bool key="_NSIsUsingManagedProxy">YES</bool>
+				<bool key="NSAvoidsEmptySelection">YES</bool>
+				<bool key="NSPreservesSelection">YES</bool>
+				<bool key="NSSelectsInsertedObjects">YES</bool>
+				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
+			</object>
+			<object class="NSTreeController" id="937696936">
+				<bool key="NSEditable">YES</bool>
+				<bool key="NSAutomaticallyPreparesContent">YES</bool>
+				<object class="_NSManagedProxy" key="_NSManagedProxy">
+					<string key="NSEntityName">Task</string>
 					<object class="NSComparisonPredicate" key="NSFetchPredicate">
 						<object class="NSKeyPathExpression" key="NSLeftExpression">
 							<int key="NSExpressionType">3</int>
@@ -1199,18 +1212,6 @@
 							<int key="NSOptions">0</int>
 						</object>
 					</object>
-				</object>
-				<bool key="_NSIsUsingManagedProxy">YES</bool>
-				<bool key="NSAvoidsEmptySelection">YES</bool>
-				<bool key="NSPreservesSelection">YES</bool>
-				<bool key="NSSelectsInsertedObjects">YES</bool>
-				<bool key="NSFilterRestrictsInsertion">YES</bool>
-				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
-			</object>
-			<object class="NSTreeController" id="937696936">
-				<bool key="NSEditable">YES</bool>
-				<object class="_NSManagedProxy" key="_NSManagedProxy">
-					<string key="NSEntityName">Task</string>
 				</object>
 				<bool key="_NSIsUsingManagedProxy">YES</bool>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
@@ -3942,27 +3943,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: arrangedObjects</string>
-						<reference key="source" ref="937696936"/>
-						<reference key="destination" ref="116824562"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="937696936"/>
-							<reference key="NSDestination" ref="116824562"/>
-							<string key="NSLabel">contentArray: arrangedObjects</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">arrangedObjects</string>
-							<dictionary key="NSOptions">
-								<boolean value="NO" key="NSConditionallySetsEditable"/>
-								<boolean value="YES" key="NSDeletesObjectsOnRemove"/>
-								<boolean value="YES" key="NSHandlesContentAsCompoundValue"/>
-							</dictionary>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">1613</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.@count</string>
 						<reference key="source" ref="286939503"/>
 						<reference key="destination" ref="937696936"/>
@@ -3992,6 +3972,30 @@
 						<reference key="destination" ref="116824562"/>
 					</object>
 					<int key="connectionID">1619</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">managedObjectContext: managedObjectContext</string>
+						<reference key="source" ref="937696936"/>
+						<reference key="destination" ref="316811008"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="937696936"/>
+							<reference key="NSDestination" ref="316811008"/>
+							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
+							<string key="NSBinding">managedObjectContext</string>
+							<string key="NSKeyPath">managedObjectContext</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1620</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="137414457"/>
+						<reference key="destination" ref="316811008"/>
+					</object>
+					<int key="connectionID">1621</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5767,9 +5771,9 @@
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="2.ImportedFromIB2"/>
 				<boolean value="YES" key="205.ImportedFromIB2"/>
-				<string key="21.IBEditorWindowLastContentRect">{{312, 344}, {582, 509}}</string>
+				<string key="21.IBEditorWindowLastContentRect">{{97, 200}, {582, 509}}</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="21.IBWindowTemplateEditedContentRect">{{312, 344}, {582, 509}}</string>
+				<string key="21.IBWindowTemplateEditedContentRect">{{97, 200}, {582, 509}}</string>
 				<boolean value="YES" key="21.ImportedFromIB2"/>
 				<boolean value="YES" key="21.NSWindowTemplate.visibleAtLaunch"/>
 				<boolean value="YES" key="21.windowTemplate.hasMinSize"/>
@@ -5944,7 +5948,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1619</int>
+			<int key="maxID">1621</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

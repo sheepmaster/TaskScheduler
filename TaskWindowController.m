@@ -39,7 +39,7 @@
 		return;
 	}
 	
-	id newObject = [storedTasks newObject];
+	id newObject = [taskController newObject];
 	
 	[taskController addObject:newObject];
 	[newObject release];
@@ -71,7 +71,7 @@
 	}
 }
 
-- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn item:(id)item {
+- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn byItem:(id)item {
 	Task* task = [item representedObject];
 	NSString* identifier = [aTableColumn identifier];
 	if ([identifier isEqualToString:@"completed"]) {
