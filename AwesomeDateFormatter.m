@@ -15,7 +15,9 @@
 	if (self = [super init]) {
 		inputFormatter = [[NSDateFormatter alloc] initWithDateFormat:@"x" allowNaturalLanguage:YES];
 		[inputFormatter setLenient:YES];
-		[inputFormatter setDoesRelativeDateFormatting:YES];
+    if ([inputFormatter respondsToSelector:@selector(setDoesRelativeDateFormatting:)]) {
+      [inputFormatter setDoesRelativeDateFormatting:YES];
+    }
 		
 		outputFormatter = [[NSDateFormatter alloc] init];
 		[outputFormatter setDateStyle:NSDateFormatterMediumStyle];
