@@ -46,12 +46,17 @@
 	
 	[taskController rearrangeObjects];
 	
-	NSTreeNode* node = [NSTreeNode treeNodeWithRepresentedObject:newObject];
-	NSInteger row = [taskList rowForItem:node];
+//	NSTreeNode* node = [NSTreeNode treeNodeWithRepresentedObject:newObject];
+//	NSInteger row = [taskList rowForItem:node];
+	NSInteger row = [[taskController arrangedObjects] count] - 1;
 	
 	if (row != -1) {
 		[taskList editColumn:[taskList columnWithIdentifier:@"task"] row:row withEvent:nil select:YES];
 	}
+}
+
+- (IBAction)addSubtask:(id)sender {
+	[self addTask:sender];
 }
 
 /*
