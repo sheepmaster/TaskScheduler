@@ -19,7 +19,7 @@
 	NSFetchRequest* request = [[NSFetchRequest alloc] init];
 	[request setEntity:[NSEntityDescription entityForName:@"StatusChange" inManagedObjectContext:context]];
 	[request setFetchLimit:1];
-	[request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+	[request setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES] autorelease]]];
 	
 	NSError* error = nil;
 	NSArray* statusChanges = [context executeFetchRequest:request error:&error];
